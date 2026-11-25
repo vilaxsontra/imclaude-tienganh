@@ -1,8 +1,8 @@
 // ===== HỌC TIẾNG ANH THEO CÁCH AI HỌC — máy chủ (Cloudflare Worker + D1 + Workers AI) =====
 // Ràng buộc: DB (D1), AI (Workers AI). Giao diện, kho câu và giọng đọc tải một lần từ NGUON
 // rồi lưu hẳn vào D1 của bạn (bảng assets), từ đó web chạy độc lập.
-const NGUON = 'https://imclaude-tienganh.pages.dev/bc8f995c/';
-const VER = 'bc8f995c';
+const NGUON = 'https://imclaude-tienganh.pages.dev/7f792c37/';
+const VER = '7f792c37';
 
 const SCHEMA = [
   `CREATE TABLE IF NOT EXISTS settings (k TEXT PRIMARY KEY, v TEXT)`,
@@ -51,6 +51,35 @@ async function authed(req, env) { const t = req.headers.get('x-tk') || ''; if (!
 const b64bytes = b => Uint8Array.from(atob(b), c => c.charCodeAt(0));
 
 // ---------- AI ----------
+// chuẩn hoá câu nói để so: chữ thường, bỏ dấu câu, mở dạng viết tắt, số viết thành chữ, bỏ tiếng đệm
+const CHUAN_VT = { "i'm": 'i am', "you're": 'you are', "we're": 'we are', "they're": 'they are', "he's": 'he is', "she's": 'she is', "it's": 'it is', "that's": 'that is', "there's": 'there is', "here's": 'here is', "what's": 'what is', "where's": 'where is', "who's": 'who is', "how's": 'how is', "isn't": 'is not', "aren't": 'are not', "wasn't": 'was not', "weren't": 'were not', "don't": 'do not', "doesn't": 'does not', "didn't": 'did not', "can't": 'cannot', "won't": 'will not', "haven't": 'have not', "hasn't": 'has not', "hadn't": 'had not', "shouldn't": 'should not', "couldn't": 'could not', "wouldn't": 'would not', "mustn't": 'must not', "i'll": 'i will', "you'll": 'you will', "we'll": 'we will', "they'll": 'they will', "he'll": 'he will', "she'll": 'she will', "it'll": 'it will', "i've": 'i have', "you've": 'you have', "we've": 'we have', "they've": 'they have', "i'd": 'i would', "you'd": 'you would', "we'd": 'we would', "they'd": 'they would', "he'd": 'he would', "she'd": 'she would', "let's": 'let us' };
+const CHUAN_SO = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+const CHUAN_CHUC = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+const soChu = n => { n = Number(n); if (n < 20) return CHUAN_SO[n]; if (n < 100) return CHUAN_CHUC[Math.floor(n / 10)] + (n % 10 ? ' ' + CHUAN_SO[n % 10] : ''); if (n < 1000) return CHUAN_SO[Math.floor(n / 100)] + ' hundred' + (n % 100 ? ' ' + soChu(n % 100) : ''); if (n < 1e6) return soChu(Math.floor(n / 1000)) + ' thousand' + (n % 1000 ? ' ' + soChu(n % 1000) : ''); return String(n); };
+const CHUAN_DEM = new Set(['um', 'uh', 'uhm', 'er', 'erm', 'ah', 'hmm', 'mm', 'please']);
+function chuanNoi(s) {
+  let t = ' ' + String(s || '').toLowerCase().replace(/[’‘`]/g, "'") + ' ';
+  t = t.replace(/\$\s?(\d+)/g, '$1 dollars ').replace(/(\d+):(\d\d)/g, (m, h, mi) => soChu(h) + (mi === '00' ? " o'clock" : ' ' + (mi[0] === '0' ? 'oh ' + soChu(mi[1]) : soChu(mi)))).replace(/\b(\d+)\s*%/g, '$1 percent')
+    .replace(/\b(a|p)\.?\s?m\b\.?/g, '$1m').replace(/\bo\s?'\s?clock\b/g, "o'clock").replace(/\bcan not\b/g, 'cannot').replace(/\bokay\b/g, 'ok').replace(/(\d),(\d{3})/g, '$1$2');
+  t = t.replace(/\b\d+\b/g, n => soChu(n)).replace(/(\d+)(st|nd|rd|th)\b/g, '$1$2');
+  const w = (t.match(/[a-z][a-z']*|[0-9]+/g) || []).map(x => x.replace(/^'+|'+$/g, '')).filter(Boolean);
+  const out = []; for (const x of w) { if (CHUAN_DEM.has(x)) continue; const v = CHUAN_VT[x]; if (v) out.push(...v.split(' ')); else out.push(x); }
+  return out.join(' ');
+}
+
+// chấm câu nói thẳng: khớp hẳn câu mẫu thì đúng; không thì nhờ AI xét ngữ pháp + hợp tình huống (để không cho qua lỗi nhỏ, cũng không chấm oan câu đúng mà khác mẫu)
+async function chamNoi(env, S, text, cham, acc) {
+  const dap = (Array.isArray(cham.dap) ? cham.dap : []).slice(0, 6).map(x => String(x).slice(0, 160)); const tinh = String(cham.tinh || '').slice(0, 300);
+  const t = chuanNoi(text); if (!t) return { ok: false, sua: dap[0] || '', vi: 'Máy chưa nghe được câu nào.' };
+  if (dap.some(d => chuanNoi(d) === t)) return { ok: true, khop: true };
+  try {
+    const out = await llm(env, S, 'You grade one spoken answer from a Vietnamese adult learning everyday American English. The text comes from speech recognition: ignore missing punctuation and capitalization, and accept contractions or full forms. ok=true only if the answer is grammatically correct, natural, and a sensible reply to the situation. Any grammar slip (missing -s, wrong be form, wrong tense, missing article, wrong word order) means ok=false. If ok=false, give the corrected sentence that stays closest to what the learner said, and a very short reason in Vietnamese for an adult with no grammar background. Reply with JSON only: {"ok":true|false,"sua":"...","vi":"..."}',
+      `Situation (Vietnamese): ${tinh}\nModel answers: ${dap.join(' | ')}\nLearner said: ${String(text).slice(0, 300)}`, 300, acc);
+    const a = out.indexOf('{'), b = out.lastIndexOf('}'); const j = JSON.parse(out.slice(a, b + 1));
+    return { ok: !!j.ok, sua: j.ok ? '' : String(j.sua || dap[0] || ''), vi: j.ok ? '' : String(j.vi || '') };
+  } catch (e) { return { ok: false, sua: dap[0] || '', vi: '', loi: 1 }; }
+}
+
 const MODEL = '@cf/openai/gpt-oss-120b';
 async function llm(env, S, sys, user, max = 1200, acc) {
   const m = S.ai_model || MODEL;
@@ -63,7 +92,7 @@ async function llm(env, S, sys, user, max = 1200, acc) {
   return typeof t === 'string' ? t : JSON.stringify(t || '');
 }
 function pickJSON(t) { const a = t.indexOf('['), b = t.lastIndexOf(']'); if (a < 0 || b < a) return null; try { return JSON.parse(t.slice(a, b + 1)); } catch { return null; } }
-const LOAI = { thieu_s: 'missing -s on verb after he/she/it/singular noun', thua_s: 'extra -s on verb after I/you/we/they/plural', be_sai: 'wrong form of be (am/is/are)', thieu_be: 'missing am/is/are before adjective/noun/place', thua_be: 'extra am/is/are before an action verb', a_an: 'a vs an', thieu_mao_tu: 'missing a/an/the', the: 'a vs the', so_nhieu: 'missing plural -s/-es', so_nhieu_dac_biet: 'irregular plural (children, people…)', khong_dem_duoc: 'uncountable noun used with a/-s', tinh_tu_truoc: 'adjective after noun (word order)', so_huu: 'wrong possessive (my/his/her…)', tan_ngu: 'wrong object pronoun (me/him/her…)', to_v: 'missing to after want/need/have/try…', khong_to: 'extra to after can/will/should/let\'s', v_ing_sau: 'need -ing after enjoy/finish/stop/like', v_ing_gioi_tu: 'need -ing after a preposition', dang_lam: 'wrong present continuous (am/is/are + -ing)', do_does: 'do vs does in questions', dont_doesnt: 'don\'t vs doesn\'t', sau_do_nguyen: 'verb after do/does/did/didn\'t must be base form', qua_khu_ed: 'regular past tense -ed', qua_khu_bqt: 'irregular past tense (went, bought…)', was_were: 'was vs were', will_v: 'verb after will must be base form', going_to: 'be going to + verb', gioi_tu_gio: 'time preposition at/on/in', gioi_tu_cho: 'place preposition at/in/on', there_be: 'there is vs there are', many_much: 'many vs much', some_any: 'some vs any', trat_tu_hoi: 'question word order', so_sanh_hon: 'comparative (bigger, more expensive)', so_sanh_nhat: 'superlative (the biggest)', tan_suat: 'position of always/usually/never', hthh: 'present perfect have/has + past participle', for_since: 'for vs since', bi_dong: 'passive voice', ed_ing: 'bored vs boring', make_do: 'make vs do', dieu_kien: 'if + present, will', dieu_kien_2: 'if + past, would', who_which: 'who/which/that', hoi_gian_tiep: 'embedded question word order', dong_tu_3: 'past participle form', tinh_tu_trang_tu: 'adjective vs adverb -ly', dong_tu_cam_giac: 'look/feel/sound + adjective', too_either: 'too vs either', should_v: 'verb after should/could/would base form', used_to: 'used to + verb', chu_ngu: 'missing subject (it/there)', phrasal: 'phrasal verb particle', tu_vung: 'wrong word choice / other' };
+const LOAI = { thieu_s: 'missing -s on verb after he/she/it/singular noun', thua_s: 'extra -s on verb after I/you/we/they/plural', be_sai: 'wrong form of be (am/is/are)', thieu_be: 'missing am/is/are before adjective/noun/place', thua_be: 'extra am/is/are before an action verb', a_an: 'a vs an', thieu_mao_tu: 'missing a/an/the', the: 'a vs the', so_nhieu: 'missing plural -s/-es', so_nhieu_dac_biet: 'irregular plural (children, people…)', khong_dem_duoc: 'uncountable noun used with a/-s', tinh_tu_truoc: 'adjective after noun (word order)', so_huu: 'wrong possessive (my/his/her…)', tan_ngu: 'wrong object pronoun (me/him/her…)', to_v: 'missing to after want/need/have/try…', khong_to: 'extra to after can/will/should/let\'s', v_ing_sau: 'need -ing after enjoy/finish/stop/like', v_ing_gioi_tu: 'need -ing after a preposition', dang_lam: 'wrong present continuous (am/is/are + -ing)', do_does: 'do vs does in questions', dont_doesnt: 'don\'t vs doesn\'t', sau_do_nguyen: 'verb after do/does/did/didn\'t must be base form', qua_khu_ed: 'regular past tense -ed', qua_khu_bqt: 'irregular past tense (went, bought…)', was_were: 'was vs were', will_v: 'verb after will must be base form', going_to: 'be going to + verb', gioi_tu_gio: 'time preposition at/on/in', gioi_tu_cho: 'place preposition at/in/on', there_be: 'there is vs there are', many_much: 'many vs much', some_any: 'some vs any', trat_tu_hoi: 'question word order', so_sanh_hon: 'comparative (bigger, more expensive)', so_sanh_nhat: 'superlative (the biggest)', tan_suat: 'position of always/usually/never', hthh: 'present perfect have/has + past participle', for_since: 'for vs since', bi_dong: 'passive voice', ed_ing: 'bored vs boring', make_do: 'make vs do', dieu_kien: 'if + present, will', dieu_kien_2: 'if + past, would', who_which: 'who/which/that', hoi_gian_tiep: 'embedded question word order', dong_tu_3: 'past participle form', tinh_tu_trang_tu: 'adjective vs adverb -ly', dong_tu_cam_giac: 'look/feel/sound + adjective', too_either: 'too vs either', should_v: 'verb after should/could/would base form', used_to: 'used to + verb', chu_ngu: 'missing subject (it/there)', phrasal: 'phrasal verb particle', this_these: 'this/that (one) vs these/those (many)', this_that: 'this/these (near) vs that/those (far)', nho_lam: 'have/get something done (causative)', it_there: 'it vs there (weather/distance vs existence)', dang_lam_qk: 'past continuous was/were + -ing', keo_dai: 'present perfect (continuous) for ongoing situations, for/since', when_hien_tai: 'present tense after when/if for future or habits', hoi_if: 'reported yes/no question with if', few_little: 'a few vs a little', menh_lenh: 'imperative uses base verb', phrasal_tach: 'object pronoun inside phrasal verb (pick it up)', so_huu_rieng: 'possessive pronoun mine/yours/hers', whose: "whose vs who's", so_nhieu_chung: 'plural noun for things in general (I like dogs)', as_as: 'as ... as comparison', cang_cang: 'the more ..., the better', nothing_anything: 'nothing vs anything (double negative)', any_anything: 'any + noun vs anything/something', tinh_tu_dt: 'adjective before noun, not adverb', to_nguyen: 'base verb after to', too_to: 'too + adjective + to', so_that: 'so (that) + clause', where_when: 'where vs when in relative clauses', enough_vi_tri: 'position of enough', so_such: 'so vs such', say_tell: 'say vs tell', despite: 'despite vs although', be_used_to: 'be/get used to + -ing/noun', v_ing_mot_viec: '-ing subject takes singular verb', tu_vung: 'wrong word choice / other' };
 const toks = s => (s.match(/[\p{L}\p{N}'’-]+|[^\s\p{L}\p{N}'’-]/gu) || []);
 // so sánh câu gốc và câu đã sửa theo từng chữ: mỗi chỗ khác thành một cặp (sai, đúng); chỗ thêm/bớt chữ thì kèm chữ bên cạnh
 function diffs(a, b) {
@@ -175,11 +204,11 @@ export default {
         }
         if (p === '/rieng-tu') return new Response(RIENG_TU, { headers: { 'content-type': 'text/html; charset=utf-8' } });
         const B = await bundle(env);
-        if (p === '/sw.js') return new Response(B.sw.replace('bc8f995c', VER), { headers: { 'content-type': 'text/javascript; charset=utf-8', 'cache-control': 'no-cache' } });
+        if (p === '/sw.js') return new Response(B.sw.replace('7f792c37', VER), { headers: { 'content-type': 'text/javascript; charset=utf-8', 'cache-control': 'no-cache' } });
         if (p === '/manifest.webmanifest') return new Response(B.manifest, { headers: { 'content-type': 'application/manifest+json' } });
         if (p === '/icon.svg') return new Response(B.icon, { headers: { 'content-type': 'image/svg+xml', 'cache-control': 'max-age=86400' } });
         if (p === '/icon-192.png' || p === '/icon-512.png') return new Response(b64bytes(p.includes('192') ? B.png192 : B.png512), { headers: { 'content-type': 'image/png', 'cache-control': 'max-age=86400' } });
-        return new Response(B.html.replace('bc8f995c', VER), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-cache' } });
+        return new Response(B.html.replace('7f792c37', VER), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-cache' } });
       }
       const body = req.method === 'POST' ? await req.json().catch(() => ({})) : {};
       const S = await getSet(env);
@@ -207,7 +236,9 @@ export default {
           if (q.nghe_s + sec > lim) return J({ error: uid ? 'Hôm nay bạn đã nói hết ' + (lim / 60) + ' phút. Mai quay lại nhé.' : 'Hết ' + (lim / 60) + ' phút nói thử hôm nay. Đăng nhập Gmail để được ' + NUM(env, 'NGHE_PHUT', 15) + ' phút mỗi ngày.', code: uid ? 'het' : 'khach' }, 429);
           const units = sec / 60 * 46.63;
           if (await tranUsed(env, day) + units > NUM(env, 'TRAN_NGAY', 300000)) return J({ error: 'Hôm nay web đã dùng hết lượt AI. Mai quay lại nhé, phần học vẫn dùng bình thường.', code: 'tran' }, 429);
-          try { const r = await env.AI.run('@cf/openai/whisper-large-v3-turbo', { audio: a, language: 'en', vad_filter: true }); await addUse(env, who, day, sec, 0, units); return J({ text: String(r?.text || '').trim() }); }
+          try { const r = await env.AI.run('@cf/openai/whisper-large-v3-turbo', { audio: a, language: 'en', vad_filter: true }); const text = String(r?.text || '').trim();
+            const acc = { units }; const cham = body.cham && typeof body.cham === 'object' ? await chamNoi(env, S, text, body.cham, acc) : undefined;
+            await addUse(env, who, day, sec, 0, acc.units); return J({ text, cham }); }
           catch (e) { return J({ error: 'Chưa nghe được: ' + e.message }, 502); }
         }
         if (p === '/api/nghe-nghiep' && req.method === 'POST') {
@@ -277,7 +308,8 @@ export default {
       if (p === '/api/nghe' && req.method === 'POST') {
         if (!env.AI) return ERR('Chưa bật Workers AI');
         const a = String(body.audio || ''); if (!a || a.length > 4e6) return ERR('Không có tiếng hoặc quá dài');
-        try { const r = await env.AI.run('@cf/openai/whisper-large-v3-turbo', { audio: a, language: 'en', vad_filter: true }); return J({ text: String(r?.text || '').trim() }); }
+        try { const r = await env.AI.run('@cf/openai/whisper-large-v3-turbo', { audio: a, language: 'en', vad_filter: true }); const text = String(r?.text || '').trim();
+          const cham = body.cham && typeof body.cham === 'object' ? await chamNoi(env, S, text, body.cham, null) : undefined; return J({ text, cham }); }
         catch (e) { return J({ error: 'Chưa nghe được: ' + e.message }, 502); }
       }
       if (p === '/api/sua' && req.method === 'POST') {

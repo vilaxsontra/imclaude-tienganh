@@ -1,0 +1,333 @@
+// ===== HỌC TIẾNG ANH THEO CÁCH AI HỌC — máy chủ (Cloudflare Worker + D1 + Workers AI) =====
+// Ràng buộc: DB (D1), AI (Workers AI). Giao diện, kho câu và giọng đọc tải một lần từ NGUON
+// rồi lưu hẳn vào D1 của bạn (bảng assets), từ đó web chạy độc lập.
+const NGUON = 'https://imclaude-tienganh.pages.dev/7f792c37/';
+const VER = '7f792c37';
+
+const SCHEMA = [
+  `CREATE TABLE IF NOT EXISTS settings (k TEXT PRIMARY KEY, v TEXT)`,
+  `CREATE TABLE IF NOT EXISTS assets (k TEXT PRIMARY KEY, v TEXT)`,
+  `CREATE TABLE IF NOT EXISTS sessions (token TEXT PRIMARY KEY, created INTEGER)`,
+  `CREATE TABLE IF NOT EXISTS tt (id INTEGER PRIMARY KEY, doc TEXT, updated INTEGER)`,
+  `CREATE TABLE IF NOT EXISTS ke (id INTEGER PRIMARY KEY AUTOINCREMENT, day TEXT, text TEXT, sua TEXT, created INTEGER)`,
+  `CREATE TABLE IF NOT EXISTS am (k TEXT PRIMARY KEY, v TEXT)`,
+  // chế độ web chung (đăng nhập Google)
+  `CREATE TABLE IF NOT EXISTS users (uid TEXT PRIMARY KEY, email TEXT, name TEXT, created INTEGER, last INTEGER)`,
+  `CREATE TABLE IF NOT EXISTS phien (token TEXT PRIMARY KEY, uid TEXT, created INTEGER)`,
+  `CREATE TABLE IF NOT EXISTS ttu (uid TEXT PRIMARY KEY, doc TEXT, updated INTEGER)`,
+  `CREATE TABLE IF NOT EXISTS keu (id INTEGER PRIMARY KEY AUTOINCREMENT, uid TEXT, day TEXT, text TEXT, sua TEXT, created INTEGER)`,
+  `CREATE TABLE IF NOT EXISTS luot (ai TEXT, day TEXT, nghe_s REAL DEFAULT 0, sua INTEGER DEFAULT 0, PRIMARY KEY(ai, day))`,
+  `CREATE TABLE IF NOT EXISTS tran (day TEXT PRIMARY KEY, units REAL DEFAULT 0)`,
+];
+let migrated = false; const MEM = {};
+async function migrate(env) { if (migrated) return; await env.DB.batch(SCHEMA.map(s => env.DB.prepare(s))); migrated = true; }
+async function asset(env, k, file) {
+  if (MEM[k]) return MEM[k];
+  const r = await env.DB.prepare('SELECT v FROM assets WHERE k=?').bind(k).first();
+  if (r) { MEM[k] = r.v; return r.v; }
+  const res = await fetch(NGUON + file, { redirect: 'follow' }); if (!res.ok) throw new Error('Không tải được ' + file + ' (' + res.status + ')');
+  const t = await res.text(); if (!/^\s*[{\[]/.test(t)) throw new Error('Tệp ' + file + ' không hợp lệ');
+  await env.DB.prepare('INSERT INTO assets(k,v) VALUES(?,?) ON CONFLICT(k) DO UPDATE SET v=excluded.v').bind(k, t).run(); MEM[k] = t; return t;
+}
+const bundle = async env => { const k = 'bundle_' + VER; if (MEM['B' + k]) return MEM['B' + k]; const o = JSON.parse(await asset(env, k, 'giaodien.json')); MEM['B' + k] = o; return o; };
+const khoText = env => asset(env, 'kho_' + VER, 'kho.json');
+// Giọng đọc: mỗi câu một dòng trong bảng am. Gói nào chưa có thì tải về một lần (gói nhỏ để không vượt giới hạn CPU gói miễn phí).
+async function importPack(env, n) {
+  const flag = 'am_' + n; const f = await env.DB.prepare('SELECT v FROM settings WHERE k=?').bind(flag).first(); if (f) return 0;
+  const res = await fetch(NGUON + 'am' + n + '.txt'); if (!res.ok) throw new Error('Không tải được gói giọng đọc ' + n);
+  const lines = (await res.text()).split('\n'); const st = [];
+  for (const l of lines) { const i = l.indexOf('\t'); if (i > 0) st.push(env.DB.prepare('INSERT OR IGNORE INTO am(k,v) VALUES(?,?)').bind(l.slice(0, i), l.slice(i + 1))); }
+  for (let i = 0; i < st.length; i += 50) await env.DB.batch(st.slice(i, i + 50));
+  await setSet(env, flag, '1'); return st.length;
+}
+
+const J = (o, st = 200) => new Response(JSON.stringify(o), { status: st, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' } });
+const ERR = (m, st = 400) => J({ error: m }, st);
+const rnd = (n = 24) => { const a = new Uint8Array(n); crypto.getRandomValues(a); return [...a].map(b => 'abcdefghijkmnpqrstuvwxyz23456789'[b % 32]).join(''); };
+async function sha(s) { const d = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)); return [...new Uint8Array(d)].map(b => b.toString(16).padStart(2, '0')).join(''); }
+async function getSet(env) { const r = await env.DB.prepare('SELECT k,v FROM settings').all(); const o = {}; for (const x of r.results) o[x.k] = x.v; return o; }
+async function setSet(env, k, v) { await env.DB.prepare('INSERT INTO settings(k,v) VALUES(?,?) ON CONFLICT(k) DO UPDATE SET v=excluded.v').bind(k, String(v)).run(); }
+async function authed(req, env) { const t = req.headers.get('x-tk') || ''; if (!t) return false; return !!(await env.DB.prepare('SELECT 1 FROM sessions WHERE token=?').bind(t).first()); }
+const b64bytes = b => Uint8Array.from(atob(b), c => c.charCodeAt(0));
+
+// ---------- AI ----------
+// chuẩn hoá câu nói để so: chữ thường, bỏ dấu câu, mở dạng viết tắt, số viết thành chữ, bỏ tiếng đệm
+const CHUAN_VT = { "i'm": 'i am', "you're": 'you are', "we're": 'we are', "they're": 'they are', "he's": 'he is', "she's": 'she is', "it's": 'it is', "that's": 'that is', "there's": 'there is', "here's": 'here is', "what's": 'what is', "where's": 'where is', "who's": 'who is', "how's": 'how is', "isn't": 'is not', "aren't": 'are not', "wasn't": 'was not', "weren't": 'were not', "don't": 'do not', "doesn't": 'does not', "didn't": 'did not', "can't": 'cannot', "won't": 'will not', "haven't": 'have not', "hasn't": 'has not', "hadn't": 'had not', "shouldn't": 'should not', "couldn't": 'could not', "wouldn't": 'would not', "mustn't": 'must not', "i'll": 'i will', "you'll": 'you will', "we'll": 'we will', "they'll": 'they will', "he'll": 'he will', "she'll": 'she will', "it'll": 'it will', "i've": 'i have', "you've": 'you have', "we've": 'we have', "they've": 'they have', "i'd": 'i would', "you'd": 'you would', "we'd": 'we would', "they'd": 'they would', "he'd": 'he would', "she'd": 'she would', "let's": 'let us' };
+const CHUAN_SO = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+const CHUAN_CHUC = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+const soChu = n => { n = Number(n); if (n < 20) return CHUAN_SO[n]; if (n < 100) return CHUAN_CHUC[Math.floor(n / 10)] + (n % 10 ? ' ' + CHUAN_SO[n % 10] : ''); if (n < 1000) return CHUAN_SO[Math.floor(n / 100)] + ' hundred' + (n % 100 ? ' ' + soChu(n % 100) : ''); if (n < 1e6) return soChu(Math.floor(n / 1000)) + ' thousand' + (n % 1000 ? ' ' + soChu(n % 1000) : ''); return String(n); };
+const CHUAN_DEM = new Set(['um', 'uh', 'uhm', 'er', 'erm', 'ah', 'hmm', 'mm', 'please']);
+function chuanNoi(s) {
+  let t = ' ' + String(s || '').toLowerCase().replace(/[’‘`]/g, "'") + ' ';
+  t = t.replace(/\$\s?(\d+)/g, '$1 dollars ').replace(/(\d+):(\d\d)/g, (m, h, mi) => soChu(h) + (mi === '00' ? " o'clock" : ' ' + (mi[0] === '0' ? 'oh ' + soChu(mi[1]) : soChu(mi)))).replace(/\b(\d+)\s*%/g, '$1 percent')
+    .replace(/\b(a|p)\.?\s?m\b\.?/g, '$1m').replace(/\bo\s?'\s?clock\b/g, "o'clock").replace(/\bcan not\b/g, 'cannot').replace(/\bokay\b/g, 'ok').replace(/(\d),(\d{3})/g, '$1$2');
+  t = t.replace(/\b\d+\b/g, n => soChu(n)).replace(/(\d+)(st|nd|rd|th)\b/g, '$1$2');
+  const w = (t.match(/[a-z][a-z']*|[0-9]+/g) || []).map(x => x.replace(/^'+|'+$/g, '')).filter(Boolean);
+  const out = []; for (const x of w) { if (CHUAN_DEM.has(x)) continue; const v = CHUAN_VT[x]; if (v) out.push(...v.split(' ')); else out.push(x); }
+  return out.join(' ');
+}
+
+// chấm câu nói thẳng: khớp hẳn câu mẫu thì đúng; không thì nhờ AI xét ngữ pháp + hợp tình huống (để không cho qua lỗi nhỏ, cũng không chấm oan câu đúng mà khác mẫu)
+async function chamNoi(env, S, text, cham, acc) {
+  const dap = (Array.isArray(cham.dap) ? cham.dap : []).slice(0, 6).map(x => String(x).slice(0, 160)); const tinh = String(cham.tinh || '').slice(0, 300);
+  const t = chuanNoi(text); if (!t) return { ok: false, sua: dap[0] || '', vi: 'Máy chưa nghe được câu nào.' };
+  if (dap.some(d => chuanNoi(d) === t)) return { ok: true, khop: true };
+  try {
+    const out = await llm(env, S, 'You grade one spoken answer from a Vietnamese adult learning everyday American English. The text comes from speech recognition: ignore missing punctuation and capitalization, and accept contractions or full forms. ok=true only if the answer is grammatically correct, natural, and a sensible reply to the situation. Any grammar slip (missing -s, wrong be form, wrong tense, missing article, wrong word order) means ok=false. If ok=false, give the corrected sentence that stays closest to what the learner said, and a very short reason in Vietnamese for an adult with no grammar background. Reply with JSON only: {"ok":true|false,"sua":"...","vi":"..."}',
+      `Situation (Vietnamese): ${tinh}\nModel answers: ${dap.join(' | ')}\nLearner said: ${String(text).slice(0, 300)}`, 300, acc);
+    const a = out.indexOf('{'), b = out.lastIndexOf('}'); const j = JSON.parse(out.slice(a, b + 1));
+    return { ok: !!j.ok, sua: j.ok ? '' : String(j.sua || dap[0] || ''), vi: j.ok ? '' : String(j.vi || '') };
+  } catch (e) { return { ok: false, sua: dap[0] || '', vi: '', loi: 1 }; }
+}
+
+const MODEL = '@cf/openai/gpt-oss-120b';
+async function llm(env, S, sys, user, max = 1200, acc) {
+  const m = S.ai_model || MODEL;
+  const r = m.includes('gpt-oss')
+    ? await env.AI.run(m, { instructions: sys, input: user, reasoning: { effort: 'low' }, max_output_tokens: max + 600 })
+    : await env.AI.run(m, { messages: [{ role: 'system', content: sys }, { role: 'user', content: user }], max_tokens: max, temperature: 0.1 });
+  if (acc) { const u = r && r.usage; acc.units += u ? ((u.input_tokens || u.prompt_tokens || 0) * 0.35 + (u.output_tokens || u.completion_tokens || 0) * 0.75) / 1e6 / 0.000011 : 110; }
+  if (r && Array.isArray(r.output)) { const msg = r.output.find(o => o.type === 'message'); const t = msg && msg.content && msg.content.map(c => c.text || '').join(''); if (t) return t; }
+  const t = r && (r.response ?? r.result?.response ?? r.choices?.[0]?.message?.content);
+  return typeof t === 'string' ? t : JSON.stringify(t || '');
+}
+function pickJSON(t) { const a = t.indexOf('['), b = t.lastIndexOf(']'); if (a < 0 || b < a) return null; try { return JSON.parse(t.slice(a, b + 1)); } catch { return null; } }
+const LOAI = { thieu_s: 'missing -s on verb after he/she/it/singular noun', thua_s: 'extra -s on verb after I/you/we/they/plural', be_sai: 'wrong form of be (am/is/are)', thieu_be: 'missing am/is/are before adjective/noun/place', thua_be: 'extra am/is/are before an action verb', a_an: 'a vs an', thieu_mao_tu: 'missing a/an/the', the: 'a vs the', so_nhieu: 'missing plural -s/-es', so_nhieu_dac_biet: 'irregular plural (children, people…)', khong_dem_duoc: 'uncountable noun used with a/-s', tinh_tu_truoc: 'adjective after noun (word order)', so_huu: 'wrong possessive (my/his/her…)', tan_ngu: 'wrong object pronoun (me/him/her…)', to_v: 'missing to after want/need/have/try…', khong_to: 'extra to after can/will/should/let\'s', v_ing_sau: 'need -ing after enjoy/finish/stop/like', v_ing_gioi_tu: 'need -ing after a preposition', dang_lam: 'wrong present continuous (am/is/are + -ing)', do_does: 'do vs does in questions', dont_doesnt: 'don\'t vs doesn\'t', sau_do_nguyen: 'verb after do/does/did/didn\'t must be base form', qua_khu_ed: 'regular past tense -ed', qua_khu_bqt: 'irregular past tense (went, bought…)', was_were: 'was vs were', will_v: 'verb after will must be base form', going_to: 'be going to + verb', gioi_tu_gio: 'time preposition at/on/in', gioi_tu_cho: 'place preposition at/in/on', there_be: 'there is vs there are', many_much: 'many vs much', some_any: 'some vs any', trat_tu_hoi: 'question word order', so_sanh_hon: 'comparative (bigger, more expensive)', so_sanh_nhat: 'superlative (the biggest)', tan_suat: 'position of always/usually/never', hthh: 'present perfect have/has + past participle', for_since: 'for vs since', bi_dong: 'passive voice', ed_ing: 'bored vs boring', make_do: 'make vs do', dieu_kien: 'if + present, will', dieu_kien_2: 'if + past, would', who_which: 'who/which/that', hoi_gian_tiep: 'embedded question word order', dong_tu_3: 'past participle form', tinh_tu_trang_tu: 'adjective vs adverb -ly', dong_tu_cam_giac: 'look/feel/sound + adjective', too_either: 'too vs either', should_v: 'verb after should/could/would base form', used_to: 'used to + verb', chu_ngu: 'missing subject (it/there)', phrasal: 'phrasal verb particle', this_these: 'this/that (one) vs these/those (many)', this_that: 'this/these (near) vs that/those (far)', nho_lam: 'have/get something done (causative)', it_there: 'it vs there (weather/distance vs existence)', dang_lam_qk: 'past continuous was/were + -ing', keo_dai: 'present perfect (continuous) for ongoing situations, for/since', when_hien_tai: 'present tense after when/if for future or habits', hoi_if: 'reported yes/no question with if', few_little: 'a few vs a little', menh_lenh: 'imperative uses base verb', phrasal_tach: 'object pronoun inside phrasal verb (pick it up)', so_huu_rieng: 'possessive pronoun mine/yours/hers', whose: "whose vs who's", so_nhieu_chung: 'plural noun for things in general (I like dogs)', as_as: 'as ... as comparison', cang_cang: 'the more ..., the better', nothing_anything: 'nothing vs anything (double negative)', any_anything: 'any + noun vs anything/something', tinh_tu_dt: 'adjective before noun, not adverb', to_nguyen: 'base verb after to', too_to: 'too + adjective + to', so_that: 'so (that) + clause', where_when: 'where vs when in relative clauses', enough_vi_tri: 'position of enough', so_such: 'so vs such', say_tell: 'say vs tell', despite: 'despite vs although', be_used_to: 'be/get used to + -ing/noun', v_ing_mot_viec: '-ing subject takes singular verb', tu_vung: 'wrong word choice / other' };
+const toks = s => (s.match(/[\p{L}\p{N}'’-]+|[^\s\p{L}\p{N}'’-]/gu) || []);
+// so sánh câu gốc và câu đã sửa theo từng chữ: mỗi chỗ khác thành một cặp (sai, đúng); chỗ thêm/bớt chữ thì kèm chữ bên cạnh
+function diffs(a, b) {
+  const A = toks(a), Bt = toks(b), n = A.length, m = Bt.length, L = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+  const eq = (x, y) => x.toLowerCase().replace('’', "'") === y.toLowerCase().replace('’', "'");
+  for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--) L[i][j] = eq(A[i], Bt[j]) ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
+  const out = []; let i = 0, j = 0, cur = null;
+  const flush = () => { if (cur) { out.push(cur); cur = null; } };
+  while (i < n || j < m) {
+    if (i < n && j < m && eq(A[i], Bt[j])) { flush(); i++; j++; continue; }
+    cur ||= { ai: i, bj: j, a: [], b: [] };
+    if (j < m && (i >= n || L[i][j + 1] >= L[i + 1][j])) { cur.b.push(Bt[j]); j++; } else { cur.a.push(A[i]); i++; }
+  }
+  flush();
+  return out.filter(d => (d.a.join('') + d.b.join('')).replace(/[.,!?;:]/g, '')).map(d => {
+    let sa = d.a.slice(), sb = d.b.slice(), bj = d.bj;
+    if (!sa.length || !sb.length) { // thêm hoặc bớt chữ: lấy luôn chữ đứng trước (hoặc sau) làm chỗ che
+      const na = A[d.ai + d.a.length], nb = Bt[d.bj + d.b.length];
+      if (na && nb && /[\p{L}\p{N}]/u.test(na)) { sa.push(na); sb.push(nb); }
+      else if (d.ai > 0 && bj > 0) { sa.unshift(A[d.ai - 1]); sb.unshift(Bt[bj - 1]); bj--; }
+    }
+    return { sai: sa.join(' ').replace(/ ([.,!?;:])/g, '$1'), dung: sb.join(' ').replace(/ ([.,!?;:])/g, '$1'), bj, len: sb.length };
+  }).filter(d => d.sai && d.dung && d.sai.toLowerCase() !== d.dung.toLowerCase());
+}
+async function suaCau(env, S, text, acc) {
+  const sys = 'You are a careful English teacher for Vietnamese adult learners. Split the learner text into sentences (they may mix in some Vietnamese words). Correct each sentence into natural, everyday American English with the SMALLEST possible changes; keep the meaning and the learner\'s words where they are fine; do not add new sentences. Output ONLY a JSON array, one element per sentence: {"goc": original sentence, "sua": corrected sentence, "vi": natural Vietnamese translation of the corrected sentence}.';
+  const arr = pickJSON(await llm(env, S, sys, text.slice(0, 1500), 1500, acc));
+  if (!Array.isArray(arr)) return { error: 'AI chưa trả lời đúng dạng, thử lại.' };
+  const items = arr.filter(x => x && typeof x.sua === 'string' && typeof x.goc === 'string').slice(0, 10).map(x => ({ goc: x.goc.trim(), sua: x.sua.trim(), vi: String(x.vi || '').trim(), doi: diffs(x.goc, x.sua).slice(0, 3) }));
+  // lần hai: kiểm câu sửa có thật đúng và tự nhiên không, đồng thời gọi đúng tên từng lỗi
+  const ch = []; items.forEach((x, i) => x.doi.forEach((d, j) => ch.push({ i, j, d })));
+  const prompt = `Sentences:\n${items.map((x, i) => `${i + 1}. ${x.sua}`).join('\n')}\n\nChanges made by the teacher:\n${ch.map((c, k) => `C${k + 1} (sentence ${c.i + 1}): "${c.d.sai}" -> "${c.d.dung}"`).join('\n') || '(none)'}\n\nError codes:\n${Object.entries(LOAI).map(([k, v]) => k + ': ' + v).join('\n')}`;
+  let va = [];
+  for (let t = 0; t < 2; t++) { // hỏi lại một lần nếu trả lời sai dạng
+    const v = await llm(env, S, 'You check an English teacher\'s corrections. Output ONLY a JSON array: first one element per sentence, "OK" if the sentence is fully grammatical, natural American English, else "BAD"; then one element per change, the single best error code for the learner\'s mistake. Example for 2 sentences and 1 change: ["OK","OK","thieu_s"].', prompt, 600, acc);
+    va = pickJSON(v) || []; if (va.length === items.length + ch.length) break;
+  }
+  items.forEach((x, i) => { x.kiem = String(va[i] || '').toUpperCase().includes('OK'); });
+  ch.forEach((c, k) => { const code = String(va[items.length + k] || '').trim(); c.d.loai = LOAI[code] ? code : 'tu_vung'; });
+  const bai = [];
+  for (const x of items) {
+    if (!x.kiem) continue;
+    const T = toks(x.sua);
+    for (const d of x.doi) {
+      // đặt dấu che quanh đúng chỗ đã sửa trong câu đúng
+      const before = T.slice(0, d.bj).join(' '), mid = T.slice(d.bj, d.bj + d.len).join(' '), after = T.slice(d.bj + d.len).join(' ');
+      const en = (before + ' {' + mid + '} ' + after).replace(/ ([.,!?;:])/g, '$1').replace(/\s+/g, ' ').trim();
+      if (mid.replace(/[.,!?;:]/g, '').trim() !== d.dung.replace(/[.,!?;:]/g, '').trim()) continue;
+      // chỗ người học viết bằng tiếng Việt hoặc thay cả cụm dài thì chỉ cho xem câu đúng, không biến thành bài đoán
+      if (/[^\x00-\x7F]/.test(d.sai) || d.sai.split(' ').length > 3 || d.len > 3) continue;
+      bai.push({ en, vi: x.vi, o: d.dung.replace(/[.,!?;:]+$/, ''), sai: [[d.sai.replace(/[.,!?;:]+$/, ''), d.loai]], khac: [] });
+    }
+  }
+  return { cau: items.map(x => ({ goc: x.goc, sua: x.sua, vi: x.vi, doi: x.doi.map(d => ({ sai: d.sai, dung: d.dung, loai: d.loai })), kiem: x.kiem })), bai };
+}
+
+// ---------- đăng nhập Google (web chung) ----------
+let JWKS = null, JWKS_T = 0;
+const b64u = s => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(s.length / 4) * 4, '=')), c => c.charCodeAt(0));
+async function googleUser(env, cred) {
+  if (env.TEST_LOGIN === '1' && cred.startsWith('test:')) { const e = cred.slice(5); return { sub: 'test-' + e, email: e, name: e.split('@')[0] }; } // chỉ dùng khi kiểm thử cục bộ
+  const [h, p, sg] = String(cred).split('.'); if (!sg) throw new Error('Mã đăng nhập không hợp lệ');
+  const head = JSON.parse(new TextDecoder().decode(b64u(h))), pay = JSON.parse(new TextDecoder().decode(b64u(p)));
+  if (!JWKS || Date.now() - JWKS_T > 3600e3) { JWKS = (await (await fetch('https://www.googleapis.com/oauth2/v3/certs')).json()).keys; JWKS_T = Date.now(); }
+  const jwk = JWKS.find(k => k.kid === head.kid); if (!jwk) throw new Error('Không tìm thấy khoá Google');
+  const key = await crypto.subtle.importKey('jwk', jwk, { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, false, ['verify']);
+  const ok = await crypto.subtle.verify('RSASSA-PKCS1-v1_5', key, b64u(sg), new TextEncoder().encode(h + '.' + p));
+  if (!ok) throw new Error('Chữ ký không đúng');
+  if (pay.aud !== env.GOOGLE_CLIENT_ID) throw new Error('Sai ứng dụng');
+  if (!['accounts.google.com', 'https://accounts.google.com'].includes(pay.iss)) throw new Error('Sai nơi cấp');
+  if (pay.exp * 1000 < Date.now()) throw new Error('Mã đăng nhập đã hết hạn');
+  return { sub: pay.sub, email: pay.email || '', name: pay.name || '' };
+}
+const NUM = (env, k, d) => Number(env[k] ?? d);
+const today7 = () => new Date(Date.now() + 7 * 3600e3).toISOString().slice(0, 10);
+async function quota(env, who, day) { return (await env.DB.prepare('SELECT nghe_s, sua FROM luot WHERE ai=? AND day=?').bind(who, day).first()) || { nghe_s: 0, sua: 0 }; }
+async function tranUsed(env, day) { const r = await env.DB.prepare('SELECT units FROM tran WHERE day=?').bind(day).first(); return r ? r.units : 0; }
+async function addUse(env, who, day, nghe_s, sua, units) {
+  await env.DB.batch([
+    env.DB.prepare('INSERT INTO luot(ai,day,nghe_s,sua) VALUES(?,?,?,?) ON CONFLICT(ai,day) DO UPDATE SET nghe_s=nghe_s+excluded.nghe_s, sua=sua+excluded.sua').bind(who, day, nghe_s, sua),
+    env.DB.prepare('INSERT INTO tran(day,units) VALUES(?,?) ON CONFLICT(day) DO UPDATE SET units=units+excluded.units').bind(day, units)]);
+}
+const RIENG_TU = `<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dữ liệu của bạn</title><style>body{font:17px/1.6 system-ui,sans-serif;max-width:680px;margin:0 auto;padding:20px;background:#f4f1ea;color:#1c1917}h1{color:#0f766e}</style></head><body>
+<h1>Dữ liệu của bạn</h1>
+<p><b>Khi chưa đăng nhập:</b> tiến độ học chỉ lưu trong trình duyệt trên máy bạn. Máy chủ không lưu gì về bạn, ngoài số giây đã luyện nói trong ngày để giới hạn lượt dùng.</p>
+<p><b>Khi đăng nhập bằng Google:</b> máy chủ lưu email, tên hiển thị, tiến độ học (câu đã học, câu sai, lịch ôn, số giây) và những câu bạn tự kể để AI sửa. Mục đích duy nhất là để bạn học tiếp được trên mọi máy.</p>
+<p><b>Giọng nói:</b> đoạn ghi âm khi luyện nói được gửi đi để máy nghe ra chữ rồi bỏ ngay, không lưu lại.</p>
+<p>Không bán, không chia sẻ dữ liệu cho ai. Muốn xoá hết: vào <b>Cài đặt → Xoá tài khoản</b>, mọi dữ liệu của bạn bị xoá ngay.</p>
+<p><a href="/">← Quay lại học</a></p></body></html>`;
+
+// ---------- định tuyến ----------
+export default {
+  async fetch(req, env, ctx) {
+    const url = new URL(req.url); const p = url.pathname;
+    try {
+      await migrate(env);
+      if (!p.startsWith('/api/')) {
+        if (p === '/kho.json') return new Response(await khoText(env), { headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'public, max-age=31536000, immutable' } });
+        const am = p.match(/^\/am\/(\d+)\/([a-z0-9_]+)\.mp3$/);
+        if (am) {
+          let r = await env.DB.prepare('SELECT v FROM am WHERE k=?').bind(am[2]).first();
+          if (!r) { await importPack(env, Number(am[1])); r = await env.DB.prepare('SELECT v FROM am WHERE k=?').bind(am[2]).first(); }
+          if (!r) return new Response('', { status: 404 });
+          const by = b64bytes(r.v), H = { 'content-type': 'audio/mpeg', 'cache-control': 'public, max-age=31536000, immutable', 'accept-ranges': 'bytes' };
+          const rg = (req.headers.get('range') || '').match(/bytes=(\d*)-(\d*)/);
+          if (rg) { let a = rg[1] ? Number(rg[1]) : 0, b = rg[2] ? Math.min(Number(rg[2]), by.length - 1) : by.length - 1; if (!rg[1] && rg[2]) { a = Math.max(0, by.length - Number(rg[2])); b = by.length - 1; }
+            return new Response(by.slice(a, b + 1), { status: 206, headers: { ...H, 'content-range': `bytes ${a}-${b}/${by.length}`, 'content-length': String(b - a + 1) } }); }
+          return new Response(by, { headers: H });
+        }
+        if (p === '/rieng-tu') return new Response(RIENG_TU, { headers: { 'content-type': 'text/html; charset=utf-8' } });
+        const B = await bundle(env);
+        if (p === '/sw.js') return new Response(B.sw.replace('7f792c37', VER), { headers: { 'content-type': 'text/javascript; charset=utf-8', 'cache-control': 'no-cache' } });
+        if (p === '/manifest.webmanifest') return new Response(B.manifest, { headers: { 'content-type': 'application/manifest+json' } });
+        if (p === '/icon.svg') return new Response(B.icon, { headers: { 'content-type': 'image/svg+xml', 'cache-control': 'max-age=86400' } });
+        if (p === '/icon-192.png' || p === '/icon-512.png') return new Response(b64bytes(p.includes('192') ? B.png192 : B.png512), { headers: { 'content-type': 'image/png', 'cache-control': 'max-age=86400' } });
+        return new Response(B.html.replace('7f792c37', VER), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-cache' } });
+      }
+      const body = req.method === 'POST' ? await req.json().catch(() => ({})) : {};
+      const S = await getSet(env);
+      const CHUNG = !!env.GOOGLE_CLIENT_ID; // web chung: đăng nhập Google, nhiều người; không có thì là bản tự cài một người (mã PIN)
+      if (p === '/api/state') return J({ mode: CHUNG ? 'google' : 'pin', client: env.GOOGLE_CLIENT_ID || '', hasPin: !!S.pin, ver: VER, ai: !!env.AI });
+      if (p === '/api/tai') { const n = Number(url.searchParams.get('n')); if (!(n >= 0)) return ERR('Thiếu số gói'); try { return J({ ok: true, n: await importPack(env, n) }); } catch (e) { return ERR(e.message, 502); } }
+      // ai đang dùng: phiên đăng nhập, hoặc khách (mã máy)
+      const tk = req.headers.get('x-tk') || '';
+      let uid = null;
+      if (tk) { const r = CHUNG ? await env.DB.prepare('SELECT uid FROM phien WHERE token=?').bind(tk).first() : await env.DB.prepare('SELECT 1 AS ok FROM sessions WHERE token=?').bind(tk).first(); if (r) uid = CHUNG ? r.uid : 'chu'; }
+      if (CHUNG) {
+        if (p === '/api/vao' && req.method === 'POST') {
+          let g; try { g = await googleUser(env, String(body.credential || '')); } catch (e) { return ERR('Chưa đăng nhập được: ' + e.message, 401); }
+          await env.DB.prepare('INSERT INTO users(uid,email,name,created,last) VALUES(?,?,?,?,?) ON CONFLICT(uid) DO UPDATE SET email=excluded.email, name=excluded.name, last=excluded.last').bind(g.sub, g.email, g.name, Date.now(), Date.now()).run();
+          const t = rnd(32); await env.DB.prepare('INSERT INTO phien VALUES(?,?,?)').bind(t, g.sub, Date.now()).run();
+          return J({ token: t, email: g.email, name: g.name });
+        }
+        if (p === '/api/nghe' && req.method === 'POST') {
+          if (!env.AI) return ERR('Chưa bật Workers AI');
+          const a = String(body.audio || ''); if (!a || a.length > 1.5e6) return ERR('Không có tiếng hoặc quá dài');
+          const sec = Math.max(0.5, (a.length * 0.75 - 44) / 32000); const day = today7();
+          const who = uid || ('k:' + String(req.headers.get('x-may') || req.headers.get('cf-connecting-ip') || 'x').slice(0, 40));
+          const lim = (uid ? NUM(env, 'NGHE_PHUT', 15) : NUM(env, 'NGHE_PHUT_KHACH', 3)) * 60;
+          const q = await quota(env, who, day);
+          if (q.nghe_s + sec > lim) return J({ error: uid ? 'Hôm nay bạn đã nói hết ' + (lim / 60) + ' phút. Mai quay lại nhé.' : 'Hết ' + (lim / 60) + ' phút nói thử hôm nay. Đăng nhập Gmail để được ' + NUM(env, 'NGHE_PHUT', 15) + ' phút mỗi ngày.', code: uid ? 'het' : 'khach' }, 429);
+          const units = sec / 60 * 46.63;
+          if (await tranUsed(env, day) + units > NUM(env, 'TRAN_NGAY', 300000)) return J({ error: 'Hôm nay web đã dùng hết lượt AI. Mai quay lại nhé, phần học vẫn dùng bình thường.', code: 'tran' }, 429);
+          try { const r = await env.AI.run('@cf/openai/whisper-large-v3-turbo', { audio: a, language: 'en', vad_filter: true }); const text = String(r?.text || '').trim();
+            const acc = { units }; const cham = body.cham && typeof body.cham === 'object' ? await chamNoi(env, S, text, body.cham, acc) : undefined;
+            await addUse(env, who, day, sec, 0, acc.units); return J({ text, cham }); }
+          catch (e) { return J({ error: 'Chưa nghe được: ' + e.message }, 502); }
+        }
+        if (p === '/api/nghe-nghiep' && req.method === 'POST') {
+          const list = body.list || {}; const mota = String(body.mota || '').slice(0, 200); const day = today7();
+          if (!env.AI || !mota || await tranUsed(env, day) > NUM(env, 'TRAN_NGAY', 300000)) return J({ job: '' });
+          try { const acc = { units: 0 }; const t = await llm(env, S, 'Pick the single closest job category for a person. Answer with only the code.', `Person's job (Vietnamese): ${mota}\nCategories:\n${Object.entries(list).map(([k, v]) => k + ': ' + v).join('\n')}`, 20, acc); await addUse(env, 'k:nghe', day, 0, 0, acc.units); const k = Object.keys(list).find(k => t.includes(k)) || ''; return J({ job: k }); }
+          catch { return J({ job: '' }); }
+        }
+        if (!uid) return ERR('Cần đăng nhập', 401);
+        if (p === '/api/tt') {
+          if (req.method === 'POST') {
+            const doc = JSON.stringify(body.doc || {}); if (doc.length > 3e6) return ERR('Dữ liệu quá lớn');
+            const cur = await env.DB.prepare('SELECT updated FROM ttu WHERE uid=?').bind(uid).first(); const up = Number(body.updated) || Date.now();
+            if (cur && cur.updated > up && !body.force) return J({ conflict: true, updated: cur.updated });
+            await env.DB.prepare('INSERT INTO ttu(uid,doc,updated) VALUES(?,?,?) ON CONFLICT(uid) DO UPDATE SET doc=excluded.doc, updated=excluded.updated').bind(uid, doc, up).run();
+            return J({ ok: true, updated: up });
+          }
+          const r = await env.DB.prepare('SELECT doc,updated FROM ttu WHERE uid=?').bind(uid).first();
+          const u = await env.DB.prepare('SELECT email,name FROM users WHERE uid=?').bind(uid).first();
+          return J(r ? { doc: JSON.parse(r.doc), updated: r.updated, me: u } : { doc: null, updated: 0, me: u });
+        }
+        if (p === '/api/sua' && req.method === 'POST') {
+          if (!env.AI) return ERR('Chưa bật Workers AI');
+          const text = String(body.text || '').trim(); if (text.length < 3) return ERR('Viết vài câu trước đã');
+          const day = today7(); const q = await quota(env, uid, day); const lim = NUM(env, 'SUA_LUOT', 6);
+          if (q.sua >= lim) return J({ error: 'Hôm nay bạn đã dùng hết ' + lim + ' lượt sửa câu. Mai quay lại nhé.', code: 'het' }, 429);
+          if (await tranUsed(env, day) + 250 > NUM(env, 'TRAN_NGAY', 300000)) return J({ error: 'Hôm nay web đã dùng hết lượt AI. Mai quay lại nhé.', code: 'tran' }, 429);
+          try { const acc = { units: 0 }; const r = await suaCau(env, S, text, acc); await addUse(env, uid, day, 0, 1, acc.units); if (r.error) return J(r, 502);
+            await env.DB.prepare('INSERT INTO keu(uid,day,text,sua,created) VALUES(?,?,?,?,?)').bind(uid, String(body.day || ''), text, JSON.stringify(r), Date.now()).run(); return J({ ...r, con: lim - q.sua - 1 }); }
+          catch (e) { return J({ error: 'AI đang bận, thử lại sau ít phút (' + e.message + ').' }, 502); }
+        }
+        if (p === '/api/luot') { const day = today7(); const q = await quota(env, uid, day); return J({ nghe_con: Math.max(0, NUM(env, 'NGHE_PHUT', 15) * 60 - q.nghe_s), sua_con: Math.max(0, NUM(env, 'SUA_LUOT', 6) - q.sua) }); }
+        if (p === '/api/logout' && req.method === 'POST') { await env.DB.prepare('DELETE FROM phien WHERE token=?').bind(tk).run(); return J({ ok: true }); }
+        if (p === '/api/xoa' && req.method === 'POST') {
+          await env.DB.batch(['DELETE FROM ttu WHERE uid=?', 'DELETE FROM keu WHERE uid=?', 'DELETE FROM luot WHERE ai=?', 'DELETE FROM phien WHERE uid=?', 'DELETE FROM users WHERE uid=?'].map(q => env.DB.prepare(q).bind(uid)));
+          return J({ ok: true });
+        }
+        return ERR('Không có', 404);
+      }
+      // ----- bản tự cài một người (mã PIN) -----
+      if (p === '/api/setup' && req.method === 'POST') {
+        if (S.pin) return ERR('Đã đặt mã PIN rồi');
+        const pin = String(body.pin || ''); if (!/^\d{4,8}$/.test(pin)) return ERR('Mã PIN gồm 4–8 chữ số');
+        const salt = rnd(12); await setSet(env, 'salt', salt); await setSet(env, 'pin', await sha(salt + pin));
+        const t = rnd(32); await env.DB.prepare('INSERT INTO sessions VALUES(?,?)').bind(t, Date.now()).run();
+        return J({ token: t });
+      }
+      if (p === '/api/login' && req.method === 'POST') {
+        if (!S.pin) return ERR('Chưa đặt mã PIN');
+        if (Date.now() < Number(S.lock || 0)) return ERR('Nhập sai nhiều lần. Thử lại sau ít phút.', 429);
+        if (await sha(S.salt + String(body.pin || '')) !== S.pin) { const f = Number(S.fails || 0) + 1; await setSet(env, 'fails', f >= 5 ? 0 : f); if (f >= 5) await setSet(env, 'lock', Date.now() + 5 * 60e3); return ERR('Sai mã PIN', 401); }
+        await setSet(env, 'fails', 0); const t = rnd(32); await env.DB.prepare('INSERT INTO sessions VALUES(?,?)').bind(t, Date.now()).run(); return J({ token: t });
+      }
+      if (!uid) return ERR('Cần đăng nhập', 401);
+      if (p === '/api/tt') {
+        if (req.method === 'POST') {
+          const doc = JSON.stringify(body.doc || {}); if (doc.length > 3e6) return ERR('Dữ liệu quá lớn');
+          const cur = await env.DB.prepare('SELECT updated FROM tt WHERE id=1').first();
+          const up = Number(body.updated) || Date.now();
+          if (cur && cur.updated > up && !body.force) return J({ conflict: true, updated: cur.updated });
+          await env.DB.prepare('INSERT INTO tt(id,doc,updated) VALUES(1,?,?) ON CONFLICT(id) DO UPDATE SET doc=excluded.doc, updated=excluded.updated').bind(doc, up).run();
+          return J({ ok: true, updated: up });
+        }
+        const r = await env.DB.prepare('SELECT doc,updated FROM tt WHERE id=1').first();
+        return J(r ? { doc: JSON.parse(r.doc), updated: r.updated } : { doc: null, updated: 0 });
+      }
+      if (p === '/api/nghe' && req.method === 'POST') {
+        if (!env.AI) return ERR('Chưa bật Workers AI');
+        const a = String(body.audio || ''); if (!a || a.length > 4e6) return ERR('Không có tiếng hoặc quá dài');
+        try { const r = await env.AI.run('@cf/openai/whisper-large-v3-turbo', { audio: a, language: 'en', vad_filter: true }); const text = String(r?.text || '').trim();
+          const cham = body.cham && typeof body.cham === 'object' ? await chamNoi(env, S, text, body.cham, null) : undefined; return J({ text, cham }); }
+        catch (e) { return J({ error: 'Chưa nghe được: ' + e.message }, 502); }
+      }
+      if (p === '/api/sua' && req.method === 'POST') {
+        if (!env.AI) return ERR('Chưa bật Workers AI');
+        const text = String(body.text || '').trim(); if (text.length < 3) return ERR('Viết vài câu trước đã');
+        try { const r = await suaCau(env, S, text); if (r.error) return J(r, 502); await env.DB.prepare('INSERT INTO ke(day,text,sua,created) VALUES(?,?,?,?)').bind(String(body.day || ''), text, JSON.stringify(r), Date.now()).run(); return J(r); }
+        catch (e) { return J({ error: 'AI đang bận hoặc hết lượt miễn phí hôm nay (' + e.message + ').' }, 502); }
+      }
+      if (p === '/api/nghe-nghiep' && req.method === 'POST') {
+        const list = body.list || {}; const mota = String(body.mota || '').slice(0, 200);
+        if (!env.AI || !mota) return J({ job: '' });
+        try { const t = await llm(env, S, 'Pick the single closest job category for a person. Answer with only the code.', `Person's job (Vietnamese): ${mota}\nCategories:\n${Object.entries(list).map(([k, v]) => k + ': ' + v).join('\n')}`, 20); const k = Object.keys(list).find(k => t.includes(k)) || ''; return J({ job: k }); }
+        catch { return J({ job: '' }); }
+      }
+      if (p === '/api/ke') return J((await env.DB.prepare('SELECT day,text,sua,created FROM ke ORDER BY id DESC LIMIT 30').all()).results.map(x => ({ ...x, sua: JSON.parse(x.sua || '{}') })));
+      if (p === '/api/pin' && req.method === 'POST') { if (!/^\d{4,8}$/.test(String(body.pin || ''))) return ERR('Mã PIN gồm 4–8 chữ số'); const salt = rnd(12); await setSet(env, 'salt', salt); await setSet(env, 'pin', await sha(salt + body.pin)); return J({ ok: true }); }
+      if (p === '/api/logout' && req.method === 'POST') { await env.DB.prepare('DELETE FROM sessions WHERE token=?').bind(tk).run(); return J({ ok: true }); }
+      return ERR('Không có', 404);
+    } catch (e) { return ERR('Lỗi máy chủ: ' + e.message, 500); }
+  },
+};
