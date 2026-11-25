@@ -44,37 +44,67 @@ async function authed(req, env) { const t = req.headers.get('x-tk') || ''; if (!
 const b64bytes = b => Uint8Array.from(atob(b), c => c.charCodeAt(0));
 
 // ---------- AI ----------
-const MODEL = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
-async function llm(env, S, sys, user, max = 900) {
-  const r = await env.AI.run(S.ai_model || MODEL, { messages: [{ role: 'system', content: sys }, { role: 'user', content: user }], max_tokens: max, temperature: 0.1 });
+const MODEL = '@cf/openai/gpt-oss-120b';
+async function llm(env, S, sys, user, max = 1200) {
+  const m = S.ai_model || MODEL;
+  const r = m.includes('gpt-oss')
+    ? await env.AI.run(m, { instructions: sys, input: user, reasoning: { effort: 'low' }, max_output_tokens: max + 600 })
+    : await env.AI.run(m, { messages: [{ role: 'system', content: sys }, { role: 'user', content: user }], max_tokens: max, temperature: 0.1 });
+  if (r && Array.isArray(r.output)) { const msg = r.output.find(o => o.type === 'message'); const t = msg && msg.content && msg.content.map(c => c.text || '').join(''); if (t) return t; }
   const t = r && (r.response ?? r.result?.response ?? r.choices?.[0]?.message?.content);
   return typeof t === 'string' ? t : JSON.stringify(t || '');
 }
 function pickJSON(t) { const a = t.indexOf('['), b = t.lastIndexOf(']'); if (a < 0 || b < a) return null; try { return JSON.parse(t.slice(a, b + 1)); } catch { return null; } }
-const LOAI = ['thieu_s', 'thua_s', 'be_sai', 'thieu_be', 'thua_be', 'a_an', 'thieu_mao_tu', 'the', 'so_nhieu', 'so_nhieu_dac_biet', 'khong_dem_duoc', 'tinh_tu_truoc', 'so_huu', 'tan_ngu', 'to_v', 'khong_to', 'v_ing_sau', 'v_ing_gioi_tu', 'dang_lam', 'do_does', 'dont_doesnt', 'sau_do_nguyen', 'qua_khu_ed', 'qua_khu_bqt', 'was_were', 'will_v', 'going_to', 'gioi_tu_gio', 'gioi_tu_cho', 'there_be', 'many_much', 'some_any', 'trat_tu_hoi', 'so_sanh_hon', 'so_sanh_nhat', 'tan_suat', 'hthh', 'for_since', 'bi_dong', 'ed_ing', 'make_do', 'dieu_kien', 'dieu_kien_2', 'who_which', 'hoi_gian_tiep', 'dong_tu_3', 'tinh_tu_trang_tu', 'dong_tu_cam_giac', 'too_either', 'should_v', 'used_to', 'chu_ngu', 'phrasal', 'tu_vung'];
-
-async function suaCau(env, S, text) {
-  const sys = `You are a careful English teacher for Vietnamese adult learners. The learner wrote a few sentences about their day (they may mix in Vietnamese words). For EACH sentence, return the corrected natural American English version with the smallest possible changes. Output ONLY a JSON array. Each element: {"goc": original sentence, "sua": corrected sentence, "vi": natural Vietnamese translation of the corrected sentence, "doi": [list of changes]}. Each change: {"sai": the learner's wrong words (a short phrase of 1-3 words, copied exactly from goc, never empty), "dung": the correct words (1-3 words, copied exactly from sua, never empty), "loai": one code from this list: ${LOAI.join(', ')}}. If a word was missing, include the neighbouring word in both "sai" and "dung" (e.g. sai "I tired", dung "I am tired"). If a sentence is already correct, "doi" is []. Do not change meaning. Do not add sentences.`;
-  const raw = await llm(env, S, sys, text.slice(0, 1200), 1500);
-  const arr = pickJSON(raw); if (!Array.isArray(arr)) return { error: 'AI chưa trả lời đúng dạng, thử lại.' };
-  const items = arr.filter(x => x && typeof x.sua === 'string' && typeof x.goc === 'string').slice(0, 10);
-  // kiểm lại lần hai: chỉ giữ câu được xác nhận là đúng và tự nhiên
-  let okIdx = items.map(() => true);
-  if (items.length) {
-    const v = await llm(env, S, 'You check English sentences. For each numbered sentence answer only OK if it is fully grammatical, natural American English, or BAD otherwise. Output a JSON array of "OK"/"BAD" strings in order, nothing else.', items.map((x, i) => `${i + 1}. ${x.sua}`).join('\n'), 200);
-    const va = pickJSON(v); if (Array.isArray(va) && va.length === items.length) okIdx = va.map(x => String(x).toUpperCase().includes('OK')); else okIdx = items.map(() => false);
+const LOAI = { thieu_s: 'missing -s on verb after he/she/it/singular noun', thua_s: 'extra -s on verb after I/you/we/they/plural', be_sai: 'wrong form of be (am/is/are)', thieu_be: 'missing am/is/are before adjective/noun/place', thua_be: 'extra am/is/are before an action verb', a_an: 'a vs an', thieu_mao_tu: 'missing a/an/the', the: 'a vs the', so_nhieu: 'missing plural -s/-es', so_nhieu_dac_biet: 'irregular plural (children, people…)', khong_dem_duoc: 'uncountable noun used with a/-s', tinh_tu_truoc: 'adjective after noun (word order)', so_huu: 'wrong possessive (my/his/her…)', tan_ngu: 'wrong object pronoun (me/him/her…)', to_v: 'missing to after want/need/have/try…', khong_to: 'extra to after can/will/should/let\'s', v_ing_sau: 'need -ing after enjoy/finish/stop/like', v_ing_gioi_tu: 'need -ing after a preposition', dang_lam: 'wrong present continuous (am/is/are + -ing)', do_does: 'do vs does in questions', dont_doesnt: 'don\'t vs doesn\'t', sau_do_nguyen: 'verb after do/does/did/didn\'t must be base form', qua_khu_ed: 'regular past tense -ed', qua_khu_bqt: 'irregular past tense (went, bought…)', was_were: 'was vs were', will_v: 'verb after will must be base form', going_to: 'be going to + verb', gioi_tu_gio: 'time preposition at/on/in', gioi_tu_cho: 'place preposition at/in/on', there_be: 'there is vs there are', many_much: 'many vs much', some_any: 'some vs any', trat_tu_hoi: 'question word order', so_sanh_hon: 'comparative (bigger, more expensive)', so_sanh_nhat: 'superlative (the biggest)', tan_suat: 'position of always/usually/never', hthh: 'present perfect have/has + past participle', for_since: 'for vs since', bi_dong: 'passive voice', ed_ing: 'bored vs boring', make_do: 'make vs do', dieu_kien: 'if + present, will', dieu_kien_2: 'if + past, would', who_which: 'who/which/that', hoi_gian_tiep: 'embedded question word order', dong_tu_3: 'past participle form', tinh_tu_trang_tu: 'adjective vs adverb -ly', dong_tu_cam_giac: 'look/feel/sound + adjective', too_either: 'too vs either', should_v: 'verb after should/could/would base form', used_to: 'used to + verb', chu_ngu: 'missing subject (it/there)', phrasal: 'phrasal verb particle', tu_vung: 'wrong word choice / other' };
+const toks = s => (s.match(/[A-Za-z0-9'’-]+|[^\sA-Za-z0-9'’-]/g) || []);
+// so sánh câu gốc và câu đã sửa theo từng chữ: mỗi chỗ khác thành một cặp (sai, đúng); chỗ thêm/bớt chữ thì kèm chữ bên cạnh
+function diffs(a, b) {
+  const A = toks(a), Bt = toks(b), n = A.length, m = Bt.length, L = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+  const eq = (x, y) => x.toLowerCase().replace('’', "'") === y.toLowerCase().replace('’', "'");
+  for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--) L[i][j] = eq(A[i], Bt[j]) ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
+  const out = []; let i = 0, j = 0, cur = null;
+  const flush = () => { if (cur) { out.push(cur); cur = null; } };
+  while (i < n || j < m) {
+    if (i < n && j < m && eq(A[i], Bt[j])) { flush(); i++; j++; continue; }
+    cur ||= { ai: i, bj: j, a: [], b: [] };
+    if (j < m && (i >= n || L[i][j + 1] >= L[i + 1][j])) { cur.b.push(Bt[j]); j++; } else { cur.a.push(A[i]); i++; }
   }
-  const bai = [];
-  items.forEach((x, i) => {
-    if (!okIdx[i]) return;
-    for (const d of (Array.isArray(x.doi) ? x.doi : []).slice(0, 2)) {
-      const dung = String(d.dung || '').trim(), sai = String(d.sai || '').trim();
-      if (!dung || !sai || dung.toLowerCase() === sai.toLowerCase()) continue;
-      const at = x.sua.indexOf(dung); if (at < 0) continue;
-      bai.push({ en: x.sua.slice(0, at) + '{' + dung + '}' + x.sua.slice(at + dung.length), vi: String(x.vi || ''), o: dung, sai: [[sai, LOAI.includes(d.loai) ? d.loai : 'tu_vung']], khac: [] });
+  flush();
+  return out.filter(d => (d.a.join('') + d.b.join('')).replace(/[.,!?;:]/g, '')).map(d => {
+    let sa = d.a.slice(), sb = d.b.slice(), bj = d.bj;
+    if (!sa.length || !sb.length) { // thêm hoặc bớt chữ: lấy luôn chữ đứng trước (hoặc sau) làm chỗ che
+      const na = A[d.ai + d.a.length], nb = Bt[d.bj + d.b.length];
+      if (na && nb && /[A-Za-z0-9]/.test(na)) { sa.push(na); sb.push(nb); }
+      else if (d.ai > 0 && bj > 0) { sa.unshift(A[d.ai - 1]); sb.unshift(Bt[bj - 1]); bj--; }
     }
-  });
-  return { cau: items.map((x, i) => ({ goc: x.goc, sua: x.sua, vi: x.vi || '', doi: x.doi || [], kiem: okIdx[i] })), bai };
+    return { sai: sa.join(' ').replace(/ ([.,!?;:])/g, '$1'), dung: sb.join(' ').replace(/ ([.,!?;:])/g, '$1'), bj, len: sb.length };
+  }).filter(d => d.sai && d.dung && d.sai.toLowerCase() !== d.dung.toLowerCase());
+}
+async function suaCau(env, S, text) {
+  const sys = 'You are a careful English teacher for Vietnamese adult learners. Split the learner text into sentences (they may mix in some Vietnamese words). Correct each sentence into natural, everyday American English with the SMALLEST possible changes; keep the meaning and the learner\'s words where they are fine; do not add new sentences. Output ONLY a JSON array, one element per sentence: {"goc": original sentence, "sua": corrected sentence, "vi": natural Vietnamese translation of the corrected sentence}.';
+  const arr = pickJSON(await llm(env, S, sys, text.slice(0, 1500), 1500));
+  if (!Array.isArray(arr)) return { error: 'AI chưa trả lời đúng dạng, thử lại.' };
+  const items = arr.filter(x => x && typeof x.sua === 'string' && typeof x.goc === 'string').slice(0, 10).map(x => ({ goc: x.goc.trim(), sua: x.sua.trim(), vi: String(x.vi || '').trim(), doi: diffs(x.goc, x.sua).slice(0, 3) }));
+  // lần hai: kiểm câu sửa có thật đúng và tự nhiên không, đồng thời gọi đúng tên từng lỗi
+  const ch = []; items.forEach((x, i) => x.doi.forEach((d, j) => ch.push({ i, j, d })));
+  const prompt = `Sentences:\n${items.map((x, i) => `${i + 1}. ${x.sua}`).join('\n')}\n\nChanges made by the teacher:\n${ch.map((c, k) => `C${k + 1} (sentence ${c.i + 1}): "${c.d.sai}" -> "${c.d.dung}"`).join('\n') || '(none)'}\n\nError codes:\n${Object.entries(LOAI).map(([k, v]) => k + ': ' + v).join('\n')}`;
+  const v = await llm(env, S, 'You check an English teacher\'s corrections. Output ONLY a JSON array: first one element per sentence, "OK" if the sentence is fully grammatical, natural American English, else "BAD"; then one element per change, the single best error code for the learner\'s mistake. Example for 2 sentences and 1 change: ["OK","OK","thieu_s"].', prompt, 600);
+  const va = pickJSON(v) || [];
+  items.forEach((x, i) => { x.kiem = String(va[i] || '').toUpperCase().includes('OK'); });
+  ch.forEach((c, k) => { const code = String(va[items.length + k] || '').trim(); c.d.loai = LOAI[code] ? code : 'tu_vung'; });
+  const bai = [];
+  for (const x of items) {
+    if (!x.kiem) continue;
+    const T = toks(x.sua);
+    for (const d of x.doi) {
+      // đặt dấu che quanh đúng chỗ đã sửa trong câu đúng
+      const before = T.slice(0, d.bj).join(' '), mid = T.slice(d.bj, d.bj + d.len).join(' '), after = T.slice(d.bj + d.len).join(' ');
+      const en = (before + ' {' + mid + '} ' + after).replace(/ ([.,!?;:])/g, '$1').replace(/\s+/g, ' ').trim();
+      if (mid.replace(/[.,!?;:]/g, '').trim() !== d.dung.replace(/[.,!?;:]/g, '').trim()) continue;
+      bai.push({ en, vi: x.vi, o: d.dung.replace(/[.,!?;:]+$/, ''), sai: [[d.sai.replace(/[.,!?;:]+$/, ''), d.loai]], khac: [] });
+    }
+  }
+  return { cau: items.map(x => ({ goc: x.goc, sua: x.sua, vi: x.vi, doi: x.doi.map(d => ({ sai: d.sai, dung: d.dung, loai: d.loai })), kiem: x.kiem })), bai };
 }
 
 // ---------- định tuyến ----------
