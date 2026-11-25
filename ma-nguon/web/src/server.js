@@ -56,7 +56,7 @@ async function llm(env, S, sys, user, max = 1200) {
 }
 function pickJSON(t) { const a = t.indexOf('['), b = t.lastIndexOf(']'); if (a < 0 || b < a) return null; try { return JSON.parse(t.slice(a, b + 1)); } catch { return null; } }
 const LOAI = { thieu_s: 'missing -s on verb after he/she/it/singular noun', thua_s: 'extra -s on verb after I/you/we/they/plural', be_sai: 'wrong form of be (am/is/are)', thieu_be: 'missing am/is/are before adjective/noun/place', thua_be: 'extra am/is/are before an action verb', a_an: 'a vs an', thieu_mao_tu: 'missing a/an/the', the: 'a vs the', so_nhieu: 'missing plural -s/-es', so_nhieu_dac_biet: 'irregular plural (children, people…)', khong_dem_duoc: 'uncountable noun used with a/-s', tinh_tu_truoc: 'adjective after noun (word order)', so_huu: 'wrong possessive (my/his/her…)', tan_ngu: 'wrong object pronoun (me/him/her…)', to_v: 'missing to after want/need/have/try…', khong_to: 'extra to after can/will/should/let\'s', v_ing_sau: 'need -ing after enjoy/finish/stop/like', v_ing_gioi_tu: 'need -ing after a preposition', dang_lam: 'wrong present continuous (am/is/are + -ing)', do_does: 'do vs does in questions', dont_doesnt: 'don\'t vs doesn\'t', sau_do_nguyen: 'verb after do/does/did/didn\'t must be base form', qua_khu_ed: 'regular past tense -ed', qua_khu_bqt: 'irregular past tense (went, bought…)', was_were: 'was vs were', will_v: 'verb after will must be base form', going_to: 'be going to + verb', gioi_tu_gio: 'time preposition at/on/in', gioi_tu_cho: 'place preposition at/in/on', there_be: 'there is vs there are', many_much: 'many vs much', some_any: 'some vs any', trat_tu_hoi: 'question word order', so_sanh_hon: 'comparative (bigger, more expensive)', so_sanh_nhat: 'superlative (the biggest)', tan_suat: 'position of always/usually/never', hthh: 'present perfect have/has + past participle', for_since: 'for vs since', bi_dong: 'passive voice', ed_ing: 'bored vs boring', make_do: 'make vs do', dieu_kien: 'if + present, will', dieu_kien_2: 'if + past, would', who_which: 'who/which/that', hoi_gian_tiep: 'embedded question word order', dong_tu_3: 'past participle form', tinh_tu_trang_tu: 'adjective vs adverb -ly', dong_tu_cam_giac: 'look/feel/sound + adjective', too_either: 'too vs either', should_v: 'verb after should/could/would base form', used_to: 'used to + verb', chu_ngu: 'missing subject (it/there)', phrasal: 'phrasal verb particle', tu_vung: 'wrong word choice / other' };
-const toks = s => (s.match(/[A-Za-z0-9'’-]+|[^\sA-Za-z0-9'’-]/g) || []);
+const toks = s => (s.match(/[\p{L}\p{N}'’-]+|[^\s\p{L}\p{N}'’-]/gu) || []);
 // so sánh câu gốc và câu đã sửa theo từng chữ: mỗi chỗ khác thành một cặp (sai, đúng); chỗ thêm/bớt chữ thì kèm chữ bên cạnh
 function diffs(a, b) {
   const A = toks(a), Bt = toks(b), n = A.length, m = Bt.length, L = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
@@ -74,7 +74,7 @@ function diffs(a, b) {
     let sa = d.a.slice(), sb = d.b.slice(), bj = d.bj;
     if (!sa.length || !sb.length) { // thêm hoặc bớt chữ: lấy luôn chữ đứng trước (hoặc sau) làm chỗ che
       const na = A[d.ai + d.a.length], nb = Bt[d.bj + d.b.length];
-      if (na && nb && /[A-Za-z0-9]/.test(na)) { sa.push(na); sb.push(nb); }
+      if (na && nb && /[\p{L}\p{N}]/u.test(na)) { sa.push(na); sb.push(nb); }
       else if (d.ai > 0 && bj > 0) { sa.unshift(A[d.ai - 1]); sb.unshift(Bt[bj - 1]); bj--; }
     }
     return { sai: sa.join(' ').replace(/ ([.,!?;:])/g, '$1'), dung: sb.join(' ').replace(/ ([.,!?;:])/g, '$1'), bj, len: sb.length };
@@ -101,6 +101,8 @@ async function suaCau(env, S, text) {
       const before = T.slice(0, d.bj).join(' '), mid = T.slice(d.bj, d.bj + d.len).join(' '), after = T.slice(d.bj + d.len).join(' ');
       const en = (before + ' {' + mid + '} ' + after).replace(/ ([.,!?;:])/g, '$1').replace(/\s+/g, ' ').trim();
       if (mid.replace(/[.,!?;:]/g, '').trim() !== d.dung.replace(/[.,!?;:]/g, '').trim()) continue;
+      // chỗ người học viết bằng tiếng Việt hoặc thay cả cụm dài thì chỉ cho xem câu đúng, không biến thành bài đoán
+      if (/[^\x00-\x7F]/.test(d.sai) || d.sai.split(' ').length > 3 || d.len > 3) continue;
       bai.push({ en, vi: x.vi, o: d.dung.replace(/[.,!?;:]+$/, ''), sai: [[d.sai.replace(/[.,!?;:]+$/, ''), d.loai]], khac: [] });
     }
   }
