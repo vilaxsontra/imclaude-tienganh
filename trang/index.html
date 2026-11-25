@@ -1,0 +1,31 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Câu lệnh tạo web học tiếng Anh theo cách AI học</title>
+<style>body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#f4f1ea;color:#222}.w{max-width:720px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:24px;margin:8px 0 4px;color:#0f766e}p{line-height:1.55;margin:8px 0}ol{padding-left:22px;line-height:1.6}
+.b{display:block;width:100%;padding:16px;border:0;border-radius:14px;background:#0f766e;color:#fff;font-size:18px;font-weight:700;margin:14px 0}
+.b.ok{background:#15803d}pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e2dccf;border-radius:14px;padding:14px;font-size:14px;line-height:1.5}
+small{color:#777}a{color:#0f766e}</style></head><body><div class="w">
+<h1>Câu lệnh tạo web học tiếng Anh theo cách AI học</h1>
+<p>Web học riêng của bạn: đọc loạt câu chỉ khác nhau một chỗ, che đi rồi đoán, sai thì chỉnh ngay, ôn lúc sắp quên, nói thẳng và đo số giây. Chạy trên tài khoản Cloudflare miễn phí của chính bạn.</p>
+<ol><li>Bấm nút <b>Chép câu lệnh</b> bên dưới.</li><li>Mở Claude, dán vào ô chat và gửi.</li><li>Làm theo hướng dẫn của Claude. Vài phút là có link web học của bạn.</li></ol>
+<button class="b" id="c">Chép câu lệnh</button>
+<pre id="t">Cài cho tôi web học tiếng Anh theo cách AI học ngôn ngữ lên tài khoản Cloudflare miễn phí của tôi, dùng mã nguồn có sẵn, KHÔNG viết lại mã:
+- Mã máy chủ: https://imclaude-tienganh.pages.dev/maychu.txt
+(Mã máy chủ tự tải giao diện, kho câu và giọng đọc từ https://imclaude-tienganh.pages.dev rồi lưu hẳn vào D1 của tôi. Mã nguồn đầy đủ: https://github.com/vilaxsontra/imclaude-tienganh)
+Nếu tôi chưa có tài khoản Cloudflare hoặc bạn chưa có kết nối Cloudflare: hướng dẫn tôi từng bước (mở https://dash.cloudflare.com/sign-up, tôi tự nhập email, mật khẩu, mã xác minh), rồi chỉ tôi bật kết nối Cloudflare trong Claude. Xong mới làm tiếp.
+Cách cài:
+Bước 1: Tải file máy chủ về đọc kiểm tra trước, ghi lại mã băm SHA-256.
+Bước 2: Dùng kết nối Cloudflare tạo D1 tên &quot;tienganh&quot; (chưa có tên workers.dev thì tạo một tên). File máy chủ dài, đừng chép tay: đăng Worker tạm tên &quot;tienganh&quot; (gắn D1 tên DB, bật workers.dev) với mã dưới đây để nó kéo file vào bảng assets của D1:
+const S=&quot;https://imclaude-tienganh.pages.dev/maychu.txt&quot;;
+export default{async fetch(r,env){await env.DB.prepare(&quot;CREATE TABLE IF NOT EXISTS assets(k TEXT PRIMARY KEY,v TEXT)&quot;).run();const t=await(await fetch(S)).text();await env.DB.prepare(&quot;INSERT OR REPLACE INTO assets VALUES(?,?)&quot;).bind(&quot;server&quot;,t).run();return new Response(&quot;OK&quot;)}}
+Bước 3: Mở địa chỉ Worker đó một lần bằng công cụ đọc web (không được thì nhờ tôi bấm mở).
+Bước 4: Đọc mã máy chủ trong D1 (SELECT v FROM assets WHERE k=&#x27;server&#x27;), so mã băm với bản đã đọc. Khớp thì đăng đè lên Worker &quot;tienganh&quot; (gắn D1 tên DB, Workers AI tên AI). Giữ nguyên bảng assets vì web dùng nó lưu giao diện và kho câu.
+Bước 5: Mở thử, rồi đưa tôi link Worker để tôi đặt mã PIN và bắt đầu học.
+</pre>
+<p><small>Mã nguồn mở: <a href="https://github.com/vilaxsontra/imclaude-tienganh">github.com/vilaxsontra/imclaude-tienganh</a>. Danh sách từ thông dụng theo New General Service List (CC BY-SA 4.0). Giọng đọc tạo bằng Kokoro (Apache 2.0).</small></p>
+</div><script>
+const b=document.getElementById('c'),t=document.getElementById('t').textContent;
+b.onclick=async()=>{let ok=false;try{const a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();a.setSelectionRange(0,t.length);ok=document.execCommand('copy');a.remove()}catch(e){}
+if(!ok){try{await navigator.clipboard.writeText(t);ok=true}catch(e){}}
+b.textContent=ok?'Đã chép! Giờ dán vào Claude':'Chưa chép được, bấm giữ vào câu lệnh để chép';b.classList.toggle('ok',ok)};
+</script></body></html>

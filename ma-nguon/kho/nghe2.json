@@ -1,0 +1,4633 @@
+{
+ "y_te": {
+  "ten": "Y tế, điều dưỡng, nhà thuốc",
+  "cau": [
+   {
+    "k": "k002",
+    "en": "The doctor {is} busy.",
+    "vi": "Bác sĩ đang bận.",
+    "sai": [
+     [
+      "are",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k002",
+    "en": "The doctors {are} busy.",
+    "vi": "Các bác sĩ đang bận.",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k002",
+    "en": "The nurses {are} busy.",
+    "vi": "Các điều dưỡng đang bận.",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k004",
+    "en": "{Are} you allergic to anything?",
+    "vi": "Anh chị có bị dị ứng gì không?",
+    "sai": [
+     [
+      "Is",
+      "be_sai"
+     ],
+     [
+      "Do",
+      "thieu_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k004",
+    "en": "{Is} she allergic to anything?",
+    "vi": "Cô ấy có bị dị ứng gì không?",
+    "sai": [
+     [
+      "Are",
+      "be_sai"
+     ],
+     [
+      "Does",
+      "thieu_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k004",
+    "en": "{Is} she allergic to penicillin?",
+    "vi": "Cô ấy có bị dị ứng penicillin không?",
+    "sai": [
+     [
+      "Are",
+      "be_sai"
+     ],
+     [
+      "Does",
+      "thieu_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k013",
+    "en": "I {work} the night shift.",
+    "vi": "Tôi làm ca đêm.",
+    "sai": [
+     [
+      "works",
+      "thua_s"
+     ],
+     [
+      "am work",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k013",
+    "en": "She {works} the night shift.",
+    "vi": "Cô ấy làm ca đêm.",
+    "sai": [
+     [
+      "work",
+      "thieu_s"
+     ],
+     [
+      "is work",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k013",
+    "en": "She {works} at a pharmacy.",
+    "vi": "Cô ấy làm ở một nhà thuốc.",
+    "sai": [
+     [
+      "work",
+      "thieu_s"
+     ],
+     [
+      "is work",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k014",
+    "en": "This medicine {doesn't} need a prescription.",
+    "vi": "Thuốc này không cần đơn bác sĩ.",
+    "sai": [
+     [
+      "don't",
+      "dont_doesnt"
+     ],
+     [
+      "isn't",
+      "thua_be"
+     ]
+    ],
+    "khac": [
+     "does not"
+    ]
+   },
+   {
+    "k": "k014",
+    "en": "These vitamins {don't} need a prescription.",
+    "vi": "Mấy loại vitamin này không cần đơn bác sĩ.",
+    "sai": [
+     [
+      "doesn't",
+      "dont_doesnt"
+     ],
+     [
+      "aren't",
+      "thua_be"
+     ]
+    ],
+    "khac": [
+     "do not"
+    ]
+   },
+   {
+    "k": "k014",
+    "en": "You {don't} need a prescription.",
+    "vi": "Anh chị không cần đơn bác sĩ.",
+    "sai": [
+     [
+      "doesn't",
+      "dont_doesnt"
+     ],
+     [
+      "aren't",
+      "thua_be"
+     ]
+    ],
+    "khac": [
+     "do not"
+    ]
+   },
+   {
+    "k": "k015",
+    "en": "{Do} you have a fever?",
+    "vi": "Anh chị có bị sốt không?",
+    "sai": [
+     [
+      "Does",
+      "do_does"
+     ],
+     [
+      "Are",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k015",
+    "en": "{Does} he have a fever?",
+    "vi": "Anh ấy có bị sốt không?",
+    "sai": [
+     [
+      "Do",
+      "do_does"
+     ],
+     [
+      "Is",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k015",
+    "en": "Does he {have} a cough?",
+    "vi": "Anh ấy có bị ho không?",
+    "sai": [
+     [
+      "has",
+      "sau_do_nguyen"
+     ],
+     [
+      "having",
+      "sau_do_nguyen"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k018",
+    "en": "Where {is} the pharmacy?",
+    "vi": "Nhà thuốc ở đâu?",
+    "sai": [
+     [
+      "are",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k018",
+    "en": "Where {is} the emergency room?",
+    "vi": "Phòng cấp cứu ở đâu?",
+    "sai": [
+     [
+      "are",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k018",
+    "en": "Where {are} the gloves?",
+    "vi": "Găng tay để ở đâu?",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k022",
+    "en": "Can you {raise} your arm?",
+    "vi": "Anh chị giơ tay lên được không?",
+    "sai": [
+     [
+      "to raise",
+      "khong_to"
+     ],
+     [
+      "raising",
+      "khong_to"
+     ]
+    ],
+    "khac": [
+     "lift"
+    ]
+   },
+   {
+    "k": "k022",
+    "en": "Can you {raise} your leg?",
+    "vi": "Anh chị nâng chân lên được không?",
+    "sai": [
+     [
+      "to raise",
+      "khong_to"
+     ],
+     [
+      "raising",
+      "khong_to"
+     ]
+    ],
+    "khac": [
+     "lift"
+    ]
+   },
+   {
+    "k": "k022",
+    "en": "Can you {bend} your leg?",
+    "vi": "Anh chị co chân lại được không?",
+    "sai": [
+     [
+      "to bend",
+      "khong_to"
+     ],
+     [
+      "bending",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k027",
+    "en": "Please {take} this after meals.",
+    "vi": "Uống thuốc này sau bữa ăn nhé.",
+    "sai": [
+     [
+      "taking",
+      "khong_to"
+     ],
+     [
+      "to take",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k027",
+    "en": "Please {take} this before meals.",
+    "vi": "Uống thuốc này trước bữa ăn nhé.",
+    "sai": [
+     [
+      "taking",
+      "khong_to"
+     ],
+     [
+      "to take",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k027",
+    "en": "Don't {take} this before meals.",
+    "vi": "Đừng uống thuốc này trước bữa ăn.",
+    "sai": [
+     [
+      "taking",
+      "sau_do_nguyen"
+     ],
+     [
+      "takes",
+      "sau_do_nguyen"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k028",
+    "en": "She {needs} a blood test.",
+    "vi": "Cô ấy cần xét nghiệm máu.",
+    "sai": [
+     [
+      "need",
+      "thieu_s"
+     ],
+     [
+      "is need",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k028",
+    "en": "She needs {to stay} in bed.",
+    "vi": "Cô ấy cần nằm nghỉ trên giường.",
+    "sai": [
+     [
+      "stay",
+      "to_v"
+     ],
+     [
+      "staying",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k028",
+    "en": "She needs {to drink} more water.",
+    "vi": "Cô ấy cần uống nhiều nước hơn.",
+    "sai": [
+     [
+      "drink",
+      "to_v"
+     ],
+     [
+      "drinking",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k041",
+    "en": "I {checked} his blood pressure an hour ago.",
+    "vi": "Tôi đã đo huyết áp cho anh ấy cách đây một tiếng.",
+    "sai": [
+     [
+      "check",
+      "qua_khu_ed"
+     ],
+     [
+      "checking",
+      "qua_khu_ed"
+     ]
+    ],
+    "khac": [
+     "took"
+    ]
+   },
+   {
+    "k": "k041",
+    "en": "I {checked} his temperature an hour ago.",
+    "vi": "Tôi đã đo nhiệt độ cho anh ấy cách đây một tiếng.",
+    "sai": [
+     [
+      "check",
+      "qua_khu_ed"
+     ],
+     [
+      "checking",
+      "qua_khu_ed"
+     ]
+    ],
+    "khac": [
+     "took"
+    ]
+   },
+   {
+    "k": "k041",
+    "en": "I {recorded} his temperature an hour ago.",
+    "vi": "Tôi đã ghi lại nhiệt độ của anh ấy cách đây một tiếng.",
+    "sai": [
+     [
+      "record",
+      "qua_khu_ed"
+     ],
+     [
+      "recording",
+      "qua_khu_ed"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k042",
+    "en": "I {gave} him a shot an hour ago.",
+    "vi": "Tôi đã tiêm cho anh ấy một mũi cách đây một tiếng.",
+    "sai": [
+     [
+      "give",
+      "qua_khu_bqt"
+     ],
+     [
+      "gived",
+      "qua_khu_bqt"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k042",
+    "en": "I {gave} him his medicine an hour ago.",
+    "vi": "Tôi đã cho anh ấy uống thuốc cách đây một tiếng.",
+    "sai": [
+     [
+      "give",
+      "qua_khu_bqt"
+     ],
+     [
+      "gived",
+      "qua_khu_bqt"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k042",
+    "en": "She {gave} him his medicine an hour ago.",
+    "vi": "Cô ấy đã cho anh ấy uống thuốc cách đây một tiếng.",
+    "sai": [
+     [
+      "gives",
+      "qua_khu_bqt"
+     ],
+     [
+      "gived",
+      "qua_khu_bqt"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k046",
+    "en": "The doctor will {see} you soon.",
+    "vi": "Bác sĩ sẽ khám cho anh chị ngay thôi.",
+    "sai": [
+     [
+      "sees",
+      "will_v"
+     ],
+     [
+      "seeing",
+      "will_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k046",
+    "en": "The doctor will {call} you soon.",
+    "vi": "Bác sĩ sẽ gọi anh chị ngay thôi.",
+    "sai": [
+     [
+      "calls",
+      "will_v"
+     ],
+     [
+      "calling",
+      "will_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k046",
+    "en": "The nurse will {call} you soon.",
+    "vi": "Điều dưỡng sẽ gọi anh chị ngay thôi.",
+    "sai": [
+     [
+      "calls",
+      "will_v"
+     ],
+     [
+      "calling",
+      "will_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k050",
+    "en": "You should {drink} more water.",
+    "vi": "Anh chị nên uống nhiều nước hơn.",
+    "sai": [
+     [
+      "to drink",
+      "should_v"
+     ],
+     [
+      "drinking",
+      "should_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k050",
+    "en": "You should {get} more rest.",
+    "vi": "Anh chị nên nghỉ ngơi nhiều hơn.",
+    "sai": [
+     [
+      "to get",
+      "should_v"
+     ],
+     [
+      "getting",
+      "should_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k050",
+    "en": "You should {get} more sleep.",
+    "vi": "Anh chị nên ngủ nhiều hơn.",
+    "sai": [
+     [
+      "to get",
+      "should_v"
+     ],
+     [
+      "getting",
+      "should_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k069",
+    "en": "I {feel} dizzy.",
+    "vi": "Tôi thấy chóng mặt.",
+    "sai": [
+     [
+      "feels",
+      "thua_s"
+     ],
+     [
+      "am feel",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k069",
+    "en": "He {feels} dizzy.",
+    "vi": "Anh ấy thấy chóng mặt.",
+    "sai": [
+     [
+      "feel",
+      "thieu_s"
+     ],
+     [
+      "is feel",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k069",
+    "en": "He {feels} better.",
+    "vi": "Anh ấy thấy đỡ hơn rồi.",
+    "sai": [
+     [
+      "feel",
+      "thieu_s"
+     ],
+     [
+      "is feel",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k076",
+    "en": "This medicine might {make} you sleepy.",
+    "vi": "Thuốc này có thể làm anh chị buồn ngủ.",
+    "sai": [
+     [
+      "makes",
+      "khong_to"
+     ],
+     [
+      "to make",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k076",
+    "en": "This medicine might {make} you dizzy.",
+    "vi": "Thuốc này có thể làm anh chị chóng mặt.",
+    "sai": [
+     [
+      "makes",
+      "khong_to"
+     ],
+     [
+      "to make",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k076",
+    "en": "This medicine might {upset} your stomach.",
+    "vi": "Thuốc này có thể làm anh chị khó chịu dạ dày.",
+    "sai": [
+     [
+      "upsets",
+      "khong_to"
+     ],
+     [
+      "to upset",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   }
+  ],
+  "noi": [
+   {
+    "k": "k015",
+    "tinh": "Bạn là điều dưỡng. Người bệnh sờ trán thấy nóng, bạn muốn hỏi xem họ có bị sốt không.",
+    "dap": [
+     "Do you have a fever?",
+     "Do you have a fever right now?"
+    ]
+   },
+   {
+    "k": "k050",
+    "tinh": "Người bệnh bị mất nước. Bạn khuyên họ uống thêm nước.",
+    "dap": [
+     "You should drink more water.",
+     "You should drink a lot of water.",
+     "You need to drink more water."
+    ]
+   },
+   {
+    "k": "k069",
+    "tinh": "Bạn đi khám, cứ đứng lên là thấy đầu quay cuồng. Bạn nói với bác sĩ.",
+    "dap": [
+     "I feel dizzy.",
+     "I feel a little dizzy.",
+     "I feel very dizzy.",
+     "I get dizzy when I stand up."
+    ]
+   },
+   {
+    "k": "k022",
+    "tinh": "Bạn đang khám vai cho người bệnh, cần họ đưa tay lên cao.",
+    "dap": [
+     "Can you raise your arm?",
+     "Can you lift your arm?",
+     "Can you raise your arm, please?"
+    ]
+   }
+  ]
+ },
+ "tho_ky_thuat": {
+  "ten": "Thợ sửa chữa, kỹ thuật, xây dựng",
+  "cau": [
+   {
+    "k": "k013",
+    "en": "I {fix} air conditioners.",
+    "vi": "Tôi sửa máy lạnh.",
+    "sai": [
+     [
+      "fixes",
+      "thua_s"
+     ],
+     [
+      "am fix",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k013",
+    "en": "He {fixes} air conditioners.",
+    "vi": "Anh ấy sửa máy lạnh.",
+    "sai": [
+     [
+      "fix",
+      "thieu_s"
+     ],
+     [
+      "is fix",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k013",
+    "en": "He {installs} air conditioners.",
+    "vi": "Anh ấy lắp máy lạnh.",
+    "sai": [
+     [
+      "install",
+      "thieu_s"
+     ],
+     [
+      "is install",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k003",
+    "en": "This ladder {isn't} safe.",
+    "vi": "Cái thang này không an toàn.",
+    "sai": [
+     [
+      "aren't",
+      "be_sai"
+     ],
+     [
+      "not",
+      "thieu_be"
+     ]
+    ],
+    "khac": [
+     "is not"
+    ]
+   },
+   {
+    "k": "k003",
+    "en": "These ladders {aren't} safe.",
+    "vi": "Mấy cái thang này không an toàn.",
+    "sai": [
+     [
+      "isn't",
+      "be_sai"
+     ],
+     [
+      "not",
+      "thieu_be"
+     ]
+    ],
+    "khac": [
+     "are not"
+    ]
+   },
+   {
+    "k": "k003",
+    "en": "These wires {aren't} safe.",
+    "vi": "Mấy sợi dây điện này không an toàn.",
+    "sai": [
+     [
+      "isn't",
+      "be_sai"
+     ],
+     [
+      "not",
+      "thieu_be"
+     ]
+    ],
+    "khac": [
+     "are not"
+    ]
+   },
+   {
+    "k": "k016",
+    "en": "There {is} a leak under the sink.",
+    "vi": "Dưới bồn rửa có một chỗ bị rò nước.",
+    "sai": [
+     [
+      "are",
+      "there_be"
+     ],
+     [
+      "has",
+      "there_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k016",
+    "en": "There {are} two leaks under the sink.",
+    "vi": "Dưới bồn rửa có hai chỗ bị rò nước.",
+    "sai": [
+     [
+      "is",
+      "there_be"
+     ],
+     [
+      "have",
+      "there_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k016",
+    "en": "There {are} two leaks in the roof.",
+    "vi": "Mái nhà bị dột hai chỗ.",
+    "sai": [
+     [
+      "is",
+      "there_be"
+     ],
+     [
+      "have",
+      "there_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k020",
+    "en": "How much {is} this drill?",
+    "vi": "Cái máy khoan này bao nhiêu tiền?",
+    "sai": [
+     [
+      "are",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k020",
+    "en": "How much {are} these drills?",
+    "vi": "Mấy cái máy khoan này bao nhiêu tiền?",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k020",
+    "en": "How much {are} these screws?",
+    "vi": "Mấy con ốc vít này bao nhiêu tiền?",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k022",
+    "en": "Can you {hold} the ladder?",
+    "vi": "Anh giữ cái thang giúp tôi được không?",
+    "sai": [
+     [
+      "to hold",
+      "khong_to"
+     ],
+     [
+      "holding",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k022",
+    "en": "Can you {hold} this pipe?",
+    "vi": "Anh giữ cái ống này giúp tôi được không?",
+    "sai": [
+     [
+      "to hold",
+      "khong_to"
+     ],
+     [
+      "holding",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k022",
+    "en": "Can you {cut} this pipe?",
+    "vi": "Anh cắt cái ống này giúp tôi được không?",
+    "sai": [
+     [
+      "to cut",
+      "khong_to"
+     ],
+     [
+      "cutting",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k024",
+    "en": "I am {fixing} the sink.",
+    "vi": "Tôi đang sửa bồn rửa.",
+    "sai": [
+     [
+      "fix",
+      "dang_lam"
+     ],
+     [
+      "fixed",
+      "dang_lam"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k024",
+    "en": "He {is} fixing the sink.",
+    "vi": "Anh ấy đang sửa bồn rửa.",
+    "sai": [
+     [
+      "are",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k024",
+    "en": "He {is} fixing the roof.",
+    "vi": "Anh ấy đang sửa mái nhà.",
+    "sai": [
+     [
+      "are",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k028",
+    "en": "I {need} more cement.",
+    "vi": "Tôi cần thêm xi măng.",
+    "sai": [
+     [
+      "needs",
+      "thua_s"
+     ],
+     [
+      "am need",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k028",
+    "en": "He {needs} more cement.",
+    "vi": "Anh ấy cần thêm xi măng.",
+    "sai": [
+     [
+      "need",
+      "thieu_s"
+     ],
+     [
+      "is need",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k028",
+    "en": "He needs {to buy} more cement.",
+    "vi": "Anh ấy cần mua thêm xi măng.",
+    "sai": [
+     [
+      "buy",
+      "to_v"
+     ],
+     [
+      "buying",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k029",
+    "en": "I {have to} turn off the power first.",
+    "vi": "Tôi phải ngắt điện trước đã.",
+    "sai": [
+     [
+      "have",
+      "to_v"
+     ],
+     [
+      "has to",
+      "thua_s"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k029",
+    "en": "I {have to} turn off the water first.",
+    "vi": "Tôi phải khóa nước trước đã.",
+    "sai": [
+     [
+      "have",
+      "to_v"
+     ],
+     [
+      "has to",
+      "thua_s"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k029",
+    "en": "He {has to} turn off the water first.",
+    "vi": "Anh ấy phải khóa nước trước đã.",
+    "sai": [
+     [
+      "have to",
+      "thieu_s"
+     ],
+     [
+      "has",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k031",
+    "en": "He is {on} the roof.",
+    "vi": "Anh ấy đang ở trên mái nhà.",
+    "sai": [
+     [
+      "in",
+      "gioi_tu_cho"
+     ],
+     [
+      "at",
+      "gioi_tu_cho"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k031",
+    "en": "He is {on} the ladder.",
+    "vi": "Anh ấy đang ở trên thang.",
+    "sai": [
+     [
+      "in",
+      "gioi_tu_cho"
+     ],
+     [
+      "to",
+      "gioi_tu_cho"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k031",
+    "en": "He is {in} the kitchen.",
+    "vi": "Anh ấy đang ở trong bếp.",
+    "sai": [
+     [
+      "on",
+      "gioi_tu_cho"
+     ],
+     [
+      "at",
+      "gioi_tu_cho"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k041",
+    "en": "I {fixed} the light yesterday.",
+    "vi": "Hôm qua tôi đã sửa cái đèn.",
+    "sai": [
+     [
+      "fix",
+      "qua_khu_ed"
+     ],
+     [
+      "fixing",
+      "qua_khu_ed"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k041",
+    "en": "I {replaced} the light yesterday.",
+    "vi": "Hôm qua tôi đã thay cái đèn.",
+    "sai": [
+     [
+      "replace",
+      "qua_khu_ed"
+     ],
+     [
+      "replacing",
+      "qua_khu_ed"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k041",
+    "en": "I {replaced} the pipe yesterday.",
+    "vi": "Hôm qua tôi đã thay cái ống nước.",
+    "sai": [
+     [
+      "replace",
+      "qua_khu_ed"
+     ],
+     [
+      "replacing",
+      "qua_khu_ed"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k042",
+    "en": "I {bought} new tiles yesterday.",
+    "vi": "Hôm qua tôi đã mua gạch lát mới.",
+    "sai": [
+     [
+      "buy",
+      "qua_khu_bqt"
+     ],
+     [
+      "buyed",
+      "qua_khu_bqt"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k042",
+    "en": "I {bought} more paint yesterday.",
+    "vi": "Hôm qua tôi đã mua thêm sơn.",
+    "sai": [
+     [
+      "buy",
+      "qua_khu_bqt"
+     ],
+     [
+      "buyed",
+      "qua_khu_bqt"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k042",
+    "en": "I {brought} more paint yesterday.",
+    "vi": "Hôm qua tôi đã mang thêm sơn tới.",
+    "sai": [
+     [
+      "bring",
+      "qua_khu_bqt"
+     ],
+     [
+      "bringed",
+      "qua_khu_bqt"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k043",
+    "en": "He didn't {bring} his tools.",
+    "vi": "Anh ấy đã không mang đồ nghề theo.",
+    "sai": [
+     [
+      "brought",
+      "sau_do_nguyen"
+     ],
+     [
+      "brings",
+      "sau_do_nguyen"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k043",
+    "en": "He didn't {bring} his hard hat.",
+    "vi": "Anh ấy đã không mang mũ bảo hộ theo.",
+    "sai": [
+     [
+      "brought",
+      "sau_do_nguyen"
+     ],
+     [
+      "brings",
+      "sau_do_nguyen"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k043",
+    "en": "He didn't {wear} his hard hat.",
+    "vi": "Anh ấy đã không đội mũ bảo hộ.",
+    "sai": [
+     [
+      "wore",
+      "sau_do_nguyen"
+     ],
+     [
+      "wears",
+      "sau_do_nguyen"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k046",
+    "en": "I will {fix} it tomorrow.",
+    "vi": "Ngày mai tôi sẽ sửa nó.",
+    "sai": [
+     [
+      "fixes",
+      "will_v"
+     ],
+     [
+      "fixing",
+      "will_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k046",
+    "en": "I will {check} it tomorrow.",
+    "vi": "Ngày mai tôi sẽ kiểm tra nó.",
+    "sai": [
+     [
+      "checks",
+      "will_v"
+     ],
+     [
+      "checking",
+      "will_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k046",
+    "en": "I will {check} it on Monday.",
+    "vi": "Thứ Hai tôi sẽ kiểm tra nó.",
+    "sai": [
+     [
+      "checks",
+      "will_v"
+     ],
+     [
+      "checking",
+      "will_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k077",
+    "en": "You must {wear} a hard hat.",
+    "vi": "Anh phải đội mũ bảo hộ.",
+    "sai": [
+     [
+      "to wear",
+      "khong_to"
+     ],
+     [
+      "wearing",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k077",
+    "en": "You must {wear} gloves.",
+    "vi": "Anh phải đeo găng tay.",
+    "sai": [
+     [
+      "to wear",
+      "khong_to"
+     ],
+     [
+      "wearing",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k077",
+    "en": "Everyone must {wear} gloves.",
+    "vi": "Ai cũng phải đeo găng tay.",
+    "sai": [
+     [
+      "wears",
+      "khong_to"
+     ],
+     [
+      "to wear",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k060",
+    "en": "If it {rains}, we will stop painting.",
+    "vi": "Nếu trời mưa, chúng tôi sẽ ngừng sơn.",
+    "sai": [
+     [
+      "will rain",
+      "dieu_kien"
+     ],
+     [
+      "rain",
+      "thieu_s"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k060",
+    "en": "If it {is} windy, we will stop painting.",
+    "vi": "Nếu trời gió to, chúng tôi sẽ ngừng sơn.",
+    "sai": [
+     [
+      "will be",
+      "dieu_kien"
+     ],
+     [
+      "be",
+      "dieu_kien"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k060",
+    "en": "If it is windy, we will {finish} tomorrow.",
+    "vi": "Nếu trời gió to, mai chúng tôi mới làm xong.",
+    "sai": [
+     [
+      "finishes",
+      "will_v"
+     ],
+     [
+      "finishing",
+      "will_v"
+     ]
+    ],
+    "khac": []
+   }
+  ],
+  "noi": [
+   {
+    "k": "k022",
+    "tinh": "Bạn sắp leo lên thang, cần người đứng dưới giữ thang giúp.",
+    "dap": [
+     "Can you hold the ladder?",
+     "Can you hold the ladder, please?",
+     "Can you hold the ladder for me?",
+     "Could you hold the ladder for me?"
+    ]
+   },
+   {
+    "k": "k016",
+    "tinh": "Bạn kiểm tra bếp nhà khách và thấy nước rỉ ra dưới bồn rửa. Bạn báo cho chủ nhà.",
+    "dap": [
+     "There is a leak under the sink.",
+     "There's a leak under the sink.",
+     "The sink is leaking."
+    ]
+   },
+   {
+    "k": "k046",
+    "tinh": "Khách hỏi khi nào sửa được cái máy. Bạn hẹn ngày mai.",
+    "dap": [
+     "I will fix it tomorrow.",
+     "I'll fix it tomorrow.",
+     "It'll be ready tomorrow."
+    ]
+   },
+   {
+    "k": "k077",
+    "tinh": "Một người mới vào công trường mà không đội mũ bảo hộ. Bạn nhắc anh ấy.",
+    "dap": [
+     "You must wear a hard hat.",
+     "You must wear a helmet.",
+     "You must wear a hard hat here.",
+     "You need to wear a hard hat."
+    ]
+   }
+  ]
+ },
+ "giao_vien": {
+  "ten": "Giáo viên",
+  "cau": [
+   {
+    "k": "k001",
+    "en": "I {am} a math teacher.",
+    "vi": "Tôi là giáo viên toán.",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "are",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k001",
+    "en": "I {am} an English teacher.",
+    "vi": "Tôi là giáo viên tiếng Anh.",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "are",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k001",
+    "en": "I {am} your homeroom teacher.",
+    "vi": "Cô là giáo viên chủ nhiệm của các em.",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "are",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k002",
+    "en": "The class {is} noisy today.",
+    "vi": "Hôm nay lớp ồn quá.",
+    "sai": [
+     [
+      "are",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k002",
+    "en": "The students {are} noisy today.",
+    "vi": "Hôm nay học sinh ồn quá.",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k002",
+    "en": "The students {are} tired today.",
+    "vi": "Hôm nay học sinh mệt.",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k014",
+    "en": "He {doesn't} do his homework.",
+    "vi": "Em ấy không làm bài tập về nhà.",
+    "sai": [
+     [
+      "don't",
+      "dont_doesnt"
+     ],
+     [
+      "isn't",
+      "thua_be"
+     ]
+    ],
+    "khac": [
+     "does not"
+    ]
+   },
+   {
+    "k": "k014",
+    "en": "They {don't} do their homework.",
+    "vi": "Các em ấy không làm bài tập về nhà.",
+    "sai": [
+     [
+      "doesn't",
+      "dont_doesnt"
+     ],
+     [
+      "aren't",
+      "thua_be"
+     ]
+    ],
+    "khac": [
+     "do not"
+    ]
+   },
+   {
+    "k": "k014",
+    "en": "They {don't} bring their books.",
+    "vi": "Các em ấy không mang sách.",
+    "sai": [
+     [
+      "doesn't",
+      "dont_doesnt"
+     ],
+     [
+      "aren't",
+      "thua_be"
+     ]
+    ],
+    "khac": [
+     "do not"
+    ]
+   },
+   {
+    "k": "k015",
+    "en": "{Do} you understand?",
+    "vi": "Các em có hiểu không?",
+    "sai": [
+     [
+      "Does",
+      "do_does"
+     ],
+     [
+      "Are",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k015",
+    "en": "{Does} he understand?",
+    "vi": "Em ấy có hiểu không?",
+    "sai": [
+     [
+      "Do",
+      "do_does"
+     ],
+     [
+      "Is",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k015",
+    "en": "Does he {understand} the lesson?",
+    "vi": "Em ấy có hiểu bài không?",
+    "sai": [
+     [
+      "understands",
+      "sau_do_nguyen"
+     ],
+     [
+      "understood",
+      "sau_do_nguyen"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k019",
+    "en": "What {does} this word mean?",
+    "vi": "Từ này nghĩa là gì?",
+    "sai": [
+     [
+      "do",
+      "do_does"
+     ],
+     [
+      "is",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k019",
+    "en": "What {do} these words mean?",
+    "vi": "Mấy từ này nghĩa là gì?",
+    "sai": [
+     [
+      "does",
+      "do_does"
+     ],
+     [
+      "are",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k019",
+    "en": "What {does} this sentence mean?",
+    "vi": "Câu này nghĩa là gì?",
+    "sai": [
+     [
+      "do",
+      "do_does"
+     ],
+     [
+      "is",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k024",
+    "en": "The students {are} taking a test.",
+    "vi": "Học sinh đang làm bài kiểm tra.",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k024",
+    "en": "She {is} taking a test.",
+    "vi": "Em ấy đang làm bài kiểm tra.",
+    "sai": [
+     [
+      "are",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k024",
+    "en": "She is {taking} a quiz.",
+    "vi": "Em ấy đang làm bài kiểm tra ngắn.",
+    "sai": [
+     [
+      "take",
+      "dang_lam"
+     ],
+     [
+      "takes",
+      "dang_lam"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k027",
+    "en": "Please {open} your books.",
+    "vi": "Các em mở sách ra.",
+    "sai": [
+     [
+      "opening",
+      "khong_to"
+     ],
+     [
+      "to open",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k027",
+    "en": "Please {close} your books.",
+    "vi": "Các em gấp sách lại.",
+    "sai": [
+     [
+      "closing",
+      "khong_to"
+     ],
+     [
+      "to close",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k027",
+    "en": "Please {close} your notebooks.",
+    "vi": "Các em gấp vở lại.",
+    "sai": [
+     [
+      "closing",
+      "khong_to"
+     ],
+     [
+      "to close",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k030",
+    "en": "The test is {on} Friday.",
+    "vi": "Bài kiểm tra vào thứ Sáu.",
+    "sai": [
+     [
+      "in",
+      "gioi_tu_gio"
+     ],
+     [
+      "at",
+      "gioi_tu_gio"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k030",
+    "en": "The test is {at} 9 a.m.",
+    "vi": "Bài kiểm tra lúc 9 giờ sáng.",
+    "sai": [
+     [
+      "in",
+      "gioi_tu_gio"
+     ],
+     [
+      "on",
+      "gioi_tu_gio"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k030",
+    "en": "The test is {in} the morning.",
+    "vi": "Bài kiểm tra vào buổi sáng.",
+    "sai": [
+     [
+      "at",
+      "gioi_tu_gio"
+     ],
+     [
+      "on",
+      "gioi_tu_gio"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k033",
+    "en": "Please listen to {me}.",
+    "vi": "Các em nghe cô nói nhé.",
+    "sai": [
+     [
+      "I",
+      "tan_ngu"
+     ],
+     [
+      "my",
+      "tan_ngu"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k033",
+    "en": "Please listen to {him}.",
+    "vi": "Các em nghe bạn ấy nói nhé.",
+    "sai": [
+     [
+      "he",
+      "tan_ngu"
+     ],
+     [
+      "his",
+      "tan_ngu"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k033",
+    "en": "Please listen to {them}.",
+    "vi": "Các em nghe các bạn ấy nói nhé.",
+    "sai": [
+     [
+      "they",
+      "tan_ngu"
+     ],
+     [
+      "their",
+      "tan_ngu"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k041",
+    "en": "I {graded} your tests last night.",
+    "vi": "Tối qua cô đã chấm bài kiểm tra của các em.",
+    "sai": [
+     [
+      "grade",
+      "qua_khu_ed"
+     ],
+     [
+      "grading",
+      "qua_khu_ed"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k041",
+    "en": "I {graded} your essays last night.",
+    "vi": "Tối qua cô đã chấm bài viết của các em.",
+    "sai": [
+     [
+      "grade",
+      "qua_khu_ed"
+     ],
+     [
+      "grading",
+      "qua_khu_ed"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k041",
+    "en": "I {checked} your essays last night.",
+    "vi": "Tối qua cô đã xem bài viết của các em.",
+    "sai": [
+     [
+      "check",
+      "qua_khu_ed"
+     ],
+     [
+      "checking",
+      "qua_khu_ed"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k044",
+    "en": "Did you {finish} your homework?",
+    "vi": "Em làm xong bài tập chưa?",
+    "sai": [
+     [
+      "finished",
+      "sau_do_nguyen"
+     ],
+     [
+      "finishes",
+      "sau_do_nguyen"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k044",
+    "en": "Did you {bring} your homework?",
+    "vi": "Em có mang bài tập theo không?",
+    "sai": [
+     [
+      "brought",
+      "sau_do_nguyen"
+     ],
+     [
+      "brings",
+      "sau_do_nguyen"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k044",
+    "en": "Did she {bring} her homework?",
+    "vi": "Bạn ấy có mang bài tập theo không?",
+    "sai": [
+     [
+      "brought",
+      "sau_do_nguyen"
+     ],
+     [
+      "brings",
+      "sau_do_nguyen"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k050",
+    "en": "You should {practice} every day.",
+    "vi": "Em nên luyện tập mỗi ngày.",
+    "sai": [
+     [
+      "to practice",
+      "should_v"
+     ],
+     [
+      "practicing",
+      "should_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k050",
+    "en": "You should {read} every day.",
+    "vi": "Em nên đọc sách mỗi ngày.",
+    "sai": [
+     [
+      "to read",
+      "should_v"
+     ],
+     [
+      "reading",
+      "should_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k050",
+    "en": "He should {read} every day.",
+    "vi": "Em ấy nên đọc sách mỗi ngày.",
+    "sai": [
+     [
+      "reads",
+      "should_v"
+     ],
+     [
+      "to read",
+      "should_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k063",
+    "en": "She enjoys {reading}.",
+    "vi": "Em ấy thích đọc sách.",
+    "sai": [
+     [
+      "read",
+      "v_ing_sau"
+     ],
+     [
+      "to read",
+      "v_ing_sau"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k063",
+    "en": "She enjoys {drawing}.",
+    "vi": "Em ấy thích vẽ.",
+    "sai": [
+     [
+      "draw",
+      "v_ing_sau"
+     ],
+     [
+      "to draw",
+      "v_ing_sau"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k063",
+    "en": "She enjoys {working} in groups.",
+    "vi": "Em ấy thích làm việc nhóm.",
+    "sai": [
+     [
+      "work",
+      "v_ing_sau"
+     ],
+     [
+      "to work",
+      "v_ing_sau"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k064",
+    "en": "Please stop {talking}.",
+    "vi": "Các em đừng nói chuyện nữa.",
+    "sai": [
+     [
+      "talk",
+      "v_ing_sau"
+     ],
+     [
+      "talked",
+      "v_ing_sau"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k064",
+    "en": "Please stop {laughing}.",
+    "vi": "Các em đừng cười nữa.",
+    "sai": [
+     [
+      "laugh",
+      "v_ing_sau"
+     ],
+     [
+      "laughed",
+      "v_ing_sau"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k064",
+    "en": "Please stop {writing}.",
+    "vi": "Các em dừng bút.",
+    "sai": [
+     [
+      "write",
+      "v_ing_sau"
+     ],
+     [
+      "wrote",
+      "v_ing_sau"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k066",
+    "en": "I want you {to work} in pairs.",
+    "vi": "Cô muốn các em làm việc theo cặp.",
+    "sai": [
+     [
+      "work",
+      "to_v"
+     ],
+     [
+      "working",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k066",
+    "en": "I want you {to work} in groups.",
+    "vi": "Cô muốn các em làm việc theo nhóm.",
+    "sai": [
+     [
+      "work",
+      "to_v"
+     ],
+     [
+      "working",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k066",
+    "en": "I want {them} to work in groups.",
+    "vi": "Cô muốn các em ấy làm việc theo nhóm.",
+    "sai": [
+     [
+      "they",
+      "tan_ngu"
+     ],
+     [
+      "their",
+      "tan_ngu"
+     ]
+    ],
+    "khac": []
+   }
+  ],
+  "noi": [
+   {
+    "k": "k027",
+    "tinh": "Đầu giờ học, bạn muốn cả lớp mở sách ra.",
+    "dap": [
+     "Please open your books.",
+     "Open your books, please.",
+     "Please open your books, everyone."
+    ]
+   },
+   {
+    "k": "k015",
+    "tinh": "Bạn vừa giảng xong một phần khó, muốn biết cả lớp theo kịp chưa.",
+    "dap": [
+     "Do you understand?",
+     "Do you all understand?",
+     "Do you understand the lesson?",
+     "Does everyone understand?",
+     "Is that clear?"
+    ]
+   },
+   {
+    "k": "k050",
+    "tinh": "Phụ huynh hỏi làm sao để con học tiếng Anh tốt hơn. Bạn khuyên cho bé đọc sách hằng ngày.",
+    "dap": [
+     "He should read every day.",
+     "She should read every day.",
+     "Your child should read every day.",
+     "Your child should read books every day."
+    ]
+   },
+   {
+    "k": "k066",
+    "tinh": "Bạn muốn học sinh chia nhóm để cùng làm bài.",
+    "dap": [
+     "I want you to work in groups.",
+     "I want you to work in small groups.",
+     "Please work in groups.",
+     "Let's work in groups."
+    ]
+   }
+  ]
+ },
+ "hoc_sinh": {
+  "ten": "Học sinh, sinh viên",
+  "cau": [
+   {
+    "k": "k001",
+    "en": "I {am} a college student.",
+    "vi": "Mình là sinh viên đại học.",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "are",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k001",
+    "en": "I {am} a freshman.",
+    "vi": "Mình là sinh viên năm nhất.",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "are",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k001",
+    "en": "I {am} in the library.",
+    "vi": "Mình đang ở thư viện.",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "are",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k004",
+    "en": "{Are} you ready for the exam?",
+    "vi": "Bạn sẵn sàng cho kỳ thi chưa?",
+    "sai": [
+     [
+      "Is",
+      "be_sai"
+     ],
+     [
+      "Do",
+      "thieu_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k004",
+    "en": "{Is} she ready for the exam?",
+    "vi": "Cô ấy sẵn sàng cho kỳ thi chưa?",
+    "sai": [
+     [
+      "Are",
+      "be_sai"
+     ],
+     [
+      "Does",
+      "thieu_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k004",
+    "en": "{Is} she nervous about the exam?",
+    "vi": "Cô ấy có lo về kỳ thi không?",
+    "sai": [
+     [
+      "Are",
+      "be_sai"
+     ],
+     [
+      "Does",
+      "thieu_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k011",
+    "en": "I want {to study} abroad.",
+    "vi": "Mình muốn đi du học.",
+    "sai": [
+     [
+      "study",
+      "to_v"
+     ],
+     [
+      "studying",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k011",
+    "en": "She {wants} to study abroad.",
+    "vi": "Cô ấy muốn đi du học.",
+    "sai": [
+     [
+      "want",
+      "thieu_s"
+     ],
+     [
+      "is want",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k011",
+    "en": "She wants {to study} medicine.",
+    "vi": "Cô ấy muốn học ngành y.",
+    "sai": [
+     [
+      "study",
+      "to_v"
+     ],
+     [
+      "studying",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k013",
+    "en": "I {study} in the library.",
+    "vi": "Mình hay học ở thư viện.",
+    "sai": [
+     [
+      "studies",
+      "thua_s"
+     ],
+     [
+      "am study",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k013",
+    "en": "She {studies} in the library.",
+    "vi": "Cô ấy hay học ở thư viện.",
+    "sai": [
+     [
+      "study",
+      "thieu_s"
+     ],
+     [
+      "is study",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k013",
+    "en": "She {studies} at home.",
+    "vi": "Cô ấy hay học ở nhà.",
+    "sai": [
+     [
+      "study",
+      "thieu_s"
+     ],
+     [
+      "is study",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k025",
+    "en": "What {are} you studying?",
+    "vi": "Bạn đang học gì vậy?",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "do",
+      "dang_lam"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k025",
+    "en": "What {is} she studying?",
+    "vi": "Cô ấy đang học gì vậy?",
+    "sai": [
+     [
+      "are",
+      "be_sai"
+     ],
+     [
+      "does",
+      "dang_lam"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k025",
+    "en": "What is she {reading}?",
+    "vi": "Cô ấy đang đọc gì vậy?",
+    "sai": [
+     [
+      "read",
+      "dang_lam"
+     ],
+     [
+      "reads",
+      "dang_lam"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k029",
+    "en": "I {have to} finish my essay.",
+    "vi": "Mình phải viết xong bài luận.",
+    "sai": [
+     [
+      "have",
+      "to_v"
+     ],
+     [
+      "has to",
+      "thua_s"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k029",
+    "en": "I {have to} finish my project.",
+    "vi": "Mình phải làm xong đồ án.",
+    "sai": [
+     [
+      "have",
+      "to_v"
+     ],
+     [
+      "has to",
+      "thua_s"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k029",
+    "en": "She {has to} finish her project.",
+    "vi": "Cô ấy phải làm xong đồ án.",
+    "sai": [
+     [
+      "have to",
+      "thieu_s"
+     ],
+     [
+      "has",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k030",
+    "en": "My class starts {at} 7:30.",
+    "vi": "Lớp mình bắt đầu lúc 7 giờ 30.",
+    "sai": [
+     [
+      "in",
+      "gioi_tu_gio"
+     ],
+     [
+      "on",
+      "gioi_tu_gio"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k030",
+    "en": "My class starts {in} the afternoon.",
+    "vi": "Lớp mình bắt đầu vào buổi chiều.",
+    "sai": [
+     [
+      "at",
+      "gioi_tu_gio"
+     ],
+     [
+      "on",
+      "gioi_tu_gio"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k030",
+    "en": "My class starts {on} Monday.",
+    "vi": "Lớp mình bắt đầu học từ thứ Hai.",
+    "sai": [
+     [
+      "in",
+      "gioi_tu_gio"
+     ],
+     [
+      "at",
+      "gioi_tu_gio"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k042",
+    "en": "I {forgot} my notebook today.",
+    "vi": "Hôm nay mình quên mang vở.",
+    "sai": [
+     [
+      "forget",
+      "qua_khu_bqt"
+     ],
+     [
+      "forgeted",
+      "qua_khu_bqt"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k042",
+    "en": "I {lost} my notebook today.",
+    "vi": "Hôm nay mình làm mất vở.",
+    "sai": [
+     [
+      "lose",
+      "qua_khu_bqt"
+     ],
+     [
+      "losed",
+      "qua_khu_bqt"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k042",
+    "en": "I {lost} my student ID today.",
+    "vi": "Hôm nay mình làm mất thẻ sinh viên.",
+    "sai": [
+     [
+      "lose",
+      "qua_khu_bqt"
+     ],
+     [
+      "losed",
+      "qua_khu_bqt"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k044",
+    "en": "Did you {take} notes yesterday?",
+    "vi": "Hôm qua bạn có ghi bài không?",
+    "sai": [
+     [
+      "took",
+      "sau_do_nguyen"
+     ],
+     [
+      "takes",
+      "sau_do_nguyen"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k044",
+    "en": "Did you {go} to class yesterday?",
+    "vi": "Hôm qua bạn có đi học không?",
+    "sai": [
+     [
+      "went",
+      "sau_do_nguyen"
+     ],
+     [
+      "goes",
+      "sau_do_nguyen"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k044",
+    "en": "Did she {go} to class yesterday?",
+    "vi": "Hôm qua cô ấy có đi học không?",
+    "sai": [
+     [
+      "went",
+      "sau_do_nguyen"
+     ],
+     [
+      "goes",
+      "sau_do_nguyen"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k045",
+    "en": "The exam yesterday {was} hard.",
+    "vi": "Bài thi hôm qua khó.",
+    "sai": [
+     [
+      "were",
+      "was_were"
+     ],
+     [
+      "is",
+      "was_were"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k045",
+    "en": "The exam yesterday {was} easy.",
+    "vi": "Bài thi hôm qua dễ.",
+    "sai": [
+     [
+      "were",
+      "was_were"
+     ],
+     [
+      "is",
+      "was_were"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k045",
+    "en": "The exams yesterday {were} easy.",
+    "vi": "Mấy bài thi hôm qua dễ.",
+    "sai": [
+     [
+      "was",
+      "was_were"
+     ],
+     [
+      "are",
+      "was_were"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k046",
+    "en": "I will {send} you my notes.",
+    "vi": "Mình sẽ gửi bài ghi cho bạn.",
+    "sai": [
+     [
+      "sends",
+      "will_v"
+     ],
+     [
+      "sending",
+      "will_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k046",
+    "en": "I will {send} you the slides.",
+    "vi": "Mình sẽ gửi slide bài giảng cho bạn.",
+    "sai": [
+     [
+      "sends",
+      "will_v"
+     ],
+     [
+      "sending",
+      "will_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k046",
+    "en": "She will {send} you the slides.",
+    "vi": "Cô ấy sẽ gửi slide bài giảng cho bạn.",
+    "sai": [
+     [
+      "sends",
+      "will_v"
+     ],
+     [
+      "to send",
+      "will_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k047",
+    "en": "I {am} going to apply for a scholarship.",
+    "vi": "Mình định xin học bổng.",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "will",
+      "going_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k047",
+    "en": "She {is} going to apply for a scholarship.",
+    "vi": "Cô ấy định xin học bổng.",
+    "sai": [
+     [
+      "are",
+      "be_sai"
+     ],
+     [
+      "will",
+      "going_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k047",
+    "en": "She is going {to apply} for an internship.",
+    "vi": "Cô ấy định xin đi thực tập.",
+    "sai": [
+     [
+      "apply",
+      "going_to"
+     ],
+     [
+      "applying",
+      "going_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k052",
+    "en": "This test is {easier} than the last one.",
+    "vi": "Bài kiểm tra này dễ hơn bài trước.",
+    "sai": [
+     [
+      "more easy",
+      "so_sanh_hon"
+     ],
+     [
+      "more easier",
+      "so_sanh_hon"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k052",
+    "en": "This test is {more difficult} than the last one.",
+    "vi": "Bài kiểm tra này khó hơn bài trước.",
+    "sai": [
+     [
+      "difficulter",
+      "so_sanh_hon"
+     ],
+     [
+      "more difficulter",
+      "so_sanh_hon"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k052",
+    "en": "This test is {longer} than the last one.",
+    "vi": "Bài kiểm tra này dài hơn bài trước.",
+    "sai": [
+     [
+      "more long",
+      "so_sanh_hon"
+     ],
+     [
+      "more longer",
+      "so_sanh_hon"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k065",
+    "en": "I hope {to pass} the exam.",
+    "vi": "Mình hy vọng thi đậu.",
+    "sai": [
+     [
+      "pass",
+      "to_v"
+     ],
+     [
+      "passing",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k065",
+    "en": "I hope {to get} a scholarship.",
+    "vi": "Mình hy vọng giành được học bổng.",
+    "sai": [
+     [
+      "get",
+      "to_v"
+     ],
+     [
+      "getting",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k065",
+    "en": "I hope {to get} a good grade.",
+    "vi": "Mình hy vọng được điểm cao.",
+    "sai": [
+     [
+      "get",
+      "to_v"
+     ],
+     [
+      "getting",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k067",
+    "en": "Thanks for {lending} me your notes.",
+    "vi": "Cảm ơn bạn đã cho mình mượn bài ghi.",
+    "sai": [
+     [
+      "lend",
+      "v_ing_gioi_tu"
+     ],
+     [
+      "to lend",
+      "v_ing_gioi_tu"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k067",
+    "en": "Thanks for {sending} me your notes.",
+    "vi": "Cảm ơn bạn đã gửi bài ghi cho mình.",
+    "sai": [
+     [
+      "send",
+      "v_ing_gioi_tu"
+     ],
+     [
+      "to send",
+      "v_ing_gioi_tu"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k067",
+    "en": "Thanks for {sending} me the slides.",
+    "vi": "Cảm ơn bạn đã gửi slide cho mình.",
+    "sai": [
+     [
+      "send",
+      "v_ing_gioi_tu"
+     ],
+     [
+      "to send",
+      "v_ing_gioi_tu"
+     ]
+    ],
+    "khac": []
+   }
+  ],
+  "noi": [
+   {
+    "k": "k067",
+    "tinh": "Bạn cùng lớp vừa cho bạn mượn vở ghi bài. Bạn cảm ơn.",
+    "dap": [
+     "Thanks for lending me your notes.",
+     "Thank you for lending me your notes.",
+     "Thanks for the notes."
+    ]
+   },
+   {
+    "k": "k044",
+    "tinh": "Hôm qua bạn nghỉ học. Bạn hỏi bạn cùng lớp hôm qua có ghi bài không.",
+    "dap": [
+     "Did you take notes yesterday?",
+     "Did you take any notes yesterday?"
+    ]
+   },
+   {
+    "k": "k065",
+    "tinh": "Bạn bè hỏi về kỳ thi sắp tới. Bạn nói bạn mong là sẽ thi đậu.",
+    "dap": [
+     "I hope to pass the exam.",
+     "I hope to pass.",
+     "I hope I pass the exam.",
+     "I hope I'll pass the exam."
+    ]
+   },
+   {
+    "k": "k047",
+    "tinh": "Thầy hỏi năm sau bạn có kế hoạch gì. Bạn nói bạn định xin học bổng.",
+    "dap": [
+     "I am going to apply for a scholarship.",
+     "I'm going to apply for a scholarship.",
+     "I plan to apply for a scholarship."
+    ]
+   }
+  ]
+ },
+ "du_lich": {
+  "ten": "Du lịch, khách sạn, đi nước ngoài",
+  "cau": [
+   {
+    "k": "k018",
+    "en": "Where {is} gate 12?",
+    "vi": "Cổng số 12 ở đâu?",
+    "sai": [
+     [
+      "are",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k018",
+    "en": "Where {is} the check-in counter?",
+    "vi": "Quầy làm thủ tục ở đâu?",
+    "sai": [
+     [
+      "are",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k018",
+    "en": "Where {are} the restrooms?",
+    "vi": "Nhà vệ sinh ở đâu?",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k020",
+    "en": "How much {is} this hat?",
+    "vi": "Cái nón này bao nhiêu tiền?",
+    "sai": [
+     [
+      "are",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k020",
+    "en": "How much {are} these hats?",
+    "vi": "Mấy cái nón này bao nhiêu tiền?",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k020",
+    "en": "How much {are} these postcards?",
+    "vi": "Mấy tấm bưu thiếp này bao nhiêu tiền?",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k021",
+    "en": "Can I {have} the Wi-Fi password?",
+    "vi": "Cho tôi xin mật khẩu Wi-Fi.",
+    "sai": [
+     [
+      "to have",
+      "khong_to"
+     ],
+     [
+      "having",
+      "khong_to"
+     ]
+    ],
+    "khac": [
+     "get"
+    ]
+   },
+   {
+    "k": "k021",
+    "en": "Can I {have} a city map?",
+    "vi": "Cho tôi xin một tấm bản đồ thành phố.",
+    "sai": [
+     [
+      "to have",
+      "khong_to"
+     ],
+     [
+      "having",
+      "khong_to"
+     ]
+    ],
+    "khac": [
+     "get"
+    ]
+   },
+   {
+    "k": "k021",
+    "en": "Can I {have} a late checkout?",
+    "vi": "Cho tôi trả phòng muộn được không?",
+    "sai": [
+     [
+      "to have",
+      "khong_to"
+     ],
+     [
+      "having",
+      "khong_to"
+     ]
+    ],
+    "khac": [
+     "get"
+    ]
+   },
+   {
+    "k": "k017",
+    "en": "{Is} there a bus to the airport?",
+    "vi": "Có xe buýt ra sân bay không?",
+    "sai": [
+     [
+      "Are",
+      "there_be"
+     ],
+     [
+      "Does",
+      "there_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k017",
+    "en": "{Is} there a shuttle to the airport?",
+    "vi": "Có xe đưa đón ra sân bay không?",
+    "sai": [
+     [
+      "Are",
+      "there_be"
+     ],
+     [
+      "Does",
+      "there_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k017",
+    "en": "{Are} there any buses to the airport?",
+    "vi": "Có chuyến xe buýt nào ra sân bay không?",
+    "sai": [
+     [
+      "Is",
+      "there_be"
+     ],
+     [
+      "Do",
+      "there_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k008",
+    "en": "I {have} a reservation.",
+    "vi": "Tôi có đặt phòng trước.",
+    "sai": [
+     [
+      "has",
+      "thua_s"
+     ],
+     [
+      "am have",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k008",
+    "en": "We {have} a reservation.",
+    "vi": "Chúng tôi có đặt phòng trước.",
+    "sai": [
+     [
+      "has",
+      "thua_s"
+     ],
+     [
+      "are have",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k008",
+    "en": "She {has} a reservation.",
+    "vi": "Cô ấy có đặt phòng trước.",
+    "sai": [
+     [
+      "have",
+      "thieu_s"
+     ],
+     [
+      "is have",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k022",
+    "en": "Can you {call} a taxi for me?",
+    "vi": "Anh gọi giúp tôi một chiếc taxi được không?",
+    "sai": [
+     [
+      "to call",
+      "khong_to"
+     ],
+     [
+      "calling",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k022",
+    "en": "Can you call a taxi for {us}?",
+    "vi": "Anh gọi giúp chúng tôi một chiếc taxi được không?",
+    "sai": [
+     [
+      "we",
+      "tan_ngu"
+     ],
+     [
+      "our",
+      "tan_ngu"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k022",
+    "en": "Can you {book} a taxi for us?",
+    "vi": "Anh đặt giúp chúng tôi một chiếc taxi được không?",
+    "sai": [
+     [
+      "to book",
+      "khong_to"
+     ],
+     [
+      "booking",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k026",
+    "en": "Let's {take} a taxi.",
+    "vi": "Mình đi taxi đi.",
+    "sai": [
+     [
+      "taking",
+      "khong_to"
+     ],
+     [
+      "to take",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k026",
+    "en": "Let's {take} a photo.",
+    "vi": "Mình chụp một tấm hình đi.",
+    "sai": [
+     [
+      "taking",
+      "khong_to"
+     ],
+     [
+      "to take",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k026",
+    "en": "Let's {take} a break.",
+    "vi": "Mình nghỉ một chút đi.",
+    "sai": [
+     [
+      "taking",
+      "khong_to"
+     ],
+     [
+      "to take",
+      "khong_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k031",
+    "en": "The pool is {on} the roof.",
+    "vi": "Hồ bơi ở trên sân thượng.",
+    "sai": [
+     [
+      "in",
+      "gioi_tu_cho"
+     ],
+     [
+      "at",
+      "gioi_tu_cho"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k031",
+    "en": "The gym is {on} the roof.",
+    "vi": "Phòng gym ở trên sân thượng.",
+    "sai": [
+     [
+      "in",
+      "gioi_tu_cho"
+     ],
+     [
+      "at",
+      "gioi_tu_cho"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k031",
+    "en": "The gym is {in} the basement.",
+    "vi": "Phòng gym ở tầng hầm.",
+    "sai": [
+     [
+      "on",
+      "gioi_tu_cho"
+     ],
+     [
+      "at",
+      "gioi_tu_cho"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k040",
+    "en": "What time {is} checkout?",
+    "vi": "Mấy giờ phải trả phòng?",
+    "sai": [
+     [
+      "are",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k040",
+    "en": "What time {is} breakfast?",
+    "vi": "Mấy giờ ăn sáng?",
+    "sai": [
+     [
+      "are",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k040",
+    "en": "What time {does} breakfast start?",
+    "vi": "Mấy giờ bắt đầu phục vụ bữa sáng?",
+    "sai": [
+     [
+      "do",
+      "do_does"
+     ],
+     [
+      "is",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k048",
+    "en": "I'd like {to book} a room.",
+    "vi": "Tôi muốn đặt một phòng.",
+    "sai": [
+     [
+      "book",
+      "to_v"
+     ],
+     [
+      "booking",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k048",
+    "en": "I'd like {to book} a tour.",
+    "vi": "Tôi muốn đặt một tour.",
+    "sai": [
+     [
+      "book",
+      "to_v"
+     ],
+     [
+      "booking",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k048",
+    "en": "I'd like {to join} a tour.",
+    "vi": "Tôi muốn tham gia một tour.",
+    "sai": [
+     [
+      "join",
+      "to_v"
+     ],
+     [
+      "joining",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k042",
+    "en": "I {lost} my passport yesterday.",
+    "vi": "Hôm qua tôi bị mất hộ chiếu.",
+    "sai": [
+     [
+      "lose",
+      "qua_khu_bqt"
+     ],
+     [
+      "losed",
+      "qua_khu_bqt"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k042",
+    "en": "I {lost} my wallet yesterday.",
+    "vi": "Hôm qua tôi bị mất ví.",
+    "sai": [
+     [
+      "lose",
+      "qua_khu_bqt"
+     ],
+     [
+      "losed",
+      "qua_khu_bqt"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k042",
+    "en": "I {found} my wallet yesterday.",
+    "vi": "Hôm qua tôi đã tìm thấy ví.",
+    "sai": [
+     [
+      "find",
+      "qua_khu_bqt"
+     ],
+     [
+      "finded",
+      "qua_khu_bqt"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k045",
+    "en": "Last year, the hotel {was} cheap.",
+    "vi": "Năm ngoái, khách sạn đó rẻ.",
+    "sai": [
+     [
+      "were",
+      "was_were"
+     ],
+     [
+      "is",
+      "was_were"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k045",
+    "en": "Last year, the rooms {were} cheap.",
+    "vi": "Năm ngoái, phòng ở đó rẻ.",
+    "sai": [
+     [
+      "was",
+      "was_were"
+     ],
+     [
+      "are",
+      "was_were"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k045",
+    "en": "Last year, flights {were} cheap.",
+    "vi": "Năm ngoái, vé máy bay rẻ.",
+    "sai": [
+     [
+      "was",
+      "was_were"
+     ],
+     [
+      "are",
+      "was_were"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k047",
+    "en": "We {are} going to visit Hoi An.",
+    "vi": "Chúng tôi định đi Hội An.",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "will",
+      "going_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k047",
+    "en": "I {am} going to visit Hoi An.",
+    "vi": "Tôi định đi Hội An.",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "will",
+      "going_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k047",
+    "en": "I am going {to visit} Japan.",
+    "vi": "Tôi định đi Nhật.",
+    "sai": [
+     [
+      "visit",
+      "going_to"
+     ],
+     [
+      "visiting",
+      "going_to"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k051",
+    "en": "Could you {help} me with my bags?",
+    "vi": "Anh giúp tôi xách hành lý được không?",
+    "sai": [
+     [
+      "to help",
+      "should_v"
+     ],
+     [
+      "helping",
+      "should_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k051",
+    "en": "Could you help {us} with our bags?",
+    "vi": "Anh giúp chúng tôi xách hành lý được không?",
+    "sai": [
+     [
+      "we",
+      "tan_ngu"
+     ],
+     [
+      "our",
+      "tan_ngu"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k051",
+    "en": "Could you {carry} our bags?",
+    "vi": "Anh mang giúp hành lý của chúng tôi được không?",
+    "sai": [
+     [
+      "to carry",
+      "should_v"
+     ],
+     [
+      "carrying",
+      "should_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k086",
+    "en": "I'd like to check {in}, please.",
+    "vi": "Tôi muốn nhận phòng.",
+    "sai": [
+     [
+      "on",
+      "phrasal"
+     ],
+     [
+      "at",
+      "phrasal"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k086",
+    "en": "I'd like to check {out}, please.",
+    "vi": "Tôi muốn trả phòng.",
+    "sai": [
+     [
+      "off",
+      "phrasal"
+     ],
+     [
+      "away",
+      "phrasal"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k086",
+    "en": "We'd like to check {out}, please.",
+    "vi": "Chúng tôi muốn trả phòng.",
+    "sai": [
+     [
+      "off",
+      "phrasal"
+     ],
+     [
+      "away",
+      "phrasal"
+     ]
+    ],
+    "khac": []
+   }
+  ],
+  "noi": [
+   {
+    "k": "k086",
+    "tinh": "Bạn vừa tới quầy lễ tân khách sạn, muốn làm thủ tục vào phòng đã đặt.",
+    "dap": [
+     "I'd like to check in, please.",
+     "I'd like to check in.",
+     "Hi, I'd like to check in, please."
+    ]
+   },
+   {
+    "k": "k021",
+    "tinh": "Bạn đang ở khách sạn, điện thoại cần vào mạng không dây.",
+    "dap": [
+     "Can I have the Wi-Fi password, please?",
+     "Can I have the Wi-Fi password?",
+     "Can I get the Wi-Fi password, please?",
+     "What's the Wi-Fi password?"
+    ]
+   },
+   {
+    "k": "k018",
+    "tinh": "Bạn ở sân bay, cần tìm cổng số 12 để lên máy bay.",
+    "dap": [
+     "Where is gate 12?",
+     "Excuse me, where is gate 12?",
+     "Where's gate 12?"
+    ]
+   },
+   {
+    "k": "k042",
+    "tinh": "Bạn tới đồn cảnh sát ở nước ngoài, báo rằng hôm qua bạn đánh rơi hộ chiếu.",
+    "dap": [
+     "I lost my passport yesterday.",
+     "I lost my passport."
+    ]
+   }
+  ]
+ },
+ "noi_tro": {
+  "ten": "Nội trợ, chăm sóc gia đình",
+  "cau": [
+   {
+    "k": "k012",
+    "en": "My son {likes} fried chicken.",
+    "vi": "Con trai tôi thích gà rán.",
+    "sai": [
+     [
+      "like",
+      "thieu_s"
+     ],
+     [
+      "is like",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k012",
+    "en": "My kids {like} fried chicken.",
+    "vi": "Bọn nhỏ nhà tôi thích gà rán.",
+    "sai": [
+     [
+      "likes",
+      "thua_s"
+     ],
+     [
+      "are like",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k012",
+    "en": "My kids {love} fried chicken.",
+    "vi": "Bọn nhỏ nhà tôi mê gà rán.",
+    "sai": [
+     [
+      "loves",
+      "thua_s"
+     ],
+     [
+      "are love",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k013",
+    "en": "I {cook} dinner every day.",
+    "vi": "Ngày nào tôi cũng nấu bữa tối.",
+    "sai": [
+     [
+      "cooks",
+      "thua_s"
+     ],
+     [
+      "am cook",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k013",
+    "en": "My husband {cooks} dinner every day.",
+    "vi": "Ngày nào chồng tôi cũng nấu bữa tối.",
+    "sai": [
+     [
+      "cook",
+      "thieu_s"
+     ],
+     [
+      "is cook",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k013",
+    "en": "My husband {washes} the dishes every day.",
+    "vi": "Ngày nào chồng tôi cũng rửa chén.",
+    "sai": [
+     [
+      "wash",
+      "thieu_s"
+     ],
+     [
+      "is wash",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k016",
+    "en": "There {is} some milk in the fridge.",
+    "vi": "Trong tủ lạnh có sữa.",
+    "sai": [
+     [
+      "are",
+      "there_be"
+     ],
+     [
+      "has",
+      "there_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k016",
+    "en": "There {are} some eggs in the fridge.",
+    "vi": "Trong tủ lạnh có trứng.",
+    "sai": [
+     [
+      "is",
+      "there_be"
+     ],
+     [
+      "have",
+      "there_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k016",
+    "en": "There {are} some eggs on the table.",
+    "vi": "Trên bàn có mấy quả trứng.",
+    "sai": [
+     [
+      "is",
+      "there_be"
+     ],
+     [
+      "have",
+      "there_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k017",
+    "en": "{Is} there any rice left?",
+    "vi": "Còn cơm không?",
+    "sai": [
+     [
+      "Are",
+      "there_be"
+     ],
+     [
+      "Does",
+      "there_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k017",
+    "en": "{Is} there any milk left?",
+    "vi": "Còn sữa không?",
+    "sai": [
+     [
+      "Are",
+      "there_be"
+     ],
+     [
+      "Does",
+      "there_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k017",
+    "en": "{Are} there any eggs left?",
+    "vi": "Còn trứng không?",
+    "sai": [
+     [
+      "Is",
+      "there_be"
+     ],
+     [
+      "Do",
+      "there_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k024",
+    "en": "I {am} cooking dinner.",
+    "vi": "Tôi đang nấu cơm tối.",
+    "sai": [
+     [
+      "is",
+      "be_sai"
+     ],
+     [
+      "are",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k024",
+    "en": "Grandma {is} cooking dinner.",
+    "vi": "Bà đang nấu cơm tối.",
+    "sai": [
+     [
+      "are",
+      "be_sai"
+     ],
+     [
+      "am",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k024",
+    "en": "Grandma is {sleeping}.",
+    "vi": "Bà đang ngủ.",
+    "sai": [
+     [
+      "sleep",
+      "dang_lam"
+     ],
+     [
+      "sleeps",
+      "dang_lam"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k027",
+    "en": "Don't {touch} the stove.",
+    "vi": "Đừng chạm vào bếp.",
+    "sai": [
+     [
+      "touching",
+      "sau_do_nguyen"
+     ],
+     [
+      "to touch",
+      "sau_do_nguyen"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k027",
+    "en": "Don't {touch} the knife.",
+    "vi": "Đừng đụng vào con dao.",
+    "sai": [
+     [
+      "touching",
+      "sau_do_nguyen"
+     ],
+     [
+      "to touch",
+      "sau_do_nguyen"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k027",
+    "en": "Don't {play} with the knife.",
+    "vi": "Đừng nghịch dao.",
+    "sai": [
+     [
+      "playing",
+      "sau_do_nguyen"
+     ],
+     [
+      "to play",
+      "sau_do_nguyen"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k028",
+    "en": "We {need} more rice.",
+    "vi": "Nhà mình cần thêm gạo.",
+    "sai": [
+     [
+      "needs",
+      "thua_s"
+     ],
+     [
+      "are need",
+      "thua_be"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k028",
+    "en": "We need {to buy} more rice.",
+    "vi": "Nhà mình cần mua thêm gạo.",
+    "sai": [
+     [
+      "buy",
+      "to_v"
+     ],
+     [
+      "buying",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k028",
+    "en": "We need {to buy} more eggs.",
+    "vi": "Nhà mình cần mua thêm trứng.",
+    "sai": [
+     [
+      "buy",
+      "to_v"
+     ],
+     [
+      "buying",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k029",
+    "en": "I {have to} pick up my kids.",
+    "vi": "Tôi phải đi đón con.",
+    "sai": [
+     [
+      "have",
+      "to_v"
+     ],
+     [
+      "has to",
+      "thua_s"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k029",
+    "en": "She {has to} pick up her kids.",
+    "vi": "Cô ấy phải đi đón con.",
+    "sai": [
+     [
+      "have to",
+      "thieu_s"
+     ],
+     [
+      "has",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k029",
+    "en": "She {has to} pick up her mom.",
+    "vi": "Cô ấy phải đi đón mẹ.",
+    "sai": [
+     [
+      "have to",
+      "thieu_s"
+     ],
+     [
+      "has",
+      "to_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k078",
+    "en": "Add {a little} salt.",
+    "vi": "Cho một chút muối.",
+    "sai": [
+     [
+      "a few",
+      "khong_dem_duoc"
+     ],
+     [
+      "many",
+      "many_much"
+     ]
+    ],
+    "khac": [
+     "some",
+     "a bit of"
+    ]
+   },
+   {
+    "k": "k078",
+    "en": "Add {a little} sugar.",
+    "vi": "Cho một chút đường.",
+    "sai": [
+     [
+      "a few",
+      "khong_dem_duoc"
+     ],
+     [
+      "many",
+      "many_much"
+     ]
+    ],
+    "khac": [
+     "some",
+     "a bit of"
+    ]
+   },
+   {
+    "k": "k078",
+    "en": "Add {a few} eggs.",
+    "vi": "Cho vài quả trứng.",
+    "sai": [
+     [
+      "a little",
+      "many_much"
+     ],
+     [
+      "much",
+      "many_much"
+     ]
+    ],
+    "khac": [
+     "some"
+    ]
+   },
+   {
+    "k": "k041",
+    "en": "I {cleaned} the kitchen yesterday.",
+    "vi": "Hôm qua tôi đã dọn bếp.",
+    "sai": [
+     [
+      "clean",
+      "qua_khu_ed"
+     ],
+     [
+      "cleaning",
+      "qua_khu_ed"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k041",
+    "en": "I {cleaned} the bathroom yesterday.",
+    "vi": "Hôm qua tôi đã dọn nhà tắm.",
+    "sai": [
+     [
+      "clean",
+      "qua_khu_ed"
+     ],
+     [
+      "cleaning",
+      "qua_khu_ed"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k041",
+    "en": "I {mopped} the bathroom yesterday.",
+    "vi": "Hôm qua tôi đã lau nhà tắm.",
+    "sai": [
+     [
+      "mop",
+      "qua_khu_ed"
+     ],
+     [
+      "mopping",
+      "qua_khu_ed"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k042",
+    "en": "I {bought} some fish this morning.",
+    "vi": "Sáng nay tôi đã mua ít cá.",
+    "sai": [
+     [
+      "buy",
+      "qua_khu_bqt"
+     ],
+     [
+      "buyed",
+      "qua_khu_bqt"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k042",
+    "en": "I {bought} some vegetables this morning.",
+    "vi": "Sáng nay tôi đã mua ít rau.",
+    "sai": [
+     [
+      "buy",
+      "qua_khu_bqt"
+     ],
+     [
+      "buyed",
+      "qua_khu_bqt"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k042",
+    "en": "Mom {bought} some vegetables this morning.",
+    "vi": "Sáng nay mẹ đã mua ít rau.",
+    "sai": [
+     [
+      "buys",
+      "qua_khu_bqt"
+     ],
+     [
+      "buyed",
+      "qua_khu_bqt"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k050",
+    "en": "You should {boil} the water first.",
+    "vi": "Bạn nên đun sôi nước trước.",
+    "sai": [
+     [
+      "to boil",
+      "should_v"
+     ],
+     [
+      "boiling",
+      "should_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k050",
+    "en": "You should {wash} the rice first.",
+    "vi": "Bạn nên vo gạo trước.",
+    "sai": [
+     [
+      "to wash",
+      "should_v"
+     ],
+     [
+      "washing",
+      "should_v"
+     ]
+    ],
+    "khac": [
+     "rinse"
+    ]
+   },
+   {
+    "k": "k050",
+    "en": "You should {wash} the vegetables first.",
+    "vi": "Bạn nên rửa rau trước.",
+    "sai": [
+     [
+      "to wash",
+      "should_v"
+     ],
+     [
+      "washing",
+      "should_v"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k060",
+    "en": "If you {are} tired, I will cook dinner.",
+    "vi": "Nếu anh mệt thì em sẽ nấu cơm tối.",
+    "sai": [
+     [
+      "will be",
+      "dieu_kien"
+     ],
+     [
+      "is",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k060",
+    "en": "If Mom {is} tired, I will cook dinner.",
+    "vi": "Nếu mẹ mệt thì con sẽ nấu cơm tối.",
+    "sai": [
+     [
+      "will be",
+      "dieu_kien"
+     ],
+     [
+      "are",
+      "be_sai"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k060",
+    "en": "If Mom is tired, I will {wash} the dishes.",
+    "vi": "Nếu mẹ mệt thì con sẽ rửa chén.",
+    "sai": [
+     [
+      "washes",
+      "will_v"
+     ],
+     [
+      "washing",
+      "will_v"
+     ]
+    ],
+    "khac": [
+     "do"
+    ]
+   },
+   {
+    "k": "k063",
+    "en": "I enjoy {cooking} for my family.",
+    "vi": "Tôi thích nấu ăn cho gia đình.",
+    "sai": [
+     [
+      "cook",
+      "v_ing_sau"
+     ],
+     [
+      "to cook",
+      "v_ing_sau"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k063",
+    "en": "I enjoy {baking} for my family.",
+    "vi": "Tôi thích làm bánh cho gia đình.",
+    "sai": [
+     [
+      "bake",
+      "v_ing_sau"
+     ],
+     [
+      "to bake",
+      "v_ing_sau"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k063",
+    "en": "I enjoy {baking} with my kids.",
+    "vi": "Tôi thích làm bánh cùng bọn nhỏ.",
+    "sai": [
+     [
+      "bake",
+      "v_ing_sau"
+     ],
+     [
+      "to bake",
+      "v_ing_sau"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k080",
+    "en": "I {make} the beds every morning.",
+    "vi": "Sáng nào tôi cũng dọn giường.",
+    "sai": [
+     [
+      "do",
+      "make_do"
+     ],
+     [
+      "makes",
+      "thua_s"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k080",
+    "en": "I {do} the laundry every morning.",
+    "vi": "Sáng nào tôi cũng giặt đồ.",
+    "sai": [
+     [
+      "make",
+      "make_do"
+     ],
+     [
+      "does",
+      "thua_s"
+     ]
+    ],
+    "khac": []
+   },
+   {
+    "k": "k080",
+    "en": "I {do} the dishes every morning.",
+    "vi": "Sáng nào tôi cũng rửa chén.",
+    "sai": [
+     [
+      "make",
+      "make_do"
+     ],
+     [
+      "does",
+      "thua_s"
+     ]
+    ],
+    "khac": []
+   }
+  ],
+  "noi": [
+   {
+    "k": "k017",
+    "tinh": "Bạn đang nấu ăn, hỏi chồng xem trong tủ lạnh còn trứng không.",
+    "dap": [
+     "Are there any eggs left?",
+     "Are there any eggs in the fridge?",
+     "Are there any eggs left in the fridge?",
+     "Do we have any eggs left?"
+    ]
+   },
+   {
+    "k": "k027",
+    "tinh": "Đứa nhỏ đang với tay tới cái bếp còn nóng. Bạn nhắc con ngay.",
+    "dap": [
+     "Don't touch the stove!",
+     "Don't touch the stove.",
+     "Don't touch it!",
+     "Don't touch that, it's hot!"
+    ]
+   },
+   {
+    "k": "k028",
+    "tinh": "Nhà sắp hết gạo. Bạn nói với chồng là phải đi mua thêm.",
+    "dap": [
+     "We need to buy more rice.",
+     "We need more rice.",
+     "We need to get more rice.",
+     "We're almost out of rice."
+    ]
+   },
+   {
+    "k": "k029",
+    "tinh": "Bạn bè rủ đi cà phê lúc 4 giờ, nhưng giờ đó bạn phải đi đón con.",
+    "dap": [
+     "I have to pick up my kids.",
+     "Sorry, I have to pick up my kids.",
+     "I have to pick up my kids at 4."
+    ]
+   }
+  ]
+ }
+}

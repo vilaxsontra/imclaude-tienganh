@@ -1,0 +1,12 @@
+Cài cho tôi web học tiếng Anh theo cách AI học ngôn ngữ lên tài khoản Cloudflare miễn phí của tôi, dùng mã nguồn có sẵn, KHÔNG viết lại mã:
+- Mã máy chủ: https://imclaude-tienganh.pages.dev/maychu.txt
+(Mã máy chủ tự tải giao diện, kho câu và giọng đọc từ https://imclaude-tienganh.pages.dev rồi lưu hẳn vào D1 của tôi. Mã nguồn đầy đủ: https://github.com/vilaxsontra/imclaude-tienganh)
+Nếu tôi chưa có tài khoản Cloudflare hoặc bạn chưa có kết nối Cloudflare: hướng dẫn tôi từng bước (mở https://dash.cloudflare.com/sign-up, tôi tự nhập email, mật khẩu, mã xác minh), rồi chỉ tôi bật kết nối Cloudflare trong Claude. Xong mới làm tiếp.
+Cách cài:
+Bước 1: Tải file máy chủ về đọc kiểm tra trước, ghi lại mã băm SHA-256.
+Bước 2: Dùng kết nối Cloudflare tạo D1 tên "tienganh" (chưa có tên workers.dev thì tạo một tên). File máy chủ dài, đừng chép tay: đăng Worker tạm tên "tienganh" (gắn D1 tên DB, bật workers.dev) với mã dưới đây để nó kéo file vào bảng assets của D1:
+const S="https://imclaude-tienganh.pages.dev/maychu.txt";
+export default{async fetch(r,env){await env.DB.prepare("CREATE TABLE IF NOT EXISTS assets(k TEXT PRIMARY KEY,v TEXT)").run();const t=await(await fetch(S)).text();await env.DB.prepare("INSERT OR REPLACE INTO assets VALUES(?,?)").bind("server",t).run();return new Response("OK")}}
+Bước 3: Mở địa chỉ Worker đó một lần bằng công cụ đọc web (không được thì nhờ tôi bấm mở).
+Bước 4: Đọc mã máy chủ trong D1 (SELECT v FROM assets WHERE k='server'), so mã băm với bản đã đọc. Khớp thì đăng đè lên Worker "tienganh" (gắn D1 tên DB, Workers AI tên AI). Giữ nguyên bảng assets vì web dùng nó lưu giao diện và kho câu.
+Bước 5: Mở thử, rồi đưa tôi link Worker để tôi đặt mã PIN và bắt đầu học.

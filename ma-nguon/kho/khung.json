@@ -1,0 +1,1118 @@
+[
+ {
+  "id": "k001",
+  "lv": 1,
+  "ten": "Tôi là / tôi đang (am)",
+  "huong": "I am + tính từ/nghề/nơi chốn: I am tired, I am a teacher, I am at home. Che 'am'. Đổi phần sau.",
+  "loi": [
+   "thieu_be",
+   "be_sai"
+  ]
+ },
+ {
+  "id": "k002",
+  "lv": 1,
+  "ten": "Anh ấy, cô ấy, họ là (is / are)",
+  "huong": "He is / She is / They are / We are / You are + tính từ. Che is/are. Đổi người.",
+  "loi": [
+   "be_sai",
+   "thieu_be"
+  ]
+ },
+ {
+  "id": "k003",
+  "lv": 1,
+  "ten": "Không phải là (not)",
+  "huong": "I am not / She is not / They aren't / It isn't + tính từ. Che 'not' hoặc be.",
+  "loi": [
+   "be_sai"
+  ]
+ },
+ {
+  "id": "k004",
+  "lv": 1,
+  "ten": "Có phải ... không? (Are you / Is she)",
+  "huong": "Câu hỏi Are you tired? Is she at home? Is it far? Che Are/Is.",
+  "loi": [
+   "be_sai",
+   "trat_tu_hoi"
+  ]
+ },
+ {
+  "id": "k005",
+  "lv": 1,
+  "ten": "Cái này, cái kia (this / that / these / those)",
+  "huong": "This is my phone. That is your bag. These are my keys. Che this/these/that/those, chọn theo số ít, số nhiều.",
+  "loi": [
+   "be_sai",
+   "so_nhieu"
+  ]
+ },
+ {
+  "id": "k006",
+  "lv": 1,
+  "ten": "Của tôi, của bạn (my / your / his / her)",
+  "huong": "This is my car. That is her phone. Che my/your/his/her/our/their.",
+  "loi": [
+   "so_huu",
+   "tan_ngu"
+  ]
+ },
+ {
+  "id": "k007",
+  "lv": 1,
+  "ten": "Một cái, một con (a / an)",
+  "huong": "I have a car. She has an apple. Che a/an.",
+  "loi": [
+   "a_an",
+   "thieu_mao_tu"
+  ]
+ },
+ {
+  "id": "k008",
+  "lv": 1,
+  "ten": "Tôi có (have / has)",
+  "huong": "I have a car. She has a dog. They have two kids. Che have/has.",
+  "loi": [
+   "thieu_s",
+   "thua_s",
+   "a_an"
+  ]
+ },
+ {
+  "id": "k009",
+  "lv": 1,
+  "ten": "Nhiều cái (số nhiều)",
+  "huong": "one cat / two cats / three boxes / many people. Che danh từ số nhiều.",
+  "loi": [
+   "so_nhieu",
+   "so_nhieu_dac_biet"
+  ]
+ },
+ {
+  "id": "k010",
+  "lv": 1,
+  "ten": "Tôi muốn (want + thứ gì)",
+  "huong": "I want water. I want a coffee. She wants a new phone. Che want/wants.",
+  "loi": [
+   "thieu_s",
+   "thua_s",
+   "thieu_mao_tu"
+  ]
+ },
+ {
+  "id": "k011",
+  "lv": 1,
+  "ten": "Tôi muốn làm (want to + động từ)",
+  "huong": "I want to drink tea. She wants to go home. Che 'to' hoặc want/wants.",
+  "loi": [
+   "to_v",
+   "thieu_s"
+  ]
+ },
+ {
+  "id": "k012",
+  "lv": 1,
+  "ten": "Tôi thích (like / love)",
+  "huong": "I like coffee. He likes football. We love this place. Che like/likes.",
+  "loi": [
+   "thieu_s",
+   "thua_s"
+  ]
+ },
+ {
+  "id": "k013",
+  "lv": 1,
+  "ten": "Hằng ngày tôi làm (thì hiện tại)",
+  "huong": "I work every day. She works at a bank. They live in Hanoi. Che động từ.",
+  "loi": [
+   "thieu_s",
+   "thua_s",
+   "thua_be"
+  ]
+ },
+ {
+  "id": "k014",
+  "lv": 1,
+  "ten": "Tôi không (don't / doesn't)",
+  "huong": "I don't eat meat. She doesn't drink coffee. Che don't/doesn't hoặc động từ sau nó.",
+  "loi": [
+   "dont_doesnt",
+   "sau_do_nguyen"
+  ]
+ },
+ {
+  "id": "k015",
+  "lv": 1,
+  "ten": "Bạn có ... không? (Do you / Does she)",
+  "huong": "Do you like tea? Does she work here? Che Do/Does hoặc động từ.",
+  "loi": [
+   "do_does",
+   "sau_do_nguyen"
+  ]
+ },
+ {
+  "id": "k016",
+  "lv": 1,
+  "ten": "Có (there is / there are)",
+  "huong": "There is a bank near here. There are two rooms. Che is/are.",
+  "loi": [
+   "there_be",
+   "so_nhieu"
+  ]
+ },
+ {
+  "id": "k017",
+  "lv": 1,
+  "ten": "Có ... không? (Is there / Are there)",
+  "huong": "Is there a toilet here? Are there any eggs? Che Is/Are.",
+  "loi": [
+   "there_be",
+   "some_any"
+  ]
+ },
+ {
+  "id": "k018",
+  "lv": 1,
+  "ten": "Ở đâu? (Where is / Where are)",
+  "huong": "Where is the toilet? Where are my keys? Where do you live? Che is/are/do.",
+  "loi": [
+   "be_sai",
+   "trat_tu_hoi",
+   "do_does"
+  ]
+ },
+ {
+  "id": "k019",
+  "lv": 1,
+  "ten": "Cái gì? (What is / What do)",
+  "huong": "What is this? What is your name? What do you want? Che is/do.",
+  "loi": [
+   "trat_tu_hoi",
+   "do_does"
+  ]
+ },
+ {
+  "id": "k020",
+  "lv": 1,
+  "ten": "Bao nhiêu tiền? (How much)",
+  "huong": "How much is this? How much are these shoes? Che is/are.",
+  "loi": [
+   "be_sai",
+   "so_nhieu"
+  ]
+ },
+ {
+  "id": "k021",
+  "lv": 1,
+  "ten": "Cho tôi xin (Can I have)",
+  "huong": "Can I have a coffee, please? Can I have the bill? Che 'have' hoặc a/the.",
+  "loi": [
+   "khong_to",
+   "thieu_mao_tu"
+  ]
+ },
+ {
+  "id": "k022",
+  "lv": 1,
+  "ten": "Bạn có thể ... giúp tôi không? (Can you)",
+  "huong": "Can you help me? Can you open the door? Che động từ sau can.",
+  "loi": [
+   "khong_to",
+   "tan_ngu"
+  ]
+ },
+ {
+  "id": "k023",
+  "lv": 1,
+  "ten": "Tôi biết / không biết làm (can / can't)",
+  "huong": "I can swim. She can't drive. Che động từ (không to).",
+  "loi": [
+   "khong_to",
+   "thieu_s"
+  ]
+ },
+ {
+  "id": "k024",
+  "lv": 1,
+  "ten": "Đang làm (am / is / are + ing)",
+  "huong": "I am cooking. She is sleeping. They are watching TV. Che be hoặc V-ing.",
+  "loi": [
+   "dang_lam",
+   "thua_be",
+   "be_sai"
+  ]
+ },
+ {
+  "id": "k025",
+  "lv": 1,
+  "ten": "Bạn đang làm gì? (What are you doing)",
+  "huong": "What are you doing? Is she working now? Che be hoặc V-ing.",
+  "loi": [
+   "dang_lam",
+   "trat_tu_hoi"
+  ]
+ },
+ {
+  "id": "k026",
+  "lv": 1,
+  "ten": "Mình cùng ... đi (Let's)",
+  "huong": "Let's go. Let's eat now. Let's take a taxi. Che động từ sau let's.",
+  "loi": [
+   "khong_to"
+  ]
+ },
+ {
+  "id": "k027",
+  "lv": 1,
+  "ten": "Làm ơn / đừng (Please / Don't)",
+  "huong": "Please sit down. Don't worry. Don't touch it. Che động từ.",
+  "loi": [
+   "khong_to",
+   "sau_do_nguyen"
+  ]
+ },
+ {
+  "id": "k028",
+  "lv": 1,
+  "ten": "Tôi cần (need / need to)",
+  "huong": "I need a taxi. I need to call my boss. She needs help. Che need/needs/to.",
+  "loi": [
+   "to_v",
+   "thieu_s"
+  ]
+ },
+ {
+  "id": "k029",
+  "lv": 1,
+  "ten": "Tôi phải (have to)",
+  "huong": "I have to go now. She has to work today. Che have/has/to.",
+  "loi": [
+   "to_v",
+   "thieu_s"
+  ]
+ },
+ {
+  "id": "k030",
+  "lv": 1,
+  "ten": "Giờ, ngày, tháng (at / on / in)",
+  "huong": "at 7 o'clock, on Monday, in May, in the morning. Che giới từ.",
+  "loi": [
+   "gioi_tu_gio"
+  ]
+ },
+ {
+  "id": "k031",
+  "lv": 1,
+  "ten": "Ở đâu (at / in / on chỗ)",
+  "huong": "I am at home. The keys are on the table. She is in the kitchen. Che giới từ.",
+  "loi": [
+   "gioi_tu_cho"
+  ]
+ },
+ {
+  "id": "k032",
+  "lv": 1,
+  "ten": "Trời, thời gian (It is)",
+  "huong": "It is hot today. It is ten o'clock. It is far from here. Che 'It' hoặc 'is'.",
+  "loi": [
+   "chu_ngu",
+   "thieu_be"
+  ]
+ },
+ {
+  "id": "k033",
+  "lv": 1,
+  "ten": "Tôi, anh ấy làm tân ngữ (me / him / her / them)",
+  "huong": "Call me. Help her. I love them. Che đại từ.",
+  "loi": [
+   "tan_ngu"
+  ]
+ },
+ {
+  "id": "k034",
+  "lv": 1,
+  "ten": "Của Lan ('s)",
+  "huong": "This is Lan's car. My mom's house is big. Che danh từ có 's.",
+  "loi": [
+   "so_huu_s",
+   "so_huu"
+  ]
+ },
+ {
+  "id": "k035",
+  "lv": 1,
+  "ten": "Nhà to, xe mới (tính từ trước danh từ)",
+  "huong": "a big house, a new car, a good idea. Che cụm tính từ + danh từ, đáp án nhiễu đảo trật tự.",
+  "loi": [
+   "tinh_tu_truoc",
+   "a_an"
+  ]
+ },
+ {
+  "id": "k036",
+  "lv": 1,
+  "ten": "Rất, quá (very / too / so)",
+  "huong": "It is very hot. This bag is too big. She is so kind. Che very/too.",
+  "loi": [
+   "thieu_be",
+   "tu_vung"
+  ]
+ },
+ {
+  "id": "k037",
+  "lv": 1,
+  "ten": "Một ít, nhiều (some / a lot of / many / much)",
+  "huong": "I have some money. There are a lot of people. How much water? Che some/many/much.",
+  "loi": [
+   "many_much",
+   "some_any",
+   "khong_dem_duoc"
+  ]
+ },
+ {
+  "id": "k038",
+  "lv": 1,
+  "ten": "Chào hỏi, cảm ơn, xin lỗi (câu quen)",
+  "huong": "Nice to meet you. Thank you very much. I'm sorry. Excuse me. See you tomorrow. Che một chữ trong câu quen.",
+  "loi": [
+   "tu_vung"
+  ]
+ },
+ {
+  "id": "k039",
+  "lv": 1,
+  "ten": "Nói lại giúp tôi (khi không hiểu)",
+  "huong": "Sorry, can you say that again? Can you speak slowly, please? What does this mean? Che một chữ.",
+  "loi": [
+   "khong_to",
+   "do_does"
+  ]
+ },
+ {
+  "id": "k040",
+  "lv": 1,
+  "ten": "Mấy giờ, khi nào (What time / When)",
+  "huong": "What time is it? What time do you start work? When is your birthday? Che is/do.",
+  "loi": [
+   "trat_tu_hoi",
+   "do_does"
+  ]
+ },
+ {
+  "id": "k041",
+  "lv": 2,
+  "ten": "Hôm qua tôi đã (quá khứ đuôi ed)",
+  "huong": "Yesterday I worked late. We visited my parents. Che động từ quá khứ.",
+  "loi": [
+   "qua_khu_ed"
+  ]
+ },
+ {
+  "id": "k042",
+  "lv": 2,
+  "ten": "Hôm qua tôi đã đi, đã ăn (quá khứ đặc biệt)",
+  "huong": "I went to the market. She bought a new bag. We ate pho. Che động từ quá khứ bất quy tắc.",
+  "loi": [
+   "qua_khu_bqt",
+   "qua_khu_ed"
+  ]
+ },
+ {
+  "id": "k043",
+  "lv": 2,
+  "ten": "Tôi đã không (didn't)",
+  "huong": "I didn't go to work. She didn't call me. Che didn't hoặc động từ sau nó.",
+  "loi": [
+   "sau_do_nguyen",
+   "qua_khu_bqt"
+  ]
+ },
+ {
+  "id": "k044",
+  "lv": 2,
+  "ten": "Bạn đã ... chưa? (Did you)",
+  "huong": "Did you eat? Did she call you? Che Did hoặc động từ.",
+  "loi": [
+   "sau_do_nguyen",
+   "do_does"
+  ]
+ },
+ {
+  "id": "k045",
+  "lv": 2,
+  "ten": "Đã ở, đã là (was / were)",
+  "huong": "I was tired. They were at home. Was it expensive? Che was/were.",
+  "loi": [
+   "was_were",
+   "be_sai"
+  ]
+ },
+ {
+  "id": "k046",
+  "lv": 2,
+  "ten": "Sẽ (will)",
+  "huong": "I will call you. It will rain tomorrow. She will be late. Che will hoặc động từ sau.",
+  "loi": [
+   "will_v"
+  ]
+ },
+ {
+  "id": "k047",
+  "lv": 2,
+  "ten": "Định làm (going to)",
+  "huong": "I am going to visit my mom. We are going to buy a house. Che going/to/be.",
+  "loi": [
+   "going_to",
+   "be_sai"
+  ]
+ },
+ {
+  "id": "k048",
+  "lv": 2,
+  "ten": "Tôi muốn ... ạ (I'd like)",
+  "huong": "I'd like a coffee. I'd like to book a room. Che like/to.",
+  "loi": [
+   "to_v",
+   "thieu_mao_tu"
+  ]
+ },
+ {
+  "id": "k049",
+  "lv": 2,
+  "ten": "Bạn có muốn ... không? (Would you like)",
+  "huong": "Would you like some tea? Would you like to come? Che like/to/some.",
+  "loi": [
+   "to_v",
+   "some_any"
+  ]
+ },
+ {
+  "id": "k050",
+  "lv": 2,
+  "ten": "Nên (should)",
+  "huong": "You should rest. You shouldn't drink so much. Che động từ sau should.",
+  "loi": [
+   "should_v"
+  ]
+ },
+ {
+  "id": "k051",
+  "lv": 2,
+  "ten": "Làm ơn có thể ... không (Could you)",
+  "huong": "Could you help me? Could you send me the file? Che động từ.",
+  "loi": [
+   "should_v",
+   "tan_ngu"
+  ]
+ },
+ {
+  "id": "k052",
+  "lv": 2,
+  "ten": "Lớn hơn, rẻ hơn (so sánh hơn)",
+  "huong": "This house is bigger. That car is more expensive. Che tính từ so sánh.",
+  "loi": [
+   "so_sanh_hon"
+  ]
+ },
+ {
+  "id": "k053",
+  "lv": 2,
+  "ten": "Lớn nhất (so sánh nhất)",
+  "huong": "It is the biggest room. This is the most expensive car. Che cụm so sánh nhất.",
+  "loi": [
+   "so_sanh_nhat"
+  ]
+ },
+ {
+  "id": "k054",
+  "lv": 2,
+  "ten": "Bằng (as ... as)",
+  "huong": "My house is as big as yours. He is not as tall as me. Che as hoặc tính từ.",
+  "loi": [
+   "so_sanh_hon",
+   "tu_vung"
+  ]
+ },
+ {
+  "id": "k055",
+  "lv": 2,
+  "ten": "Luôn luôn, thường, không bao giờ",
+  "huong": "I always get up early. She is never late. Che trạng từ tần suất hoặc động từ cạnh nó.",
+  "loi": [
+   "tan_suat",
+   "thieu_s"
+  ]
+ },
+ {
+  "id": "k056",
+  "lv": 2,
+  "ten": "Bao lâu một lần, bao lâu (How often / How long)",
+  "huong": "How often do you go to the gym? How long does it take? Che do/does.",
+  "loi": [
+   "do_does",
+   "trat_tu_hoi"
+  ]
+ },
+ {
+  "id": "k057",
+  "lv": 2,
+  "ten": "Mất bao lâu (It takes)",
+  "huong": "It takes 10 minutes to walk there. It took two hours. Che takes/took.",
+  "loi": [
+   "thieu_s",
+   "qua_khu_bqt"
+  ]
+ },
+ {
+  "id": "k058",
+  "lv": 2,
+  "ten": "Vì, nên (because / so)",
+  "huong": "I am tired because I worked late. It rained, so I stayed home. Che because/so.",
+  "loi": [
+   "tu_vung"
+  ]
+ },
+ {
+  "id": "k059",
+  "lv": 2,
+  "ten": "Nhưng, và, hoặc (but / and / or)",
+  "huong": "I like tea but my wife likes coffee. Che but/and/or.",
+  "loi": [
+   "tu_vung"
+  ]
+ },
+ {
+  "id": "k060",
+  "lv": 2,
+  "ten": "Nếu (If + hiện tại, will)",
+  "huong": "If it rains, I will stay home. If you call me, I will come. Che động từ ở vế if hoặc will.",
+  "loi": [
+   "dieu_kien",
+   "will_v"
+  ]
+ },
+ {
+  "id": "k061",
+  "lv": 2,
+  "ten": "Khi (When + hiện tại)",
+  "huong": "When I get home, I will call you. When she is free, she reads. Che động từ.",
+  "loi": [
+   "dieu_kien",
+   "thieu_s"
+  ]
+ },
+ {
+  "id": "k062",
+  "lv": 2,
+  "ten": "Cũng vậy (too / either)",
+  "huong": "I like it too. I don't know either. Me too. Che too/either.",
+  "loi": [
+   "too_either"
+  ]
+ },
+ {
+  "id": "k063",
+  "lv": 2,
+  "ten": "Thích làm (enjoy / like + ing)",
+  "huong": "I enjoy cooking. She likes reading. Che V-ing.",
+  "loi": [
+   "v_ing_sau"
+  ]
+ },
+ {
+  "id": "k064",
+  "lv": 2,
+  "ten": "Xong, dừng (finish / stop + ing)",
+  "huong": "I finished working at 6. Stop talking, please. Che V-ing.",
+  "loi": [
+   "v_ing_sau"
+  ]
+ },
+ {
+  "id": "k065",
+  "lv": 2,
+  "ten": "Định, hy vọng, cố (plan / hope / try to)",
+  "huong": "I plan to open a shop. I hope to see you soon. Che to hoặc động từ.",
+  "loi": [
+   "to_v"
+  ]
+ },
+ {
+  "id": "k066",
+  "lv": 2,
+  "ten": "Muốn ai làm gì (want you to)",
+  "huong": "I want you to come. She asked me to wait. Che đại từ hoặc to.",
+  "loi": [
+   "tan_ngu",
+   "to_v"
+  ]
+ },
+ {
+  "id": "k067",
+  "lv": 2,
+  "ten": "Cảm ơn vì đã (Thank you for + ing)",
+  "huong": "Thank you for helping me. Thank you for coming. Che V-ing.",
+  "loi": [
+   "v_ing_gioi_tu"
+  ]
+ },
+ {
+  "id": "k068",
+  "lv": 2,
+  "ten": "Trước khi, sau khi (before / after + ing)",
+  "huong": "Wash your hands before eating. After finishing work, I go home. Che V-ing.",
+  "loi": [
+   "v_ing_gioi_tu"
+  ]
+ },
+ {
+  "id": "k069",
+  "lv": 2,
+  "ten": "Trông, nghe có vẻ (look / sound / feel + tính từ)",
+  "huong": "You look tired. That sounds good. I feel better. Che tính từ hoặc động từ.",
+  "loi": [
+   "dong_tu_cam_giac",
+   "thieu_s"
+  ]
+ },
+ {
+  "id": "k070",
+  "lv": 2,
+  "ten": "Trở nên (get + tính từ)",
+  "huong": "It is getting cold. I got angry. Che getting/got.",
+  "loi": [
+   "dang_lam",
+   "qua_khu_bqt"
+  ]
+ },
+ {
+  "id": "k071",
+  "lv": 2,
+  "ten": "Tôi nghĩ là (I think)",
+  "huong": "I think it is a good idea. I don't think she is home. Che think hoặc is.",
+  "loi": [
+   "thieu_be",
+   "dont_doesnt"
+  ]
+ },
+ {
+  "id": "k072",
+  "lv": 2,
+  "ten": "Ai, cái nào, tại sao, thế nào (Who / Which / Why / How)",
+  "huong": "Who is that man? Which one do you want? Why are you late? How do you go to work? Che từ để hỏi.",
+  "loi": [
+   "trat_tu_hoi",
+   "tu_vung"
+  ]
+ },
+ {
+  "id": "k073",
+  "lv": 2,
+  "ten": "Đúng không? (..., right? / isn't it?)",
+  "huong": "You are from Hanoi, right? It's cold, isn't it? Che isn't/aren't/right.",
+  "loi": [
+   "be_sai",
+   "tu_vung"
+  ]
+ },
+ {
+  "id": "k074",
+  "lv": 2,
+  "ten": "Đã có (there was / there were)",
+  "huong": "There was a big storm. There were many people. Che was/were.",
+  "loi": [
+   "was_were",
+   "there_be"
+  ]
+ },
+ {
+  "id": "k075",
+  "lv": 2,
+  "ten": "Ngày xưa hay (used to)",
+  "huong": "I used to live in Dalat. She used to smoke. Che used/to.",
+  "loi": [
+   "used_to",
+   "to_v"
+  ]
+ },
+ {
+  "id": "k076",
+  "lv": 2,
+  "ten": "Có lẽ (may / might)",
+  "huong": "It may rain. She might be at home. Che động từ sau may/might.",
+  "loi": [
+   "khong_to"
+  ]
+ },
+ {
+  "id": "k077",
+  "lv": 2,
+  "ten": "Phải, cấm (must / mustn't)",
+  "huong": "You must wear a helmet. You mustn't park here. Che động từ.",
+  "loi": [
+   "khong_to"
+  ]
+ },
+ {
+  "id": "k078",
+  "lv": 2,
+  "ten": "Một vài, một chút (a few / a little)",
+  "huong": "I have a few friends here. Can I have a little sugar? Che few/little.",
+  "loi": [
+   "khong_dem_duoc",
+   "many_much"
+  ]
+ },
+ {
+  "id": "k079",
+  "lv": 2,
+  "ten": "Cái đó (a / the)",
+  "huong": "I bought a car. The car is red. Please close the door. Che a/the.",
+  "loi": [
+   "the",
+   "thieu_mao_tu",
+   "a_an"
+  ]
+ },
+ {
+  "id": "k080",
+  "lv": 2,
+  "ten": "Làm (make / do)",
+  "huong": "I make breakfast. She does the dishes. Can you do me a favor? Che make/do.",
+  "loi": [
+   "make_do"
+  ]
+ },
+ {
+  "id": "k081",
+  "lv": 2,
+  "ten": "Cái gì đó, không có gì (something / anything / nothing)",
+  "huong": "I want something to eat. I don't need anything. Nothing happened. Che từ đó.",
+  "loi": [
+   "some_any"
+  ]
+ },
+ {
+  "id": "k082",
+  "lv": 2,
+  "ten": "Đang làm lúc đó (was / were + ing)",
+  "huong": "I was cooking when you called. They were sleeping. Che was/were hoặc V-ing.",
+  "loi": [
+   "was_were",
+   "dang_lam"
+  ]
+ },
+ {
+  "id": "k083",
+  "lv": 2,
+  "ten": "Của ai (whose / mine / yours)",
+  "huong": "Whose bag is this? It's mine. Is this yours? Che mine/yours/hers.",
+  "loi": [
+   "so_huu"
+  ]
+ },
+ {
+  "id": "k084",
+  "lv": 2,
+  "ten": "Chán, thú vị (bored / boring)",
+  "huong": "I am bored. The movie is boring. She is interested in art. Che tính từ ed/ing.",
+  "loi": [
+   "ed_ing"
+  ]
+ },
+ {
+  "id": "k085",
+  "lv": 2,
+  "ten": "Lái cẩn thận (trạng từ ly)",
+  "huong": "She drives carefully. Please speak slowly. He works hard. Che trạng từ.",
+  "loi": [
+   "tinh_tu_trang_tu"
+  ]
+ },
+ {
+  "id": "k086",
+  "lv": 2,
+  "ten": "Bật, tìm, dậy (động từ cụm quen)",
+  "huong": "Turn on the light. I am looking for my keys. I get up at 6. Che chữ nhỏ đi kèm.",
+  "loi": [
+   "phrasal"
+  ]
+ },
+ {
+  "id": "k087",
+  "lv": 3,
+  "ten": "Đã từng (have you ever)",
+  "huong": "Have you ever been to Japan? I have never eaten sushi. Che have/been/eaten.",
+  "loi": [
+   "hthh",
+   "dong_tu_3"
+  ]
+ },
+ {
+  "id": "k088",
+  "lv": 3,
+  "ten": "Vừa xong, đã ... rồi (already / just / yet)",
+  "huong": "I have just finished. She has already left. Have you eaten yet? Che has/have hoặc dạng thứ ba.",
+  "loi": [
+   "hthh",
+   "dong_tu_3",
+   "thieu_s"
+  ]
+ },
+ {
+  "id": "k089",
+  "lv": 3,
+  "ten": "Đã được bao lâu (for / since)",
+  "huong": "I have lived here for ten years. She has worked here since 2020. Che for/since.",
+  "loi": [
+   "for_since",
+   "hthh"
+  ]
+ },
+ {
+  "id": "k090",
+  "lv": 3,
+  "ten": "Được làm (bị động hiện tại)",
+  "huong": "This phone is made in Vietnam. English is spoken here. Che is/are hoặc dạng thứ ba.",
+  "loi": [
+   "bi_dong",
+   "dong_tu_3"
+  ]
+ },
+ {
+  "id": "k091",
+  "lv": 3,
+  "ten": "Đã được làm (bị động quá khứ)",
+  "huong": "The house was built in 2010. My car was stolen. Che was/were hoặc dạng thứ ba.",
+  "loi": [
+   "bi_dong",
+   "was_were",
+   "dong_tu_3"
+  ]
+ },
+ {
+  "id": "k092",
+  "lv": 3,
+  "ten": "Người mà, cái mà (who / which / that)",
+  "huong": "The man who called is my boss. The car that I bought is red. Che who/which/that.",
+  "loi": [
+   "who_which"
+  ]
+ },
+ {
+  "id": "k093",
+  "lv": 3,
+  "ten": "Nơi mà (where / when nối câu)",
+  "huong": "This is the place where I was born. Che where/when.",
+  "loi": [
+   "who_which",
+   "tu_vung"
+  ]
+ },
+ {
+  "id": "k094",
+  "lv": 3,
+  "ten": "Nếu tôi là (If + quá khứ, would)",
+  "huong": "If I had more time, I would learn Japanese. If I were you, I would wait. Che had/were/would.",
+  "loi": [
+   "dieu_kien_2"
+  ]
+ },
+ {
+  "id": "k095",
+  "lv": 3,
+  "ten": "Lẽ ra nên (should have)",
+  "huong": "You should have told me. I should have left earlier. Che have hoặc dạng thứ ba.",
+  "loi": [
+   "dong_tu_3",
+   "should_v"
+  ]
+ },
+ {
+  "id": "k096",
+  "lv": 3,
+  "ten": "Ước gì (I wish)",
+  "huong": "I wish I had a car. I wish it were sunny. Che động từ quá khứ.",
+  "loi": [
+   "dieu_kien_2"
+  ]
+ },
+ {
+  "id": "k097",
+  "lv": 3,
+  "ten": "Hỏi lịch sự (Can you tell me where ... is)",
+  "huong": "Can you tell me where the station is? Do you know what time it opens? Che is/opens.",
+  "loi": [
+   "hoi_gian_tiep",
+   "trat_tu_hoi"
+  ]
+ },
+ {
+  "id": "k098",
+  "lv": 3,
+  "ten": "Quá ... để (too ... to / enough to)",
+  "huong": "It is too hot to go out. She is old enough to drive. Che too/enough/to.",
+  "loi": [
+   "to_v",
+   "tu_vung"
+  ]
+ },
+ {
+  "id": "k099",
+  "lv": 3,
+  "ten": "Đến nỗi (so ... that / such a)",
+  "huong": "It was so hot that I stayed home. It was such a good day. Che so/such.",
+  "loi": [
+   "tu_vung"
+  ]
+ },
+ {
+  "id": "k100",
+  "lv": 3,
+  "ten": "Đã quen (be used to + ing)",
+  "huong": "I am used to getting up early. She is used to the cold. Che V-ing hoặc be.",
+  "loi": [
+   "v_ing_gioi_tu",
+   "used_to"
+  ]
+ },
+ {
+  "id": "k101",
+  "lv": 3,
+  "ten": "Việc làm gì đó là (V-ing làm chủ ngữ)",
+  "huong": "Swimming is good for you. Learning English takes time. Che V-ing.",
+  "loi": [
+   "v_ing_sau",
+   "thieu_s"
+  ]
+ },
+ {
+  "id": "k102",
+  "lv": 3,
+  "ten": "Đang làm suốt từ (have been + ing)",
+  "huong": "I have been waiting for an hour. She has been working all day. Che been/V-ing.",
+  "loi": [
+   "hthh",
+   "dang_lam",
+   "for_since"
+  ]
+ },
+ {
+  "id": "k103",
+  "lv": 3,
+  "ten": "Cả hai, không cái nào (both / either / neither)",
+  "huong": "Both rooms are nice. Neither of them is here. Che both/either/neither.",
+  "loi": [
+   "tu_vung",
+   "be_sai"
+  ]
+ },
+ {
+  "id": "k104",
+  "lv": 3,
+  "ten": "Càng ... càng (the more ... the more)",
+  "huong": "The more you practice, the better you get. Che more/better.",
+  "loi": [
+   "so_sanh_hon"
+  ]
+ },
+ {
+  "id": "k105",
+  "lv": 3,
+  "ten": "Có vẻ như, dường như (seem to)",
+  "huong": "She seems to be tired. It seems like a good plan. Che seems/to.",
+  "loi": [
+   "thieu_s",
+   "to_v"
+  ]
+ },
+ {
+  "id": "k106",
+  "lv": 3,
+  "ten": "Nhờ người khác làm (have / get something done)",
+  "huong": "I had my car washed. I need to get my hair cut. Che dạng thứ ba.",
+  "loi": [
+   "dong_tu_3",
+   "bi_dong"
+  ]
+ },
+ {
+  "id": "k107",
+  "lv": 3,
+  "ten": "Kể lại lời nói (said that / told me)",
+  "huong": "She said that she was busy. He told me to wait. Che said/told/was.",
+  "loi": [
+   "was_were",
+   "tan_ngu",
+   "tu_vung"
+  ]
+ },
+ {
+  "id": "k108",
+  "lv": 3,
+  "ten": "Hỏi xem có ... không (ask if / whether)",
+  "huong": "She asked if I was free. I don't know whether he will come. Che if/was/will.",
+  "loi": [
+   "hoi_gian_tiep",
+   "was_were"
+  ]
+ },
+ {
+  "id": "k109",
+  "lv": 3,
+  "ten": "Mặc dù (although / even though / but)",
+  "huong": "Although it was late, we kept working. Che although/but.",
+  "loi": [
+   "tu_vung"
+  ]
+ },
+ {
+  "id": "k110",
+  "lv": 3,
+  "ten": "Để mà (to / so that)",
+  "huong": "I came here to see you. I saved money so that I could buy a house. Che to/so/could.",
+  "loi": [
+   "to_v",
+   "tu_vung"
+  ]
+ },
+ {
+  "id": "k111",
+  "lv": 3,
+  "ten": "Thà ... còn hơn (would rather / prefer)",
+  "huong": "I'd rather stay home. I prefer tea to coffee. Che rather/prefer/to.",
+  "loi": [
+   "khong_to",
+   "tu_vung"
+  ]
+ },
+ {
+  "id": "k112",
+  "lv": 3,
+  "ten": "Chắc hẳn (must be / can't be)",
+  "huong": "She must be tired. That can't be true. Che be.",
+  "loi": [
+   "khong_to"
+  ]
+ },
+ {
+  "id": "k113",
+  "lv": 3,
+  "ten": "Bỏ, tìm ra, trả lại (động từ cụm nâng cao)",
+  "huong": "I gave up smoking. I found out the truth. Please give it back. Che chữ nhỏ đi kèm.",
+  "loi": [
+   "phrasal"
+  ]
+ },
+ {
+  "id": "k114",
+  "lv": 3,
+  "ten": "Đề nghị, gợi ý (How about / Why don't we)",
+  "huong": "How about going out tonight? Why don't we take a break? Che going/take.",
+  "loi": [
+   "v_ing_gioi_tu",
+   "sau_do_nguyen"
+  ]
+ }
+]

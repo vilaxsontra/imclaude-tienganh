@@ -1,0 +1,45 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f766e"><title>Tiếng Anh theo cách AI học</title>
+<link rel="manifest" href="/manifest.webmanifest"><link rel="icon" href="/icon.svg"><link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+:root{--c:#0f766e;--c2:#14b8a6;--bg:#f4f1ea;--ink:#1c1917;--mu:#78716c;--ok:#15803d;--no:#b91c1c;--hl:#fde68a;--card:#fffdf8}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-text-size-adjust:100%}
+#app{max-width:560px;margin:0 auto;padding:12px 12px calc(24px + env(safe-area-inset-bottom))}
+.card{background:var(--card);border-radius:18px;padding:18px;box-shadow:0 1px 3px #0001,0 6px 20px #0000000a;margin-bottom:12px}
+.mid{text-align:center}h1{font-size:24px;margin:.3em 0}h2{font-size:22px;margin:.2em 0 .4em}h3{font-size:17px;margin:1.1em 0 .4em}
+.sub{color:var(--mu);font-size:15px}.err{color:var(--no)}.tag{display:inline-block;background:#ccfbf1;color:#115e59;border-radius:99px;padding:2px 12px;font-size:14px;margin:0 0 6px}
+button{font:inherit;border:0;border-radius:14px;background:#e7e5e4;color:var(--ink);padding:12px 14px;cursor:pointer;min-height:48px}
+button:disabled{opacity:.45}button.big{display:block;width:100%;background:var(--c);color:#fff;font-weight:600;font-size:18px;margin-top:14px;min-height:56px}
+button.big.ghost{background:#ccfbf1;color:#115e59}button.link{background:none;color:var(--mu);text-decoration:underline;display:block;margin:10px auto 0}
+input,textarea,select{font:inherit;width:100%;padding:13px 14px;border:2px solid #d6d3d1;border-radius:14px;background:#fff;margin:6px 0;font-size:18px}
+input:focus,textarea:focus{outline:none;border-color:var(--c2)}
+.row{display:flex;gap:10px;margin-top:10px}.row>button{flex:1}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.opt{background:#fff;border:2px solid #d6d3d1;font-size:18px;font-weight:600;min-height:58px}.opt.on{border-color:var(--c);background:#ccfbf1}
+.opt.good,input.good{border-color:var(--ok);background:#dcfce7;color:var(--ok)}.opt.bad,input.bad{border-color:var(--no);background:#fee2e2;color:var(--no)}.opt.skip{font-weight:400;color:var(--mu)}
+.en{font-size:21px;font-weight:600;margin:.2em 0;line-height:1.45}.en.big{font-size:25px}.vi{color:var(--mu);margin:.1em 0 .3em}
+mark{background:var(--hl);border-radius:6px;padding:0 3px}
+.blank{display:inline-block;min-width:3em;border-bottom:3px solid var(--c);color:var(--c);padding:0 4px}.blank.filled{border-color:var(--ok);color:var(--ok)}
+.list .li{display:flex;gap:10px;align-items:flex-start;padding:10px 6px;border-bottom:1px solid #eee;cursor:pointer;border-radius:10px}.list .li.on{background:#fef9c3}.li.col{display:block;cursor:default}
+.pl{min-width:44px;min-height:44px;border-radius:50%;background:#ccfbf1;color:#115e59;padding:0}
+.top{display:flex;align-items:center;gap:10px;margin:2px 0 10px}.x{min-height:40px;width:44px;background:none;font-size:20px;color:var(--mu)}.cnt{color:var(--mu);font-size:15px}
+.bar{flex:1;height:10px;background:#e7e5e4;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--c2)}
+.timer{height:6px;background:#f5f5f4;border-radius:6px;overflow:hidden;margin:2px 0 10px}.timer i{display:block;height:100%;background:#fbbf24;width:100%}
+.fb{margin-top:14px;padding:14px;border-radius:14px}.fb.ok{background:#f0fdf4}.fb.no{background:#fef2f2}.msg{font-weight:600}
+.why{background:#fff7ed;border-left:4px solid #f59e0b;padding:10px 12px;border-radius:8px;margin-top:8px}
+.ring{width:160px;height:160px}.ring circle{fill:none;stroke-width:12}.ring .bg{stroke:#e7e5e4}.ring .fg{stroke:var(--c2);stroke-linecap:round;transform:rotate(-90deg);transform-origin:60px 60px}
+.ring text{text-anchor:middle;font-size:30px;font-weight:700;fill:var(--ink)}.ring text.s{font-size:13px;font-weight:400;fill:var(--mu)}
+.streak{font-weight:600}.huge{font-size:44px;font-weight:800;margin:.1em 0}
+.tinh{font-size:21px;font-weight:600;background:#fefce8;border-radius:14px;padding:14px}
+.mic{margin:22px auto 6px;width:150px;height:150px;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;text-align:center;font-weight:600;padding:12px}
+.mic .lv{position:absolute;inset:0;border-radius:50%;background:#14b8a655;transition:transform .08s}.mic span{position:relative}.mic.on{background:#dc2626}
+.chart{width:100%;height:auto}.chart path{fill:none;stroke:var(--c2);stroke-width:3}.chart circle{fill:var(--c)}.chart text{font-size:11px;text-anchor:middle;fill:var(--ink)}.chart text.d{fill:var(--mu)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.stats b{display:block;font-size:26px}.stats span{color:var(--mu);font-size:13px}
+.logo{width:64px;height:64px;margin:8px auto;border-radius:18px;background:var(--c);color:#fff;font:800 34px/64px Georgia,serif}.logo span{color:var(--hl)}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,40px);opacity:0;background:#1c1917;color:#fff;padding:10px 16px;border-radius:12px;transition:.25s;pointer-events:none;max-width:90%}#toast.on{opacity:1;transform:translate(-50%,0)}
+.spin{width:36px;height:36px;border:4px solid #ccfbf1;border-top-color:var(--c);border-radius:50%;margin:60px auto 10px;animation:r 1s linear infinite}@keyframes r{to{transform:rotate(360deg)}}
+@media (max-width:360px){html,body{font-size:16px}.en{font-size:19px}.en.big{font-size:22px}.grid{gap:8px}.opt{font-size:16px}}
+</style></head><body><div id="app"></div><div id="toast"></div>
+<script>__DONGCO__</script><script>__APP__</script></body></html>
