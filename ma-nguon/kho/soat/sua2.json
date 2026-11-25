@@ -1,0 +1,701 @@
+[
+ {
+  "id": "k040b1",
+  "khac": [
+   "When's"
+  ],
+  "ly_do": "Thêm dạng viết tắt When's"
+ },
+ {
+  "id": "k041b6",
+  "khac": [
+   "saw"
+  ],
+  "ly_do": "watched/saw a movie cùng nghĩa, thêm saw"
+ },
+ {
+  "id": "k042a3",
+  "sai": [
+   [
+    "buyed",
+    "qua_khu_bqt"
+   ],
+   [
+    "buy",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "'brought' thay vào vẫn ra câu đúng (Mom brought some fish), bỏ"
+ },
+ {
+  "id": "k042a4",
+  "sai": [
+   [
+    "buy",
+    "qua_khu_bqt"
+   ],
+   [
+    "buyed",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "'brought' thay vào vẫn ra câu đúng, bỏ"
+ },
+ {
+  "id": "k042a5",
+  "khac": [
+   "had"
+  ],
+  "ly_do": "had cũng đúng cùng nghĩa"
+ },
+ {
+  "id": "k042a6",
+  "khac": [
+   "had"
+  ],
+  "ly_do": "had cũng đúng cùng nghĩa"
+ },
+ {
+  "id": "k042a7",
+  "khac": [
+   "had"
+  ],
+  "ly_do": "had cũng đúng cùng nghĩa"
+ },
+ {
+  "id": "k042a8",
+  "khac": [
+   "watched"
+  ],
+  "ly_do": "watched a movie cùng nghĩa"
+ },
+ {
+  "id": "k042b1",
+  "sai": [
+   [
+    "buyed",
+    "qua_khu_bqt"
+   ],
+   [
+    "buy",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "'brought' thay vào vẫn ra câu đúng (She brought a new phone), đổi nhiễu"
+ },
+ {
+  "id": "k042b2",
+  "en": "I {had} a headache yesterday.",
+  "vi": "Hôm qua tôi bị đau đầu.",
+  "ly_do": "'I have a headache this morning' vẫn đúng (sáng nay chưa hết), đổi mốc thời gian sang yesterday"
+ },
+ {
+  "id": "k042b5",
+  "khac": [
+   "saw"
+  ],
+  "ly_do": "saw cũng đúng cùng nghĩa (gặp)"
+ },
+ {
+  "id": "k043a5",
+  "khac": [
+   "have"
+  ],
+  "ly_do": "have dinner cùng nghĩa"
+ },
+ {
+  "id": "k043a6",
+  "khac": [
+   "have"
+  ],
+  "ly_do": "have dinner cùng nghĩa"
+ },
+ {
+  "id": "k043b2",
+  "sai": [
+   [
+    "saw",
+    "sau_do_nguyen"
+   ],
+   [
+    "seen",
+    "sau_do_nguyen"
+   ]
+  ],
+  "ly_do": "'didn't seen' sai vì sau didn't phải giữ nguyên, mã sau_do_nguyen khớp hơn dong_tu_3"
+ },
+ {
+  "id": "k044a1",
+  "khac": [
+   "have"
+  ],
+  "ly_do": "have breakfast cùng nghĩa"
+ },
+ {
+  "id": "k044a2",
+  "khac": [
+   "have"
+  ],
+  "ly_do": "have breakfast cùng nghĩa"
+ },
+ {
+  "id": "k044b2",
+  "sai": [
+   [
+    "saw",
+    "sau_do_nguyen"
+   ],
+   [
+    "seen",
+    "sau_do_nguyen"
+   ]
+  ],
+  "ly_do": "'Did you seen' sai vì sau did phải giữ nguyên, mã sau_do_nguyen khớp hơn"
+ },
+ {
+  "id": "k048a6",
+  "khac": [
+   "another"
+  ],
+  "ly_do": "another cũng đúng cùng nghĩa (thêm một cái)"
+ },
+ {
+  "id": "k048a7",
+  "khac": [
+   "another"
+  ],
+  "ly_do": "another cũng đúng cùng nghĩa"
+ },
+ {
+  "id": "k053a1",
+  "khac": [
+   "the largest"
+  ],
+  "ly_do": "the largest cũng đúng cùng nghĩa (rộng nhất)"
+ },
+ {
+  "id": "k053b2",
+  "sai": [
+   [
+    "the taller",
+    "so_sanh_nhat"
+   ],
+   [
+    "the most tall",
+    "so_sanh_nhat"
+   ]
+  ],
+  "ly_do": "'He is tallest in my class' người bản xứ vẫn chấp nhận (so sánh nhất làm vị ngữ), đổi nhiễu"
+ },
+ {
+  "id": "k058a1",
+  "khac": [
+   "since"
+  ],
+  "ly_do": "since cũng đúng cùng nghĩa 'vì'"
+ },
+ {
+  "id": "k058a5",
+  "khac": [
+   "since"
+  ],
+  "ly_do": "since cũng đúng cùng nghĩa 'vì'"
+ },
+ {
+  "id": "k058a6",
+  "khac": [
+   "since"
+  ],
+  "ly_do": "since cũng đúng cùng nghĩa 'vì'"
+ },
+ {
+  "id": "k058b1",
+  "khac": [
+   "since"
+  ],
+  "ly_do": "since cũng đúng cùng nghĩa 'vì'"
+ },
+ {
+  "id": "k058b3",
+  "khac": [
+   "since"
+  ],
+  "ly_do": "since cũng đúng cùng nghĩa 'vì'"
+ },
+ {
+  "id": "k058b5",
+  "khac": [
+   "since"
+  ],
+  "ly_do": "since cũng đúng cùng nghĩa 'vì'"
+ },
+ {
+  "id": "k062a1",
+  "khac": [
+   "as well"
+  ],
+  "ly_do": "as well cũng đúng cùng nghĩa too"
+ },
+ {
+  "id": "k062a4",
+  "khac": [
+   "as well"
+  ],
+  "ly_do": "as well cũng đúng cùng nghĩa too"
+ },
+ {
+  "id": "k062a5",
+  "khac": [
+   "as well"
+  ],
+  "ly_do": "as well cũng đúng cùng nghĩa too"
+ },
+ {
+  "id": "k062a8",
+  "khac": [
+   "as well"
+  ],
+  "ly_do": "as well cũng đúng cùng nghĩa too"
+ },
+ {
+  "id": "k062b1",
+  "khac": [
+   "as well"
+  ],
+  "ly_do": "as well cũng đúng cùng nghĩa too"
+ },
+ {
+  "id": "k062b3",
+  "khac": [
+   "as well"
+  ],
+  "ly_do": "as well cũng đúng cùng nghĩa too"
+ },
+ {
+  "id": "k062b6",
+  "khac": [
+   "as well"
+  ],
+  "ly_do": "as well cũng đúng cùng nghĩa too"
+ },
+ {
+  "id": "k063b4",
+  "en": "Minh likes {playing} soccer.",
+  "ly_do": "Người Mỹ: football là bóng bầu dục; đá bóng là soccer (cho khớp k041b5)"
+ },
+ {
+  "id": "k063b6",
+  "en": "We enjoy {swimming} in the ocean.",
+  "ly_do": "Người Mỹ nói swim in the ocean tự nhiên hơn in the sea"
+ },
+ {
+  "id": "k070a8",
+  "vi": "Tôi già rồi.",
+  "ly_do": "VI 'Tôi già đi rồi' gượng"
+ },
+ {
+  "id": "k071a1",
+  "sai": [
+   [
+    "it are",
+    "be_sai"
+   ],
+   [
+    "is",
+    "chu_ngu"
+   ]
+  ],
+  "khac": [
+   "it's",
+   "that is",
+   "that's"
+  ],
+  "ly_do": "'I think it a good idea' (think + it + danh từ) vẫn là cấu trúc có thật, đổi nhiễu; thêm that's / that is cùng nghĩa 'đó là'"
+ },
+ {
+  "id": "k071b4",
+  "sai": [
+   [
+    "it are",
+    "be_sai"
+   ],
+   [
+    "is it",
+    "hoi_gian_tiep"
+   ]
+  ],
+  "ly_do": "'Do you think it too expensive?' (think + it + tính từ) vẫn là cấu trúc có thật, đổi nhiễu"
+ },
+ {
+  "id": "k072b2",
+  "en": "{How} do you get to work?",
+  "ly_do": "Người Mỹ nói How do you get to work? tự nhiên hơn go to work"
+ },
+ {
+  "id": "k001n2",
+  "dap": [
+   "I am a teacher.",
+   "I'm a teacher.",
+   "I'm an elementary school teacher.",
+   "I teach at an elementary school."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k003n2",
+  "dap": [
+   "He isn't home.",
+   "He's not home.",
+   "He is not at home.",
+   "He isn't here.",
+   "He's still at work."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k007n2",
+  "dap": [
+   "I need a taxi, please.",
+   "Can you call a taxi for me?",
+   "Can you get me a taxi?",
+   "Could you call a taxi for me, please?",
+   "Can you call me a taxi?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k009n2",
+  "dap": [
+   "Four adults and two children, please.",
+   "A table for four adults and two kids, please.",
+   "We have four adults and two children.",
+   "We need a table for four adults and two kids."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k011n2",
+  "dap": [
+   "I want to go to Dalat.",
+   "I want to visit Dalat.",
+   "I'd like to go to Dalat.",
+   "I want to go to Dalat to see the flowers."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k017n2",
+  "dap": [
+   "Is there a pharmacy near here?",
+   "Is there a drugstore near here?",
+   "Are there any pharmacies near here?",
+   "Is there a pharmacy nearby?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k021n2",
+  "dap": [
+   "Can I have some water, please?",
+   "Can I have a glass of water, please?",
+   "Could I have some water, please?",
+   "Can I get some water, please?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k029n2",
+  "dap": [
+   "I have to work on Saturday.",
+   "Sorry, I have to work.",
+   "I have to work that day.",
+   "Sorry, I work on Saturdays."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k033n2",
+  "dap": [
+   "Let's help her.",
+   "Let's help her carry the bags.",
+   "Can we help her?",
+   "Let's help her with her bags."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k035n2",
+  "dap": [
+   "It's a good restaurant.",
+   "It's a really good pho place.",
+   "Yes, it's a great restaurant.",
+   "Yes, it's really good.",
+   "The pho there is delicious."
+  ],
+  "ly_do": "Câu tự nhiên nhất khi được hỏi 'ngon không' là 'Yes, it's really good.'"
+ },
+ {
+  "id": "k037n2",
+  "dap": [
+   "There are a lot of people there.",
+   "There are always a lot of people.",
+   "Yes, there are lots of people.",
+   "Yes, it's always crowded."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k041n2",
+  "dap": [
+   "I visited my grandparents last weekend.",
+   "Last weekend I visited my grandparents.",
+   "I visited my grandparents.",
+   "I went back to my hometown to visit my grandparents."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k049n2",
+  "dap": [
+   "Would you like to come with us?",
+   "Would you like to join us?",
+   "Would you like to have hot pot with us?",
+   "Do you want to come with us?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k051n2",
+  "dap": [
+   "Could you send me the address?",
+   "Could you text me the address, please?",
+   "Could you send me the address by text?",
+   "Could you text me the address?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k053n2",
+  "dap": [
+   "Pho is the best.",
+   "I think pho is the best Vietnamese food.",
+   "Pho is my favorite. It's the best.",
+   "Pho is my favorite.",
+   "I like pho the most."
+  ],
+  "ly_do": "Hỏi 'thích nhất' thì nói 'my favorite / like the most' tự nhiên hơn"
+ },
+ {
+  "id": "k061n2",
+  "dap": [
+   "When I get to the office, I will send it.",
+   "I'll send it when I get to the office.",
+   "When I get back to the office, I'll send it.",
+   "I'll send it as soon as I get to the office."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k063n2",
+  "dap": [
+   "I don't mind waiting.",
+   "No, I don't mind waiting.",
+   "I don't mind waiting at all.",
+   "No, not at all.",
+   "No problem, I don't mind."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k067n2",
+  "dap": [
+   "Thank you for waiting.",
+   "Thanks for waiting.",
+   "Thank you for waiting for me.",
+   "Sorry I'm late. Thanks for waiting."
+  ],
+  "ly_do": "Đến muộn thì người Mỹ thường xin lỗi trước rồi cảm ơn"
+ },
+ {
+  "id": "k077n2",
+  "dap": [
+   "You mustn't park here.",
+   "You must not park here.",
+   "Sorry, you mustn't park here.",
+   "You can't park here.",
+   "Sorry, you can't park here."
+  ],
+  "ly_do": "Người Mỹ hầu như không nói mustn't; câu tự nhiên là 'You can't park here.'"
+ },
+ {
+  "id": "k079n2",
+  "dap": [
+   "Can you close the door, please?",
+   "Please close the door.",
+   "Could you close the door?",
+   "Could you close the door, please?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k081n2",
+  "dap": [
+   "I don't need anything, thanks.",
+   "No, thanks. I don't need anything.",
+   "I'm fine, I don't need anything.",
+   "I'm just looking, thanks.",
+   "No, thanks. I'm just looking."
+  ],
+  "ly_do": "Câu tự nhiên nhất ở cửa hàng là 'I'm just looking, thanks.'"
+ },
+ {
+  "id": "k087n2",
+  "dap": [
+   "I have never eaten sushi.",
+   "I've never eaten sushi before.",
+   "I've never had sushi before.",
+   "I've never tried sushi.",
+   "This is my first time eating sushi."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k089n2",
+  "dap": [
+   "I've worked at this company since 2020.",
+   "I have worked there since 2020.",
+   "I've been working there since 2020.",
+   "I've been working here since 2020."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k093n2",
+  "dap": [
+   "I still remember the day when I started work.",
+   "I still remember the day I started my first job.",
+   "I still remember the day when I started working.",
+   "I still remember my first day at work."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k099n2",
+  "dap": [
+   "It was such a great trip.",
+   "We had such a good time.",
+   "It was so much fun.",
+   "It was a lot of fun."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k111n2",
+  "dap": [
+   "I'd rather have tea.",
+   "I'd prefer tea, please.",
+   "Tea, please. I prefer tea to coffee.",
+   "Tea, please."
+  ],
+  "ly_do": "Câu tự nhiên nhất là 'Tea, please.'"
+ },
+ {
+  "id": "k113n2",
+  "dap": [
+   "We've run out of rice.",
+   "We ran out of rice. Can you buy some?",
+   "We're out of rice.",
+   "We're out of rice. Can you buy some?"
+  ],
+  "ly_do": "Sửa câu dính dấu phẩy; thêm cách nói Mỹ phổ biến 'We're out of rice.'"
+ },
+ {
+  "id": "nvan_phongn2",
+  "dap": [
+   "Sorry, I am in a meeting.",
+   "Sorry, I'm in a meeting right now.",
+   "I'm in a meeting.",
+   "Sorry, I'm in a meeting. I'll call you back."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "nnong_nghiepn2",
+  "dap": [
+   "Is there any fertilizer left?",
+   "Is there any fertilizer in the shed?",
+   "Is there any fertilizer?",
+   "Is there any fertilizer left in the shed?",
+   "Do we have any fertilizer left?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "nbat_dong_sann2",
+  "dap": [
+   "How much is it per square meter?",
+   "How much is this lot per square meter?",
+   "What's the price per square meter?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "nnha_hangn2",
+  "dap": [
+   "What do you want to drink?",
+   "What would you like to drink?",
+   "Can I get you something to drink?",
+   "Anything to drink?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến của phục vụ"
+ },
+ {
+  "id": "ny_ten2",
+  "dap": [
+   "You should drink more water.",
+   "You should drink a lot of water.",
+   "You need to drink more water."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "ntho_ky_thuatn2",
+  "dap": [
+   "There is a leak under the sink.",
+   "There's a leak under the sink.",
+   "The sink is leaking."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "ngiao_vienn2",
+  "dap": [
+   "Do you understand?",
+   "Do you all understand?",
+   "Do you understand the lesson?",
+   "Does everyone understand?",
+   "Is that clear?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "ndu_lichn2",
+  "dap": [
+   "Can I have the Wi-Fi password, please?",
+   "Can I have the Wi-Fi password?",
+   "Can I get the Wi-Fi password, please?",
+   "What's the Wi-Fi password?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "nnoi_tron2",
+  "dap": [
+   "Don't touch the stove!",
+   "Don't touch the stove.",
+   "Don't touch it!",
+   "Don't touch that, it's hot!"
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ }
+]

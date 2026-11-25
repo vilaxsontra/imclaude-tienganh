@@ -1,0 +1,739 @@
+[
+ {
+  "id": "ndu_lich1",
+  "sai": [
+   [
+    "are",
+    "be_sai"
+   ],
+   [
+    "am",
+    "be_sai"
+   ]
+  ],
+  "ly_do": "Nhiễu do/does gắn mã do_does: lời giải thích (he/she/it dùng does, they dùng do) lại như xác nhận nhiễu là đúng, gây hiểu sai; câu không có động từ hành động nên thay bằng nhiễu be_sai."
+ },
+ {
+  "id": "ndu_lich2",
+  "sai": [
+   [
+    "are",
+    "be_sai"
+   ],
+   [
+    "am",
+    "be_sai"
+   ]
+  ],
+  "ly_do": "Nhiễu do/does gắn mã do_does: lời giải thích (he/she/it dùng does, they dùng do) lại như xác nhận nhiễu là đúng, gây hiểu sai; câu không có động từ hành động nên thay bằng nhiễu be_sai."
+ },
+ {
+  "id": "ndu_lich25",
+  "sai": [
+   [
+    "are",
+    "be_sai"
+   ],
+   [
+    "am",
+    "be_sai"
+   ]
+  ],
+  "ly_do": "Nhiễu do/does gắn mã do_does: lời giải thích (he/she/it dùng does, they dùng do) lại như xác nhận nhiễu là đúng, gây hiểu sai; câu không có động từ hành động nên thay bằng nhiễu be_sai."
+ },
+ {
+  "id": "ndu_lich26",
+  "sai": [
+   [
+    "are",
+    "be_sai"
+   ],
+   [
+    "am",
+    "be_sai"
+   ]
+  ],
+  "ly_do": "Nhiễu do/does gắn mã do_does: lời giải thích (he/she/it dùng does, they dùng do) lại như xác nhận nhiễu là đúng, gây hiểu sai; câu không có động từ hành động nên thay bằng nhiễu be_sai."
+ },
+ {
+  "id": "ndu_lich3",
+  "sai": [
+   [
+    "is",
+    "be_sai"
+   ],
+   [
+    "am",
+    "be_sai"
+   ]
+  ],
+  "ly_do": "Nhiễu do/does gắn mã do_does: lời giải thích (he/she/it dùng does, they dùng do) lại như xác nhận nhiễu là đúng, gây hiểu sai; câu không có động từ hành động nên thay bằng nhiễu be_sai."
+ },
+ {
+  "id": "ny_te16",
+  "sai": [
+   [
+    "are",
+    "be_sai"
+   ],
+   [
+    "am",
+    "be_sai"
+   ]
+  ],
+  "ly_do": "Nhiễu do/does gắn mã do_does: lời giải thích (he/she/it dùng does, they dùng do) lại như xác nhận nhiễu là đúng, gây hiểu sai; câu không có động từ hành động nên thay bằng nhiễu be_sai."
+ },
+ {
+  "id": "ny_te17",
+  "sai": [
+   [
+    "are",
+    "be_sai"
+   ],
+   [
+    "am",
+    "be_sai"
+   ]
+  ],
+  "ly_do": "Nhiễu do/does gắn mã do_does: lời giải thích (he/she/it dùng does, they dùng do) lại như xác nhận nhiễu là đúng, gây hiểu sai; câu không có động từ hành động nên thay bằng nhiễu be_sai."
+ },
+ {
+  "id": "ny_te18",
+  "sai": [
+   [
+    "is",
+    "be_sai"
+   ],
+   [
+    "am",
+    "be_sai"
+   ]
+  ],
+  "ly_do": "Nhiễu do/does gắn mã do_does: lời giải thích (he/she/it dùng does, they dùng do) lại như xác nhận nhiễu là đúng, gây hiểu sai; câu không có động từ hành động nên thay bằng nhiễu be_sai."
+ },
+ {
+  "id": "ndu_lich31",
+  "sai": [
+   [
+    "lose",
+    "qua_khu_bqt"
+   ],
+   [
+    "losed",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "Dạng tự chế thêm ed của động từ bất quy tắc phải mã qua_khu_bqt; mã qua_khu_ed (giải thích 'thêm ed') lại như khuyên thêm ed."
+ },
+ {
+  "id": "ndu_lich32",
+  "sai": [
+   [
+    "lose",
+    "qua_khu_bqt"
+   ],
+   [
+    "losed",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "Dạng tự chế thêm ed của động từ bất quy tắc phải mã qua_khu_bqt; mã qua_khu_ed (giải thích 'thêm ed') lại như khuyên thêm ed."
+ },
+ {
+  "id": "ndu_lich33",
+  "sai": [
+   [
+    "find",
+    "qua_khu_bqt"
+   ],
+   [
+    "finded",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "Dạng tự chế thêm ed của động từ bất quy tắc phải mã qua_khu_bqt; mã qua_khu_ed (giải thích 'thêm ed') lại như khuyên thêm ed."
+ },
+ {
+  "id": "nhoc_sinh22",
+  "sai": [
+   [
+    "forget",
+    "qua_khu_bqt"
+   ],
+   [
+    "forgeted",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "Dạng tự chế thêm ed của động từ bất quy tắc phải mã qua_khu_bqt; mã qua_khu_ed (giải thích 'thêm ed') lại như khuyên thêm ed."
+ },
+ {
+  "id": "nhoc_sinh23",
+  "sai": [
+   [
+    "lose",
+    "qua_khu_bqt"
+   ],
+   [
+    "losed",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "Dạng tự chế thêm ed của động từ bất quy tắc phải mã qua_khu_bqt; mã qua_khu_ed (giải thích 'thêm ed') lại như khuyên thêm ed."
+ },
+ {
+  "id": "nhoc_sinh24",
+  "sai": [
+   [
+    "lose",
+    "qua_khu_bqt"
+   ],
+   [
+    "losed",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "Dạng tự chế thêm ed của động từ bất quy tắc phải mã qua_khu_bqt; mã qua_khu_ed (giải thích 'thêm ed') lại như khuyên thêm ed."
+ },
+ {
+  "id": "nnoi_tro31",
+  "sai": [
+   [
+    "buy",
+    "qua_khu_bqt"
+   ],
+   [
+    "buyed",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "Dạng tự chế thêm ed của động từ bất quy tắc phải mã qua_khu_bqt; mã qua_khu_ed (giải thích 'thêm ed') lại như khuyên thêm ed."
+ },
+ {
+  "id": "nnoi_tro32",
+  "sai": [
+   [
+    "buy",
+    "qua_khu_bqt"
+   ],
+   [
+    "buyed",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "Dạng tự chế thêm ed của động từ bất quy tắc phải mã qua_khu_bqt; mã qua_khu_ed (giải thích 'thêm ed') lại như khuyên thêm ed."
+ },
+ {
+  "id": "nnoi_tro33",
+  "sai": [
+   [
+    "buys",
+    "qua_khu_bqt"
+   ],
+   [
+    "buyed",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "Dạng tự chế thêm ed của động từ bất quy tắc phải mã qua_khu_bqt; mã qua_khu_ed (giải thích 'thêm ed') lại như khuyên thêm ed."
+ },
+ {
+  "id": "ntho_ky_thuat31",
+  "sai": [
+   [
+    "buy",
+    "qua_khu_bqt"
+   ],
+   [
+    "buyed",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "Dạng tự chế thêm ed của động từ bất quy tắc phải mã qua_khu_bqt; mã qua_khu_ed (giải thích 'thêm ed') lại như khuyên thêm ed."
+ },
+ {
+  "id": "ntho_ky_thuat32",
+  "sai": [
+   [
+    "buy",
+    "qua_khu_bqt"
+   ],
+   [
+    "buyed",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "Dạng tự chế thêm ed của động từ bất quy tắc phải mã qua_khu_bqt; mã qua_khu_ed (giải thích 'thêm ed') lại như khuyên thêm ed."
+ },
+ {
+  "id": "ntho_ky_thuat33",
+  "sai": [
+   [
+    "bring",
+    "qua_khu_bqt"
+   ],
+   [
+    "bringed",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "Dạng tự chế thêm ed của động từ bất quy tắc phải mã qua_khu_bqt; mã qua_khu_ed (giải thích 'thêm ed') lại như khuyên thêm ed."
+ },
+ {
+  "id": "ny_te31",
+  "sai": [
+   [
+    "give",
+    "qua_khu_bqt"
+   ],
+   [
+    "gived",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "Dạng tự chế thêm ed của động từ bất quy tắc phải mã qua_khu_bqt; mã qua_khu_ed (giải thích 'thêm ed') lại như khuyên thêm ed."
+ },
+ {
+  "id": "ny_te32",
+  "sai": [
+   [
+    "give",
+    "qua_khu_bqt"
+   ],
+   [
+    "gived",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "Dạng tự chế thêm ed của động từ bất quy tắc phải mã qua_khu_bqt; mã qua_khu_ed (giải thích 'thêm ed') lại như khuyên thêm ed."
+ },
+ {
+  "id": "ny_te33",
+  "sai": [
+   [
+    "gives",
+    "qua_khu_bqt"
+   ],
+   [
+    "gived",
+    "qua_khu_bqt"
+   ]
+  ],
+  "ly_do": "Dạng tự chế thêm ed của động từ bất quy tắc phải mã qua_khu_bqt; mã qua_khu_ed (giải thích 'thêm ed') lại như khuyên thêm ed."
+ },
+ {
+  "id": "nnoi_tro16",
+  "sai": [
+   [
+    "touching",
+    "sau_do_nguyen"
+   ],
+   [
+    "to touch",
+    "sau_do_nguyen"
+   ]
+  ],
+  "ly_do": "Nhiễu 'to touch' sau Don't: mã khong_to chỉ nói can/could/let's, không nói don't; sau_do_nguyen khớp hơn."
+ },
+ {
+  "id": "nnoi_tro17",
+  "sai": [
+   [
+    "touching",
+    "sau_do_nguyen"
+   ],
+   [
+    "to touch",
+    "sau_do_nguyen"
+   ]
+  ],
+  "ly_do": "Nhiễu 'to touch' sau Don't: mã khong_to chỉ nói can/could/let's, không nói don't; sau_do_nguyen khớp hơn."
+ },
+ {
+  "id": "nnoi_tro18",
+  "sai": [
+   [
+    "playing",
+    "sau_do_nguyen"
+   ],
+   [
+    "to play",
+    "sau_do_nguyen"
+   ]
+  ],
+  "ly_do": "Nhiễu 'to play' sau Don't: mã khong_to chỉ nói can/could/let's, không nói don't; sau_do_nguyen khớp hơn."
+ },
+ {
+  "id": "nnong_nghiep16",
+  "sai": [
+   [
+    "There",
+    "chu_ngu"
+   ],
+   [
+    "Its",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Nhiễu 'This' vẫn ra câu đúng ngữ pháp (This is very hot/dry today khi chỉ một vật), thay bằng 'Its'."
+ },
+ {
+  "id": "nnong_nghiep17",
+  "sai": [
+   [
+    "There",
+    "chu_ngu"
+   ],
+   [
+    "Its",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Nhiễu 'This' vẫn ra câu đúng ngữ pháp (This is very hot/dry today khi chỉ một vật), thay bằng 'Its'."
+ },
+ {
+  "id": "nnong_nghiep18",
+  "sai": [
+   [
+    "There",
+    "chu_ngu"
+   ],
+   [
+    "Its",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Nhiễu 'This' vẫn ra câu đúng ngữ pháp (This is very hot/dry today khi chỉ một vật), thay bằng 'Its'."
+ },
+ {
+  "id": "ntho_ky_thuat26",
+  "sai": [
+   [
+    "in",
+    "gioi_tu_cho"
+   ],
+   [
+    "to",
+    "gioi_tu_cho"
+   ]
+  ],
+  "ly_do": "'He is at the ladder' vẫn nói được (đứng cạnh cái thang), thay nhiễu 'at' bằng 'to'."
+ },
+ {
+  "id": "ntho_ky_thuat43",
+  "sai": [
+   [
+    "will rain",
+    "dieu_kien"
+   ],
+   [
+    "rain",
+    "thieu_s"
+   ]
+  ],
+  "ly_do": "Lỗi 'If it rain' là thiếu s với it, mã đúng là thieu_s."
+ },
+ {
+  "id": "ny_te28",
+  "khac": [
+   "took"
+  ],
+  "ly_do": "Người Mỹ thường nói 'took his blood pressure/temperature', cùng nghĩa, cần chấp nhận."
+ },
+ {
+  "id": "ny_te29",
+  "khac": [
+   "took"
+  ],
+  "ly_do": "Người Mỹ thường nói 'took his blood pressure/temperature', cùng nghĩa, cần chấp nhận."
+ },
+ {
+  "id": "nnha_hang7",
+  "khac": [
+   "get"
+  ],
+  "ly_do": "'Can I get your ...?' rất phổ biến ở Mỹ, cùng nghĩa (như ndu_lich7-9 đã chấp nhận get)."
+ },
+ {
+  "id": "nnha_hang8",
+  "khac": [
+   "get"
+  ],
+  "ly_do": "'Can I get your ...?' rất phổ biến ở Mỹ, cùng nghĩa (như ndu_lich7-9 đã chấp nhận get)."
+ },
+ {
+  "id": "nnha_hang9",
+  "khac": [
+   "get"
+  ],
+  "ly_do": "'Can I get your ...?' rất phổ biến ở Mỹ, cùng nghĩa (như ndu_lich7-9 đã chấp nhận get)."
+ },
+ {
+  "id": "k002n2",
+  "dap": [
+   "They are fine.",
+   "They're fine.",
+   "They are well.",
+   "They're good.",
+   "They're doing well."
+  ],
+  "ly_do": "Thêm cách nói phổ biến."
+ },
+ {
+  "id": "k004n2",
+  "dap": [
+   "Is this seat free?",
+   "Is this seat taken?",
+   "Is this seat empty?",
+   "Is anyone sitting here?",
+   "Can I sit here?"
+  ],
+  "ly_do": "Thêm cách hỏi phổ biến."
+ },
+ {
+  "id": "k008n2",
+  "dap": [
+   "She has two kids.",
+   "She has two children.",
+   "Yes, she has two kids.",
+   "She has a son and a daughter.",
+   "Yes, she has a son and a daughter."
+  ],
+  "ly_do": "Thêm câu đúng sát tình huống nhất (một trai, một gái)."
+ },
+ {
+  "id": "k010n2",
+  "dap": [
+   "I want a new phone.",
+   "I want to buy a new phone.",
+   "I'm looking for a new phone.",
+   "I need a new phone."
+  ],
+  "ly_do": "Thêm cách nói tự nhiên nhất ở cửa hàng."
+ },
+ {
+  "id": "k012n2",
+  "dap": [
+   "My wife loves flowers.",
+   "My wife likes flowers.",
+   "She loves flowers.",
+   "My wife loves roses.",
+   "She loves roses."
+  ],
+  "ly_do": "Thêm câu sát tình huống (vườn hồng)."
+ },
+ {
+  "id": "k014n2",
+  "dap": [
+   "I don't know.",
+   "Sorry, I don't know.",
+   "I don't know the way.",
+   "Sorry, I don't know that place.",
+   "Sorry, I don't know where that is."
+  ],
+  "ly_do": "Thêm cách nói phổ biến."
+ },
+ {
+  "id": "k016n2",
+  "dap": [
+   "There are four bedrooms.",
+   "There are four bedrooms in the house.",
+   "There are four bedrooms in this house.",
+   "It has four bedrooms.",
+   "The house has four bedrooms."
+  ],
+  "ly_do": "Thêm cách nói rất phổ biến với has."
+ },
+ {
+  "id": "k018n2",
+  "dap": [
+   "Where do you live?",
+   "So, where do you live?",
+   "Which area do you live in?",
+   "What part of town do you live in?"
+  ],
+  "ly_do": "Thêm cách hỏi khu nào."
+ },
+ {
+  "id": "k020n2",
+  "dap": [
+   "How much are these?",
+   "How much are these shoes?",
+   "How much are these sneakers?",
+   "How much do these cost?"
+  ],
+  "ly_do": "Thêm cách hỏi giá phổ biến."
+ },
+ {
+  "id": "k022n2",
+  "dap": [
+   "Can you take a photo of us?",
+   "Can you take our picture?",
+   "Can you take a picture of us, please?",
+   "Could you take a photo of us?"
+  ],
+  "ly_do": "Thêm cách nhờ lịch sự."
+ },
+ {
+  "id": "k028n2",
+  "vi": "Bạn đang ở khách sạn, sắp phải ra sân bay và cần đi taxi. Bạn nói với lễ tân.",
+  "dap": [
+   "I need a taxi.",
+   "I need a taxi to the airport.",
+   "I need to get a taxi.",
+   "Can you call me a taxi?",
+   "Could you call a taxi for me?"
+  ],
+  "ly_do": "Tình huống cũ không nói cần taxi nên người học không đoán được ý (có thể nói check out); trường vi ở đây là câu TÌNH mới. Thêm cách nhờ gọi taxi."
+ },
+ {
+  "id": "k034n2",
+  "dap": [
+   "This is my grandma's house.",
+   "That's my grandmother's house.",
+   "This is my grandmother's house.",
+   "That's my grandma's house.",
+   "My grandma lives here."
+  ],
+  "ly_do": "Đi ngang qua thì 'That's' tự nhiên; thêm cách nói."
+ },
+ {
+  "id": "k042n2",
+  "dap": [
+   "I ate com tam.",
+   "I had com tam for lunch.",
+   "I had broken rice for lunch.",
+   "I had com tam."
+  ],
+  "ly_do": "Thêm cách nói phổ biến."
+ },
+ {
+  "id": "k046n2",
+  "dap": [
+   "I will be late.",
+   "Sorry, I'll be late.",
+   "I'll be about ten minutes late.",
+   "I'm stuck in traffic."
+  ],
+  "ly_do": "Thêm cách báo kẹt xe phổ biến."
+ },
+ {
+  "id": "k052n2",
+  "dap": [
+   "A motorbike taxi is cheaper and faster.",
+   "It's cheaper and faster to take a motorbike taxi.",
+   "Taking a motorbike taxi is cheaper than taking a taxi.",
+   "Take a motorbike taxi. It's cheaper and faster."
+  ],
+  "ly_do": "Thêm cách khuyên trực tiếp."
+ },
+ {
+  "id": "k054n2",
+  "dap": [
+   "Dalat is not as cold as Hanoi in winter.",
+   "Dalat isn't as cold as Hanoi.",
+   "No, it's not as cold as Hanoi.",
+   "Dalat is warmer than Hanoi."
+  ],
+  "ly_do": "Thêm câu sát tình huống (ấm hơn)."
+ },
+ {
+  "id": "k060n2",
+  "dap": [
+   "If you call me, I will come.",
+   "If you call me, I'll come.",
+   "If you call me, I'll come right away.",
+   "Just call me and I'll come.",
+   "Call me and I'll come right away."
+  ],
+  "ly_do": "Thêm cách nói tự nhiên."
+ },
+ {
+  "id": "k066n2",
+  "dap": [
+   "My boss asked me to stay late.",
+   "My boss wanted me to work late.",
+   "My boss asked me to work late.",
+   "My boss made me stay late."
+  ],
+  "ly_do": "'bắt ở lại' = made me stay late, rất tự nhiên."
+ },
+ {
+  "id": "k088n2",
+  "dap": [
+   "I haven't finished it yet.",
+   "I haven't finished the report yet.",
+   "Sorry, I haven't finished yet.",
+   "I'm still working on it."
+  ],
+  "ly_do": "Thêm cách nói tự nhiên nhất."
+ },
+ {
+  "id": "k098n2",
+  "dap": [
+   "You're not old enough to ride a motorbike.",
+   "You're too young to ride a motorbike.",
+   "You aren't old enough to ride a motorbike yet."
+  ],
+  "ly_do": "Xe máy ở Mỹ nói ride, không nói drive."
+ },
+ {
+  "id": "k106n2",
+  "dap": [
+   "I got my hair cut yesterday.",
+   "I had my hair cut yesterday.",
+   "I just got my hair cut.",
+   "I got a haircut yesterday."
+  ],
+  "ly_do": "Thêm cách nói phổ biến."
+ },
+ {
+  "id": "k114n2",
+  "dap": [
+   "Why don't we take a break?",
+   "How about taking a break?",
+   "Why don't we take a short break?",
+   "Let's take a break."
+  ],
+  "ly_do": "Thêm cách rủ phổ biến."
+ },
+ {
+  "id": "nlai_xen4",
+  "dap": [
+   "Sorry, I'm late because of the traffic.",
+   "Sorry I'm late. The traffic was bad.",
+   "Sorry, I'm late because the traffic was bad.",
+   "Sorry I'm late, there was a lot of traffic."
+  ],
+  "ly_do": "Đã tới nơi thì kẹt xe đã qua: 'the traffic was bad', không dùng 'is bad'."
+ },
+ {
+  "id": "ntho_ky_thuatn4",
+  "dap": [
+   "You must wear a hard hat.",
+   "You must wear a helmet.",
+   "You must wear a hard hat here.",
+   "You need to wear a hard hat."
+  ],
+  "ly_do": "Thêm cách nhắc tự nhiên kiểu Mỹ."
+ },
+ {
+  "id": "ngiao_vienn4",
+  "dap": [
+   "I want you to work in groups.",
+   "I want you to work in small groups.",
+   "Please work in groups.",
+   "Let's work in groups."
+  ],
+  "ly_do": "Thêm cách nói phổ biến trong lớp."
+ },
+ {
+  "id": "nhoc_sinhn4",
+  "dap": [
+   "I am going to apply for a scholarship.",
+   "I'm going to apply for a scholarship.",
+   "I plan to apply for a scholarship."
+  ],
+  "ly_do": "Thêm cách nói cùng nghĩa."
+ }
+]

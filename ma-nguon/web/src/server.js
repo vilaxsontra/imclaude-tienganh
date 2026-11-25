@@ -88,8 +88,11 @@ async function suaCau(env, S, text) {
   // lần hai: kiểm câu sửa có thật đúng và tự nhiên không, đồng thời gọi đúng tên từng lỗi
   const ch = []; items.forEach((x, i) => x.doi.forEach((d, j) => ch.push({ i, j, d })));
   const prompt = `Sentences:\n${items.map((x, i) => `${i + 1}. ${x.sua}`).join('\n')}\n\nChanges made by the teacher:\n${ch.map((c, k) => `C${k + 1} (sentence ${c.i + 1}): "${c.d.sai}" -> "${c.d.dung}"`).join('\n') || '(none)'}\n\nError codes:\n${Object.entries(LOAI).map(([k, v]) => k + ': ' + v).join('\n')}`;
-  const v = await llm(env, S, 'You check an English teacher\'s corrections. Output ONLY a JSON array: first one element per sentence, "OK" if the sentence is fully grammatical, natural American English, else "BAD"; then one element per change, the single best error code for the learner\'s mistake. Example for 2 sentences and 1 change: ["OK","OK","thieu_s"].', prompt, 600);
-  const va = pickJSON(v) || [];
+  let va = [];
+  for (let t = 0; t < 2; t++) { // hỏi lại một lần nếu trả lời sai dạng
+    const v = await llm(env, S, 'You check an English teacher\'s corrections. Output ONLY a JSON array: first one element per sentence, "OK" if the sentence is fully grammatical, natural American English, else "BAD"; then one element per change, the single best error code for the learner\'s mistake. Example for 2 sentences and 1 change: ["OK","OK","thieu_s"].', prompt, 600);
+    va = pickJSON(v) || []; if (va.length === items.length + ch.length) break;
+  }
   items.forEach((x, i) => { x.kiem = String(va[i] || '').toUpperCase().includes('OK'); });
   ch.forEach((c, k) => { const code = String(va[items.length + k] || '').trim(); c.d.loai = LOAI[code] ? code : 'tu_vung'; });
   const bai = [];
@@ -122,7 +125,11 @@ export default {
           let r = await env.DB.prepare('SELECT v FROM am WHERE k=?').bind(am[2]).first();
           if (!r) { await importPack(env, Number(am[1])); r = await env.DB.prepare('SELECT v FROM am WHERE k=?').bind(am[2]).first(); }
           if (!r) return new Response('', { status: 404 });
-          return new Response(b64bytes(r.v), { headers: { 'content-type': 'audio/mpeg', 'cache-control': 'public, max-age=31536000, immutable' } });
+          const by = b64bytes(r.v), H = { 'content-type': 'audio/mpeg', 'cache-control': 'public, max-age=31536000, immutable', 'accept-ranges': 'bytes' };
+          const rg = (req.headers.get('range') || '').match(/bytes=(\d*)-(\d*)/);
+          if (rg) { let a = rg[1] ? Number(rg[1]) : 0, b = rg[2] ? Math.min(Number(rg[2]), by.length - 1) : by.length - 1; if (!rg[1] && rg[2]) { a = Math.max(0, by.length - Number(rg[2])); b = by.length - 1; }
+            return new Response(by.slice(a, b + 1), { status: 206, headers: { ...H, 'content-range': `bytes ${a}-${b}/${by.length}`, 'content-length': String(b - a + 1) } }); }
+          return new Response(by, { headers: H });
         }
         const B = await bundle(env);
         if (p === '/sw.js') return new Response(B.sw.replace('__VER__', VER), { headers: { 'content-type': 'text/javascript; charset=utf-8', 'cache-control': 'no-cache' } });

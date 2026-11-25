@@ -21,7 +21,8 @@ def mocks(ctx):
 def run(pw, kind):
     tag = 'android' if kind == 'c' else 'iphone'
     dev = pw.devices['Pixel 7'] if kind == 'c' else pw.devices['iPhone 13']
-    br = (pw.chromium if kind == 'c' else pw.webkit).launch(args=['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream'] if kind == 'c' else [])
+    ca = ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream'] + (['--use-file-for-fake-audio-capture=/tmp/noi_k010.wav'] if LIVE else [])
+    br = (pw.chromium if kind == 'c' else pw.webkit).launch(args=ca if kind == 'c' else [])
     ctx = br.new_context(**dev, permissions=['microphone'] if kind == 'c' else [], **({} if kind == 'c' or LIVE else {'service_workers': 'block'})); ctx._say = ''
     mocks(ctx)
     errs = []; pg = ctx.new_page(); CUR[:] = [pg]; pg.on('pageerror', lambda e: errs.append(str(e)))
@@ -38,7 +39,7 @@ def run(pw, kind):
     pg.wait_for_selector('#jobs, .ring', timeout=20000)
     if pg.locator('#jobs').count():
         ok(pg.locator('#next').is_disabled(), f'{tag}: chưa chọn nghề thì chưa cho kiểm tra')
-        pg.click('text=Nghề khác…'); pg.fill('#mota', 'bán tạp hóa'); pg.click('#okk'); pg.wait_for_timeout(500)
+        pg.click('text=Nghề khác…'); pg.fill('#mota', 'bán tạp hóa'); pg.click('#okk'); pg.wait_for_function("document.querySelector('#okk').textContent === 'Xong'", timeout=30000); pg.wait_for_timeout(300)
         ok(pg.locator('#jobs .opt.on').count() == 1, f'{tag}: nghề khác được ghép vào nghề gần nhất')
         pg.click('[data-g="20"]'); pg.click('#next')
         # kiểm tra đầu vào: trả lời đúng vài câu đầu rồi "Chưa biết"
@@ -155,6 +156,12 @@ def run(pw, kind):
     if pg.locator('#hoc').count() == 0: pg.click('#h') if pg.locator('#h').count() else None
     pg.wait_for_selector('.ring')
     pg.evaluate("Object.values(E.S.fr).forEach(f=>{}); E.S.fr['k010'] = Object.assign(E.S.fr['k010']||{}, {st:2}); home()")
+    if kind == 'c' and LIVE:
+        it = json.load(open('/tmp/noi_item.json'))
+        pg.evaluate("it => { E.noiItems = () => [it]; home(); }", it); pg.click('#noi'); pg.wait_for_selector('.tinh')
+        pg.click('#mic'); pg.wait_for_selector('.fb', timeout=30000)
+        ok('Đúng rồi' in pg.inner_text('#fb'), f'{tag}: nói thẳng thật qua Whisper: "{pg.inner_text("#fb").splitlines()[1] if len(pg.inner_text("#fb").splitlines())>1 else ""}" · {pg.inner_text("#ms")}')
+        pg.screenshot(path=f'{OUT}/{tag}-noi-that.png'); pg.click('#out')
     if kind == 'c' and not LIVE:
         pg.click('#noi'); pg.wait_for_selector('.tinh')
         it = pg.evaluate("E.noiItems(5)[0]")
@@ -167,6 +174,10 @@ def run(pw, kind):
         pg.wait_for_selector('#ke'); pg.click('#ke'); pg.fill('#tx', 'She want to drink coffee. I am happy.'); pg.click('#go'); pg.wait_for_selector('.msg')
         ok('Đã thêm 1 câu' in pg.inner_text('#fb') and pg.evaluate('Object.keys(E.S.userc).length') >= 1, f'{tag}: câu bị sửa thành bài ngày mai')
         pg.screenshot(path=f'{OUT}/{tag}-ke.png'); pg.click('#out')
+    if LIVE:
+        pg.wait_for_selector('#ke'); pg.click('#ke'); pg.fill('#tx', 'Yesterday I go to the market. I buy two fish. My son like banana.'); pg.click('#go'); pg.wait_for_selector('.msg', timeout=60000)
+        t = pg.inner_text('#fb'); ok('Đã thêm' in t and pg.evaluate('Object.keys(E.S.userc).length') >= 2, f'{tag}: AI thật sửa câu và tạo bài ngày mai ({pg.evaluate("Object.keys(E.S.userc).length")} câu)')
+        print('   ', t.replace(chr(10), ' | ')[:400]); pg.screenshot(path=f'{OUT}/{tag}-ke-that.png', full_page=True); pg.click('#out')
     # ---- tiến bộ ----
     pg.wait_for_selector('#tb'); pg.click('#tb'); ok(pg.locator('svg.chart').count() >= 1 and 'ngày liền' in pg.inner_text('#app'), f'{tag}: trang tiến bộ có biểu đồ')
     pg.screenshot(path=f'{OUT}/{tag}-tienbo.png'); pg.click('#out')
@@ -183,7 +194,7 @@ def run(pw, kind):
     pg.fill('#pin', ''); pg.click('#pin'); pg.keyboard.type('1111'); pg.keyboard.press('Enter'); pg.wait_for_selector('.ring'); ok(True, f'{tag}: PIN mới vào được')
     pg.click('#cd'); pg.fill('#np', pin); pg.click('#sp'); pg.wait_for_timeout(500)
     ok(not errs, f'{tag}: không lỗi JavaScript {errs[:2]}')
-    if am: ok(all(s in (200, 206, 304) for s in am), f'{tag}: giọng đọc tải được ({len(am)} lần)')
+    if am: ok(all(s in (200, 206, 304) for s in am), f'{tag}: giọng đọc tải được ({len(am)} lần, mã {sorted(set(am))})')
     br.close()
 def DayN(doc):
     import datetime

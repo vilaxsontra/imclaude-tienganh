@@ -1,0 +1,442 @@
+[
+ {
+  "id": "k006a1",
+  "sai": [
+   [
+    "me",
+    "so_huu"
+   ],
+   [
+    "I",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Nhiễu me/him/us/them là lỗi dùng sai dạng sở hữu (của ai), giải thích tan_ngu ('sau động từ dùng me') lại gây hiểu nhầm vì đứng sau 'is'; đổi mã sang so_huu."
+ },
+ {
+  "id": "k006a3",
+  "sai": [
+   [
+    "him",
+    "so_huu"
+   ],
+   [
+    "he",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Nhiễu me/him/us/them là lỗi dùng sai dạng sở hữu (của ai), giải thích tan_ngu ('sau động từ dùng me') lại gây hiểu nhầm vì đứng sau 'is'; đổi mã sang so_huu."
+ },
+ {
+  "id": "k006a4",
+  "sai": [
+   [
+    "him",
+    "so_huu"
+   ],
+   [
+    "he",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Nhiễu me/him/us/them là lỗi dùng sai dạng sở hữu (của ai), giải thích tan_ngu ('sau động từ dùng me') lại gây hiểu nhầm vì đứng sau 'is'; đổi mã sang so_huu."
+ },
+ {
+  "id": "k006a7",
+  "sai": [
+   [
+    "us",
+    "so_huu"
+   ],
+   [
+    "we",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Nhiễu me/him/us/them là lỗi dùng sai dạng sở hữu (của ai), giải thích tan_ngu ('sau động từ dùng me') lại gây hiểu nhầm vì đứng sau 'is'; đổi mã sang so_huu."
+ },
+ {
+  "id": "k006a8",
+  "sai": [
+   [
+    "them",
+    "so_huu"
+   ],
+   [
+    "they",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Nhiễu me/him/us/them là lỗi dùng sai dạng sở hữu (của ai), giải thích tan_ngu ('sau động từ dùng me') lại gây hiểu nhầm vì đứng sau 'is'; đổi mã sang so_huu."
+ },
+ {
+  "id": "k006b1",
+  "sai": [
+   [
+    "Me",
+    "so_huu"
+   ],
+   [
+    "I",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Nhiễu me/him/us/them là lỗi dùng sai dạng sở hữu (của ai), giải thích tan_ngu ('sau động từ dùng me') lại gây hiểu nhầm vì đứng sau 'is'; đổi mã sang so_huu."
+ },
+ {
+  "id": "k006b3",
+  "sai": [
+   [
+    "Him",
+    "so_huu"
+   ],
+   [
+    "He",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Nhiễu me/him/us/them là lỗi dùng sai dạng sở hữu (của ai), giải thích tan_ngu ('sau động từ dùng me') lại gây hiểu nhầm vì đứng sau 'is'; đổi mã sang so_huu."
+ },
+ {
+  "id": "k006b4",
+  "sai": [
+   [
+    "Us",
+    "so_huu"
+   ],
+   [
+    "We",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Nhiễu me/him/us/them là lỗi dùng sai dạng sở hữu (của ai), giải thích tan_ngu ('sau động từ dùng me') lại gây hiểu nhầm vì đứng sau 'is'; đổi mã sang so_huu."
+ },
+ {
+  "id": "k006b5",
+  "sai": [
+   [
+    "Them",
+    "so_huu"
+   ],
+   [
+    "They",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Nhiễu me/him/us/them là lỗi dùng sai dạng sở hữu (của ai), giải thích tan_ngu ('sau động từ dùng me') lại gây hiểu nhầm vì đứng sau 'is'; đổi mã sang so_huu."
+ },
+ {
+  "id": "k034b3",
+  "en": "{Mai's} cooking is great.",
+  "vi": "Mai nấu ăn ngon lắm.",
+  "sai": [
+   [
+    "Mai",
+    "so_huu_s"
+   ],
+   [
+    "Mais",
+    "so_huu_s"
+   ]
+  ],
+  "ly_do": "Nhiễu 'I like Mai cooking' người bản xứ vẫn có thể nói (= tôi thích việc Mai nấu); đổi câu để nhiễu 'Mai' sai rõ."
+ },
+ {
+  "id": "k037a1",
+  "khac": [
+   "a little"
+  ],
+  "ly_do": "'I have a little money' cũng đúng và cùng nghĩa 'một ít tiền'."
+ },
+ {
+  "id": "k037b4",
+  "khac": [
+   "a little"
+  ],
+  "ly_do": "'Can I have a little rice?' cũng đúng, cùng nghĩa 'ít cơm'."
+ },
+ {
+  "id": "k037b2",
+  "sai": [
+   [
+    "How many water",
+    "many_much"
+   ],
+   [
+    "How much waters",
+    "khong_dem_duoc"
+   ]
+  ],
+  "ly_do": "'How many waters do you need?' người Mỹ vẫn nói (= mấy chai nước); thay bằng nhiễu sai rõ."
+ },
+ {
+  "id": "k038b3",
+  "sai": [
+   [
+    "delay",
+    "tu_vung"
+   ],
+   [
+    "later",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "'I'm sorry I'm slow' là câu đúng (xin lỗi vì chậm); thay bằng 'delay', lỗi người Việt hay mắc."
+ },
+ {
+  "id": "k038b5",
+  "sai": [
+   [
+    "welcomed",
+    "tu_vung"
+   ],
+   [
+    "welcomes",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "'You're welcoming' là câu đúng (bạn thật hiếu khách); thay nhiễu."
+ },
+ {
+  "id": "k001n1",
+  "dap": [
+   "I am tired.",
+   "I'm tired.",
+   "I'm very tired.",
+   "Sorry, I'm tired.",
+   "Sorry, I'm really tired."
+  ],
+  "ly_do": "Thêm cách nói phổ biến."
+ },
+ {
+  "id": "k007n1",
+  "dap": [
+   "Do you have an umbrella?",
+   "Can I borrow an umbrella?",
+   "Do you have an extra umbrella?",
+   "Can I borrow your umbrella?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến."
+ },
+ {
+  "id": "k013n1",
+  "dap": [
+   "I work at a hospital.",
+   "I work in a hospital.",
+   "I'm a nurse at a hospital."
+  ],
+  "ly_do": "Thêm cách trả lời tự nhiên."
+ },
+ {
+  "id": "k017n1",
+  "dap": [
+   "Is there Wi-Fi here?",
+   "Is there any Wi-Fi here?",
+   "Do you have Wi-Fi here?"
+  ],
+  "ly_do": "Người Mỹ hay hỏi 'Do you have Wi-Fi here?'."
+ },
+ {
+  "id": "k021n1",
+  "dap": [
+   "Can I have the check, please?",
+   "Can I have the bill, please?",
+   "Could I have the check, please?",
+   "Check, please."
+  ],
+  "ly_do": "Thêm cách nói phổ biến."
+ },
+ {
+  "id": "k023n1",
+  "tinh": "Trước khi cho cả đoàn đi chèo thuyền, hướng dẫn viên hỏi có ai cần áo phao không. Bạn thì chưa từng học bơi.",
+  "dap": [
+   "I can't swim.",
+   "I cannot swim.",
+   "Sorry, I can't swim.",
+   "I don't know how to swim."
+  ],
+  "ly_do": "Tình huống cũ ('hỏi ai không bơi được') dịch sẵn câu trả lời; đổi gợi ý, thêm đáp."
+ },
+ {
+  "id": "k027n1",
+  "dap": [
+   "Please sit down.",
+   "Please have a seat.",
+   "Sit down, please.",
+   "Have a seat, please."
+  ],
+  "ly_do": "Thêm cách nói phổ biến."
+ },
+ {
+  "id": "k033n1",
+  "tinh": "Bạn đang họp thì một người bạn gọi điện tới. Lúc này bạn không tiện nói chuyện.",
+  "dap": [
+   "Please call me later.",
+   "Can you call me later?",
+   "Call me back later, please.",
+   "I'm in a meeting. Can you call me later?"
+  ],
+  "ly_do": "Tình huống cũ ('nhờ lát nữa gọi lại cho mình') dịch sẵn câu trả lời; đổi gợi ý, thêm đáp."
+ },
+ {
+  "id": "k043n1",
+  "dap": [
+   "No, I didn't go to the office.",
+   "I didn't come to the office yesterday.",
+   "No, I didn't. I stayed home.",
+   "No, I stayed home all day."
+  ],
+  "ly_do": "Thêm cách nói phổ biến."
+ },
+ {
+  "id": "k051n1",
+  "dap": [
+   "Could you open the door, please?",
+   "Could you open the door for me?",
+   "Could you help me with the door?",
+   "Can you get the door for me?"
+  ],
+  "ly_do": "Thêm cách nói rất phổ biến của người Mỹ."
+ },
+ {
+  "id": "k055n1",
+  "dap": [
+   "Yes, I always drink coffee in the morning.",
+   "I always have coffee in the morning.",
+   "Yes, I always drink coffee.",
+   "Yes, I drink coffee every morning."
+  ],
+  "ly_do": "Thêm cách nói phổ biến."
+ },
+ {
+  "id": "k057n1",
+  "dap": [
+   "It takes about five minutes by motorbike.",
+   "It takes five minutes to get to the market by motorbike.",
+   "It only takes five minutes by motorbike.",
+   "It's about five minutes by motorbike."
+  ],
+  "ly_do": "Thêm cách nói phổ biến."
+ },
+ {
+  "id": "k075n1",
+  "dap": [
+   "I used to live in Dalat.",
+   "Yes, I used to live there.",
+   "Yes, I lived there for a few years.",
+   "I used to live in Dalat, but not anymore."
+  ],
+  "ly_do": "'used to' không nên đi với khoảng thời gian cụ thể ('used to live there for a few years'); sách dạy coi là sai, sửa thành 'lived there for a few years'."
+ },
+ {
+  "id": "k077n1",
+  "dap": [
+   "You must wear a helmet.",
+   "You must wear your helmet.",
+   "You must wear a helmet, okay?",
+   "You have to wear a helmet."
+  ],
+  "ly_do": "Người Mỹ hằng ngày hay nói 'have to' hơn 'must'; thêm vào."
+ },
+ {
+  "id": "k083n1",
+  "dap": [
+   "Whose phone is this?",
+   "Is this yours?",
+   "Whose phone is this? Is it yours?",
+   "Is this anyone's phone?"
+  ],
+  "ly_do": "Thêm cách hỏi cả nhóm tự nhiên."
+ },
+ {
+  "id": "k085n1",
+  "tinh": "Một người bạn nước ngoài nói chuyện với bạn rất nhanh. Bạn sẽ hiểu nếu họ nói từ tốn hơn một chút.",
+  "dap": [
+   "Please speak slowly.",
+   "Can you speak more slowly, please?",
+   "Could you speak slowly, please?",
+   "Could you speak more slowly, please?",
+   "Please speak more slowly."
+  ],
+  "ly_do": "Tình huống cũ ('muốn nhờ họ nói chậm lại') dịch sẵn câu trả lời và trùng k039n1; đổi gợi ý, thêm đáp."
+ },
+ {
+  "id": "k093n1",
+  "dap": [
+   "This is the school where I studied as a kid.",
+   "That's the school where I studied when I was young.",
+   "That's the school I went to when I was little."
+  ],
+  "ly_do": "Thêm cách nói tự nhiên nhất ('the school I went to')."
+ },
+ {
+  "id": "k103n1",
+  "dap": [
+   "Both of them are nice.",
+   "Both apartments are nice.",
+   "Either one is fine with me.",
+   "I like both of them."
+  ],
+  "ly_do": "Thêm cách nói phổ biến."
+ },
+ {
+  "id": "k113n1",
+  "dap": [
+   "I gave up smoking.",
+   "I gave it up last year.",
+   "I've given up smoking.",
+   "I quit smoking."
+  ],
+  "ly_do": "'I quit smoking' là cách nói phổ biến nhất của người Mỹ."
+ },
+ {
+  "id": "nvan_phongn1",
+  "dap": [
+   "Could you send me the report?",
+   "Could you send me the report, please?",
+   "Could you please send me the report?",
+   "Can you send me the report, please?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến."
+ },
+ {
+  "id": "nnong_nghiepn1",
+  "dap": [
+   "Coffee prices might go up.",
+   "Prices might go up.",
+   "The price might go up.",
+   "It may go up.",
+   "I think the price might go up, but I'm not sure."
+  ],
+  "ly_do": "Thêm cách nói thể hiện không chắc."
+ },
+ {
+  "id": "ntho_ky_thuatn1",
+  "dap": [
+   "Can you hold the ladder?",
+   "Can you hold the ladder, please?",
+   "Can you hold the ladder for me?",
+   "Could you hold the ladder for me?"
+  ],
+  "ly_do": "Thêm cách nói lịch sự phổ biến."
+ },
+ {
+  "id": "nhoc_sinhn1",
+  "dap": [
+   "Thanks for lending me your notes.",
+   "Thank you for lending me your notes.",
+   "Thanks for the notes."
+  ],
+  "ly_do": "Thêm cách nói phổ biến."
+ },
+ {
+  "id": "nnoi_tron1",
+  "dap": [
+   "Are there any eggs left?",
+   "Are there any eggs in the fridge?",
+   "Are there any eggs left in the fridge?",
+   "Do we have any eggs left?"
+  ],
+  "ly_do": "Người Mỹ trong nhà hay hỏi 'Do we have any eggs left?'."
+ }
+]

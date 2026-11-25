@@ -5,7 +5,7 @@ kiểm tra giọng đọc có đọc đúng câu không, rồi đóng gói thàn
 Chạy: python3 giong.py  → kho.json, am0.json…amN.json (thư mục ../web/dist/nguon), BAO-CAO-GIONG.md
 """
 import json, os, re, subprocess, base64, hashlib, sys, difflib
-B = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(B, '..', 'web', 'dist', 'nguon'); os.makedirs(OUT, exist_ok=True)
+B = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(B, 'xuat'); os.makedirs(OUT, exist_ok=True)
 CACHE = os.path.join(B, 'am_cache'); os.makedirs(CACHE, exist_ok=True)
 kho = json.load(open(os.path.join(B, 'kho_tho.json')))
 from kokoro_onnx import Kokoro
@@ -15,17 +15,19 @@ K = Kokoro('/home/claude/tts_en/kokoro-v1.0.onnx', '/home/claude/tts_en/voices-v
 WM = WhisperModel('base.en', device='cpu', compute_type='int8', cpu_threads=int(os.environ.get('THR','2')))
 plain = lambda en: en.replace('{', '').replace('}', '')
 words = lambda s: re.findall(r"[a-z0-9']+", s.lower().replace('’', "'"))
+RIENG = json.load(open(os.path.join(B, 'giong_rieng.json'))) if os.path.exists(os.path.join(B, 'giong_rieng.json')) else {}
 rep = []; ids = sorted(kho['c'])
 SH = [int(x) for x in os.environ.get('SHARD','0/1').split('/')]
 ONLY = SH[1] > 1
 if ONLY: ids = [x for i, x in enumerate(ids) if i % SH[1] == SH[0]]
 for n, sid in enumerate(ids):
     c = kho['c'][sid]; text = plain(c['en'])
-    voice = 'am_michael' if (sid.startswith('n') or c.get('noi')) else 'af_heart'
-    h = hashlib.md5((voice + '|' + text).encode()).hexdigest()[:12]
+    voice = 'am_michael' if (sid.startswith('n') or c.get('noi')) else 'af_heart'; speed = 0.92
+    if sid in RIENG: voice = RIENG[sid].get('voice', voice); speed = RIENG[sid].get('speed', speed)
+    h = hashlib.md5((voice + '|' + text + ('' if speed == 0.92 else '|' + str(speed))).encode()).hexdigest()[:12]
     mp3 = os.path.join(CACHE, h + '.mp3'); meta = os.path.join(CACHE, h + '.json')
     if not os.path.exists(meta):
-        s, sr = K.create(text, voice=voice, speed=0.92, lang='en-us')
+        s, sr = K.create(text, voice=voice, speed=speed, lang='en-us')
         wav = os.path.join(CACHE, h + '.wav'); sf.write(wav, s, sr)
         subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', wav, '-af', 'silenceremove=start_periods=1:start_threshold=-50dB,apad=pad_dur=0.15', '-ac', '1', '-ar', '24000', '-b:a', '40k', mp3], check=True)
         # đo trên chính tệp mp3 sẽ phát để mốc khớp

@@ -42,12 +42,22 @@ async function taiGiong() {
 }
 
 // ---------- âm thanh ----------
-const AU = new Audio(); let AU_T = null;
+const AU = new Audio(); let AU_T = null, AU_N = 0; const BLOB = new Map();
+// iPhone chỉ cho phát tiếng sau một lần chạm: lần chạm đầu tiên phát một đoạn im lặng để mở khoá
+const SILENT = 'data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAAAAAAAAAAAAAA//OEwAAAAAAAAAAAAEluZm8AAAAPAAAABwAAA2AAVVVVVVVVVVVVVVVVVVVxcXFxcXFxcXFxcXFxcY6Ojo6Ojo6Ojo6Ojo6Oqqqqqqqqqqqqqqqqqqqqx8fHx8fHx8fHx8fHx8fj4+Pj4+Pj4+Pj4+Pj4///////////////////AAAAAExhdmM2MC4zMQAAAAAAAAAAAAAAACQEIAAAAAAAAANgmVBi7QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//NExAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMu//NExFMAAANIAAAAADEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMu//NExKYAAANIAAAAADEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMu//NExKwAAANIAAAAADEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMu//NExKwAAANIAAAAADEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NExKwAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NExKwAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV';
+addEventListener('pointerdown', function un() { removeEventListener('pointerdown', un, true); try { AU.src = SILENT; const p = AU.play(); if (p) p.catch(() => { }); } catch { } }, true);
 function amUrl(sid) { const c = E.cOf(sid); return c && c.am != null ? `/am/${c.am}/${sid}.mp3` : null; }
+async function blobFor(u) { // tải tệp tiếng thành blob: chạy ổn trên mọi trình duyệt, và đi qua bộ nhớ máy nên mất mạng vẫn nghe
+  if (BLOB.has(u)) return BLOB.get(u);
+  const r = await fetch(u); if (!r.ok) throw new Error('âm ' + r.status); const b = URL.createObjectURL(await r.blob());
+  BLOB.set(u, b); if (BLOB.size > 60) { const k = BLOB.keys().next().value; URL.revokeObjectURL(BLOB.get(k)); BLOB.delete(k); } return b;
+}
 function say(sid, untilMs) {
-  clearTimeout(AU_T); AU.pause(); speechSynthesis && speechSynthesis.cancel();
-  const u = amUrl(sid); const c = E.cOf(sid);
-  if (u) { AU.src = u; AU.currentTime = 0; AU.playbackRate = Number(localStorage.getItem('toc') || 1); const pr = AU.play(); if (pr) pr.catch(() => { }); if (untilMs) { const stop = () => { AU_T = setTimeout(() => AU.pause(), untilMs / AU.playbackRate); AU.removeEventListener('playing', stop); }; AU.addEventListener('playing', stop); } return; }
+  clearTimeout(AU_T); AU.pause(); window.speechSynthesis && speechSynthesis.cancel();
+  const u = amUrl(sid); const c = E.cOf(sid); const my = ++AU_N;
+  if (u) { blobFor(u).then(b => { if (my !== AU_N) return; AU.src = b; AU.currentTime = 0; AU.playbackRate = Number(localStorage.getItem('toc') || 1); const pr = AU.play(); if (pr) pr.catch(() => { });
+      if (untilMs) { const stop = () => { AU_T = setTimeout(() => AU.pause(), untilMs / AU.playbackRate); AU.removeEventListener('playing', stop); }; AU.addEventListener('playing', stop); } })
+      .catch(() => { if (my === AU_N && c && window.speechSynthesis) { const ut = new SpeechSynthesisUtterance(plain(c.en)); ut.lang = 'en-US'; ut.rate = 0.9; speechSynthesis.speak(ut); } }); return; }
   if (c && window.speechSynthesis) { const ut = new SpeechSynthesisUtterance(plain(c.en)); ut.lang = 'en-US'; ut.rate = 0.9 * Number(localStorage.getItem('toc') || 1); speechSynthesis.speak(ut); }
 }
 function sayText(t) { if (!window.speechSynthesis) return; speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = 'en-US'; u.rate = 0.9; speechSynthesis.speak(u); }

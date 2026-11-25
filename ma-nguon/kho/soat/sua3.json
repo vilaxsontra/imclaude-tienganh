@@ -1,0 +1,1250 @@
+[
+ {
+  "id": "k078a1",
+  "sai": [
+   [
+    "few",
+    "khong_dem_duoc"
+   ],
+   [
+    "many",
+    "many_much"
+   ]
+  ],
+  "ly_do": "Nhiễu 'many' với danh từ không đếm được khớp mã many_much (much mới đi với không đếm được); 'a much' gắn mã many_much là trái lời giải thích"
+ },
+ {
+  "id": "k078a2",
+  "sai": [
+   [
+    "few",
+    "khong_dem_duoc"
+   ],
+   [
+    "many",
+    "many_much"
+   ]
+  ],
+  "ly_do": "Nhiễu 'many' với danh từ không đếm được khớp mã many_much (much mới đi với không đếm được); 'a much' gắn mã many_much là trái lời giải thích"
+ },
+ {
+  "id": "k078a6",
+  "sai": [
+   [
+    "few",
+    "khong_dem_duoc"
+   ],
+   [
+    "many",
+    "many_much"
+   ]
+  ],
+  "ly_do": "Nhiễu 'many' với danh từ không đếm được khớp mã many_much (much mới đi với không đếm được); 'a much' gắn mã many_much là trái lời giải thích"
+ },
+ {
+  "id": "k078a7",
+  "sai": [
+   [
+    "few",
+    "khong_dem_duoc"
+   ],
+   [
+    "many",
+    "many_much"
+   ]
+  ],
+  "ly_do": "Nhiễu 'many' với danh từ không đếm được khớp mã many_much (much mới đi với không đếm được); 'a much' gắn mã many_much là trái lời giải thích"
+ },
+ {
+  "id": "k078b2",
+  "sai": [
+   [
+    "few",
+    "khong_dem_duoc"
+   ],
+   [
+    "many",
+    "many_much"
+   ]
+  ],
+  "ly_do": "Nhiễu 'many' với danh từ không đếm được khớp mã many_much (much mới đi với không đếm được); 'a much' gắn mã many_much là trái lời giải thích"
+ },
+ {
+  "id": "k078b6",
+  "sai": [
+   [
+    "few",
+    "khong_dem_duoc"
+   ],
+   [
+    "many",
+    "many_much"
+   ]
+  ],
+  "ly_do": "Nhiễu 'many' với danh từ không đếm được khớp mã many_much (much mới đi với không đếm được); 'a much' gắn mã many_much là trái lời giải thích"
+ },
+ {
+  "id": "k078a3",
+  "sai": [
+   [
+    "little",
+    "many_much"
+   ],
+   [
+    "much",
+    "many_much"
+   ]
+  ],
+  "ly_do": "Nhiễu 'much' với danh từ đếm được khớp mã many_much; 'many' gắn mã many_much là trái lời giải thích (many đúng là đi với đếm được)"
+ },
+ {
+  "id": "k078a5",
+  "sai": [
+   [
+    "little",
+    "many_much"
+   ],
+   [
+    "much",
+    "many_much"
+   ]
+  ],
+  "ly_do": "Nhiễu 'much' với danh từ đếm được khớp mã many_much; 'many' gắn mã many_much là trái lời giải thích (many đúng là đi với đếm được)"
+ },
+ {
+  "id": "k078a8",
+  "sai": [
+   [
+    "little",
+    "many_much"
+   ],
+   [
+    "much",
+    "many_much"
+   ]
+  ],
+  "ly_do": "Nhiễu 'much' với danh từ đếm được khớp mã many_much; 'many' gắn mã many_much là trái lời giải thích (many đúng là đi với đếm được)"
+ },
+ {
+  "id": "k078b1",
+  "sai": [
+   [
+    "little",
+    "many_much"
+   ],
+   [
+    "much",
+    "many_much"
+   ]
+  ],
+  "ly_do": "Nhiễu 'much' với danh từ đếm được khớp mã many_much; 'many' gắn mã many_much là trái lời giải thích (many đúng là đi với đếm được)"
+ },
+ {
+  "id": "k080b5",
+  "en": "Let's {do} the grocery shopping today.",
+  "ly_do": "'do the shopping' là kiểu Anh; người Mỹ nói 'do the grocery shopping' cho nghĩa đi chợ"
+ },
+ {
+  "id": "k082b2",
+  "en": "It {was} raining when I left the house.",
+  "ly_do": "'left home' dễ hiểu thành dọn ra ở riêng; người Mỹ nói 'left the house'"
+ },
+ {
+  "id": "k083a1",
+  "sai": [
+   [
+    "my",
+    "so_huu"
+   ],
+   [
+    "me",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Mã tan_ngu nói 'sau động từ dùng me/you/him...' làm người học tưởng chữ này đúng; lỗi ở đây là dùng sai dạng sở hữu nên mã so_huu"
+ },
+ {
+  "id": "k083a2",
+  "sai": [
+   [
+    "your",
+    "so_huu"
+   ],
+   [
+    "you",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Mã tan_ngu nói 'sau động từ dùng me/you/him...' làm người học tưởng chữ này đúng; lỗi ở đây là dùng sai dạng sở hữu nên mã so_huu"
+ },
+ {
+  "id": "k083a4",
+  "sai": [
+   [
+    "your",
+    "so_huu"
+   ],
+   [
+    "you",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Mã tan_ngu nói 'sau động từ dùng me/you/him...' làm người học tưởng chữ này đúng; lỗi ở đây là dùng sai dạng sở hữu nên mã so_huu"
+ },
+ {
+  "id": "k083a7",
+  "sai": [
+   [
+    "him",
+    "so_huu"
+   ],
+   [
+    "he",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Mã tan_ngu nói 'sau động từ dùng me/you/him...' làm người học tưởng chữ này đúng; lỗi ở đây là dùng sai dạng sở hữu nên mã so_huu"
+ },
+ {
+  "id": "k083a8",
+  "sai": [
+   [
+    "him",
+    "so_huu"
+   ],
+   [
+    "he",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Mã tan_ngu nói 'sau động từ dùng me/you/him...' làm người học tưởng chữ này đúng; lỗi ở đây là dùng sai dạng sở hữu nên mã so_huu"
+ },
+ {
+  "id": "k083b1",
+  "sai": [
+   [
+    "my",
+    "so_huu"
+   ],
+   [
+    "me",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Mã tan_ngu nói 'sau động từ dùng me/you/him...' làm người học tưởng chữ này đúng; lỗi ở đây là dùng sai dạng sở hữu nên mã so_huu"
+ },
+ {
+  "id": "k083b2",
+  "sai": [
+   [
+    "your",
+    "so_huu"
+   ],
+   [
+    "you",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Mã tan_ngu nói 'sau động từ dùng me/you/him...' làm người học tưởng chữ này đúng; lỗi ở đây là dùng sai dạng sở hữu nên mã so_huu"
+ },
+ {
+  "id": "k083b3",
+  "sai": [
+   [
+    "our",
+    "so_huu"
+   ],
+   [
+    "us",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Mã tan_ngu nói 'sau động từ dùng me/you/him...' làm người học tưởng chữ này đúng; lỗi ở đây là dùng sai dạng sở hữu nên mã so_huu"
+ },
+ {
+  "id": "k083b4",
+  "sai": [
+   [
+    "their",
+    "so_huu"
+   ],
+   [
+    "them",
+    "so_huu"
+   ]
+  ],
+  "ly_do": "Mã tan_ngu nói 'sau động từ dùng me/you/him...' làm người học tưởng chữ này đúng; lỗi ở đây là dùng sai dạng sở hữu nên mã so_huu"
+ },
+ {
+  "id": "k085a3",
+  "sai": [
+   [
+    "hardly",
+    "tu_vung"
+   ],
+   [
+    "hardworking",
+    "tinh_tu_trang_tu"
+   ]
+  ],
+  "ly_do": "'hardly' là chữ khác nghĩa (hầu như không), không phải lỗi thiếu đuôi ly; mã tinh_tu_trang_tu lại bảo thêm ly nên gây hiểu sai"
+ },
+ {
+  "id": "k085a4",
+  "sai": [
+   [
+    "hardly",
+    "tu_vung"
+   ],
+   [
+    "hardworking",
+    "tinh_tu_trang_tu"
+   ]
+  ],
+  "ly_do": "'hardly' là chữ khác nghĩa (hầu như không), không phải lỗi thiếu đuôi ly; mã tinh_tu_trang_tu lại bảo thêm ly nên gây hiểu sai"
+ },
+ {
+  "id": "k086b1",
+  "sai": [
+   [
+    "get",
+    "phrasal"
+   ],
+   [
+    "up",
+    "phrasal"
+   ]
+  ],
+  "ly_do": "Nhiễu 'stand up' vẫn ra câu đúng ngữ pháp (I stand up at 6 every day); thay bằng 'up' sai rõ"
+ },
+ {
+  "id": "k087a1",
+  "khac": [
+   "gone"
+  ],
+  "ly_do": "'Have you ever gone to Japan?' người Mỹ vẫn nói, cùng nghĩa; thêm vào để không chấm sai oan"
+ },
+ {
+  "id": "k087a3",
+  "khac": [
+   "gone"
+  ],
+  "ly_do": "'She has never gone to Japan' người Mỹ vẫn nói, cùng nghĩa; thêm vào KHÁC"
+ },
+ {
+  "id": "k089a3",
+  "khac": [
+   "has been living"
+  ],
+  "ly_do": "'has been living' cũng đúng và cùng nghĩa"
+ },
+ {
+  "id": "k093a1",
+  "sai": [
+   [
+    "which",
+    "tu_vung"
+   ],
+   [
+    "when",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Mã who_which nói 'vật thì dùng which/that' khiến người học tưởng which/what đúng; lỗi ở đây là phải dùng where/when nên đổi sang tu_vung"
+ },
+ {
+  "id": "k093a2",
+  "sai": [
+   [
+    "which",
+    "tu_vung"
+   ],
+   [
+    "what",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Mã who_which nói 'vật thì dùng which/that' khiến người học tưởng which/what đúng; lỗi ở đây là phải dùng where/when nên đổi sang tu_vung"
+ },
+ {
+  "id": "k093a3",
+  "sai": [
+   [
+    "which",
+    "tu_vung"
+   ],
+   [
+    "when",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Mã who_which nói 'vật thì dùng which/that' khiến người học tưởng which/what đúng; lỗi ở đây là phải dùng where/when nên đổi sang tu_vung"
+ },
+ {
+  "id": "k093a4",
+  "sai": [
+   [
+    "which",
+    "tu_vung"
+   ],
+   [
+    "what",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Mã who_which nói 'vật thì dùng which/that' khiến người học tưởng which/what đúng; lỗi ở đây là phải dùng where/when nên đổi sang tu_vung"
+ },
+ {
+  "id": "k093a5",
+  "sai": [
+   [
+    "where",
+    "tu_vung"
+   ],
+   [
+    "which",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Mã who_which nói 'vật thì dùng which/that' khiến người học tưởng which/what đúng; lỗi ở đây là phải dùng where/when nên đổi sang tu_vung"
+ },
+ {
+  "id": "k093a6",
+  "sai": [
+   [
+    "where",
+    "tu_vung"
+   ],
+   [
+    "which",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Mã who_which nói 'vật thì dùng which/that' khiến người học tưởng which/what đúng; lỗi ở đây là phải dùng where/when nên đổi sang tu_vung"
+ },
+ {
+  "id": "k093a7",
+  "sai": [
+   [
+    "where",
+    "tu_vung"
+   ],
+   [
+    "which",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Mã who_which nói 'vật thì dùng which/that' khiến người học tưởng which/what đúng; lỗi ở đây là phải dùng where/when nên đổi sang tu_vung"
+ },
+ {
+  "id": "k093a8",
+  "sai": [
+   [
+    "where",
+    "tu_vung"
+   ],
+   [
+    "what",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Mã who_which nói 'vật thì dùng which/that' khiến người học tưởng which/what đúng; lỗi ở đây là phải dùng where/when nên đổi sang tu_vung"
+ },
+ {
+  "id": "k093b1",
+  "sai": [
+   [
+    "which",
+    "tu_vung"
+   ],
+   [
+    "when",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Mã who_which nói 'vật thì dùng which/that' khiến người học tưởng which/what đúng; lỗi ở đây là phải dùng where/when nên đổi sang tu_vung"
+ },
+ {
+  "id": "k093b2",
+  "sai": [
+   [
+    "which",
+    "tu_vung"
+   ],
+   [
+    "what",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Mã who_which nói 'vật thì dùng which/that' khiến người học tưởng which/what đúng; lỗi ở đây là phải dùng where/when nên đổi sang tu_vung"
+ },
+ {
+  "id": "k093b3",
+  "sai": [
+   [
+    "where",
+    "tu_vung"
+   ],
+   [
+    "which",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Mã who_which nói 'vật thì dùng which/that' khiến người học tưởng which/what đúng; lỗi ở đây là phải dùng where/when nên đổi sang tu_vung"
+ },
+ {
+  "id": "k093b4",
+  "sai": [
+   [
+    "where",
+    "tu_vung"
+   ],
+   [
+    "which",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Mã who_which nói 'vật thì dùng which/that' khiến người học tưởng which/what đúng; lỗi ở đây là phải dùng where/when nên đổi sang tu_vung"
+ },
+ {
+  "id": "k093b5",
+  "sai": [
+   [
+    "which",
+    "tu_vung"
+   ],
+   [
+    "when",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Mã who_which nói 'vật thì dùng which/that' khiến người học tưởng which/what đúng; lỗi ở đây là phải dùng where/when nên đổi sang tu_vung"
+ },
+ {
+  "id": "k093b6",
+  "sai": [
+   [
+    "where",
+    "tu_vung"
+   ],
+   [
+    "which",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Mã who_which nói 'vật thì dùng which/that' khiến người học tưởng which/what đúng; lỗi ở đây là phải dùng where/when nên đổi sang tu_vung"
+ },
+ {
+  "id": "k094b2",
+  "vi": "Giá mà trời nắng thì chúng ta sẽ đi biển.",
+  "ly_do": "Câu VI cũ đọc như điều kiện có thật (dễ chọn 'is'); câu EN là giả sử trái thực tế"
+ },
+ {
+  "id": "k094b5",
+  "vi": "Giá mà mẹ tôi ở đây, mẹ sẽ nấu cho chúng tôi ăn.",
+  "ly_do": "Câu VI cũ đọc như điều kiện có thật; câu EN là giả sử trái thực tế (mẹ không có ở đây)"
+ },
+ {
+  "id": "k097a3",
+  "sai": [
+   [
+    "is the bank",
+    "hoi_gian_tiep"
+   ],
+   [
+    "does the bank",
+    "hoi_gian_tiep"
+   ]
+  ],
+  "ly_do": "Mã trat_tu_hoi nói đưa does lên trước trong câu hỏi, khiến người học tưởng 'does the bank' đúng; đây là lỗi câu hỏi lồng"
+ },
+ {
+  "id": "k098a3",
+  "sai": [
+   [
+    "enough old",
+    "tu_vung"
+   ],
+   [
+    "enough age",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Nhiễu 'too old' vẫn ra câu đúng (He is not too old to drive); thay bằng 'enough age' (lỗi dịch từ 'đủ tuổi')"
+ },
+ {
+  "id": "k098a4",
+  "sai": [
+   [
+    "enough old",
+    "tu_vung"
+   ],
+   [
+    "enough age",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Nhiễu 'too old' vẫn ra câu đúng (He is too old to drive, khác nghĩa); thay bằng 'enough age'"
+ },
+ {
+  "id": "k098b2",
+  "sai": [
+   [
+    "too much",
+    "tu_vung"
+   ],
+   [
+    "enough",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "'This bag is very heavy to carry' và 'so heavy to carry' người bản xứ vẫn nói được; thay nhiễu sai rõ"
+ },
+ {
+  "id": "k098b4",
+  "sai": [
+   [
+    "enough big",
+    "tu_vung"
+   ],
+   [
+    "enough wide",
+    "tu_vung"
+   ]
+  ],
+  "khac": [
+   "large enough"
+  ],
+  "ly_do": "Nhiễu 'too big' vẫn ra câu đúng (khác nghĩa); thay bằng 'enough wide' (dịch từ 'đủ rộng'); thêm 'large enough'"
+ },
+ {
+  "id": "k103a2",
+  "sai": [
+   [
+    "Both",
+    "tu_vung"
+   ],
+   [
+    "Either of",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Nhiễu 'Neither' vẫn ra câu đúng (Neither day is good for me, ngược nghĩa)"
+ },
+ {
+  "id": "k103a3",
+  "sai": [
+   [
+    "Both",
+    "tu_vung"
+   ],
+   [
+    "Neither of",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Nhiễu 'Either' vẫn ra câu đúng (Either day is good for me, ngược nghĩa)"
+ },
+ {
+  "id": "k103a4",
+  "sai": [
+   [
+    "Both",
+    "tu_vung"
+   ],
+   [
+    "Neither of",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Nhiễu 'Either' vẫn ra câu đúng (Either day works for me, ngược nghĩa)"
+ },
+ {
+  "id": "k103a5",
+  "sai": [
+   [
+    "Both",
+    "tu_vung"
+   ],
+   [
+    "No",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Nhiễu 'Either' vẫn ra câu đúng (Either of them works for me)"
+ },
+ {
+  "id": "k103a6",
+  "sai": [
+   [
+    "Both",
+    "tu_vung"
+   ],
+   [
+    "No",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Nhiễu 'Either' vẫn ra câu đúng (Either of them is free)"
+ },
+ {
+  "id": "k103b4",
+  "sai": [
+   [
+    "Not",
+    "tu_vung"
+   ],
+   [
+    "No",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Nhiễu 'Both' vẫn ra câu đúng (Both of us can cook, ngược nghĩa)"
+ },
+ {
+  "id": "k103b5",
+  "sai": [
+   [
+    "Both",
+    "tu_vung"
+   ],
+   [
+    "Either of",
+    "tu_vung"
+   ]
+  ],
+  "ly_do": "Nhiễu 'Neither' vẫn ra câu đúng (Neither one is fine, ngược nghĩa)"
+ },
+ {
+  "id": "k108a7",
+  "khac": [
+   "Nam's"
+  ],
+  "ly_do": "Viết tắt 'Nam's' cũng đúng, cùng nghĩa"
+ },
+ {
+  "id": "k108b2",
+  "khac": [
+   "it'll"
+  ],
+  "ly_do": "Viết tắt 'it'll' cũng đúng, cùng nghĩa"
+ },
+ {
+  "id": "k108b6",
+  "khac": [
+   "Mai's"
+  ],
+  "ly_do": "Viết tắt 'Mai's' cũng đúng, cùng nghĩa"
+ },
+ {
+  "id": "k109a2",
+  "khac": [
+   "yet"
+  ],
+  "ly_do": "'yet' nối hai vế cũng đúng và cùng nghĩa 'nhưng'"
+ },
+ {
+  "id": "k109a3",
+  "khac": [
+   "yet"
+  ],
+  "ly_do": "'yet' nối hai vế cũng đúng và cùng nghĩa 'nhưng'"
+ },
+ {
+  "id": "k109a8",
+  "khac": [
+   "yet"
+  ],
+  "ly_do": "'yet' nối hai vế cũng đúng và cùng nghĩa 'nhưng'"
+ },
+ {
+  "id": "k109b2",
+  "khac": [
+   "yet"
+  ],
+  "ly_do": "'yet' nối hai vế cũng đúng và cùng nghĩa 'nhưng'"
+ },
+ {
+  "id": "k109b4",
+  "khac": [
+   "yet"
+  ],
+  "ly_do": "'yet' nối hai vế cũng đúng và cùng nghĩa 'nhưng'"
+ },
+ {
+  "id": "k112b4",
+  "vi": "Chắc chắn không phải đường này đâu.",
+  "ly_do": "Câu VI cũ lủng củng ('Không thể nào đây là đúng đường')"
+ },
+ {
+  "id": "k113b6",
+  "khac": [
+   "on"
+  ],
+  "ly_do": "'get on well with' cũng đúng, cùng nghĩa (hay dùng ở Anh, người Mỹ vẫn hiểu và chấp nhận)"
+ },
+ {
+  "id": "k002n1",
+  "dap": [
+   "She is busy.",
+   "She's busy.",
+   "She's busy right now.",
+   "She's in a meeting.",
+   "She's in a meeting with a client."
+  ],
+  "ly_do": "Thêm cách nói tự nhiên nhất cho tình huống đang họp: She's in a meeting"
+ },
+ {
+  "id": "k004n1",
+  "dap": [
+   "Are you tired?",
+   "Are you OK?",
+   "Are you tired today?",
+   "Are you okay?",
+   "You look tired. Are you OK?"
+  ],
+  "ly_do": "Thêm cách hỏi thăm phổ biến"
+ },
+ {
+  "id": "k006n1",
+  "dap": [
+   "That is my house.",
+   "That's my house.",
+   "That's my house over there.",
+   "That blue house is mine.",
+   "My house is the blue one."
+  ],
+  "ly_do": "Chỉ nhà ở xa từ đầu hẻm nên dùng that; bỏ 'This is my house', thêm cách nói tự nhiên"
+ },
+ {
+  "id": "k008n1",
+  "dap": [
+   "I have a cold.",
+   "I have a bad cold.",
+   "I've got a cold.",
+   "I caught a cold.",
+   "I think I have a cold."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k010n1",
+  "dap": [
+   "She wants orange juice.",
+   "She wants an orange juice.",
+   "My daughter wants orange juice.",
+   "She'd like an orange juice.",
+   "She'd like orange juice, please."
+  ],
+  "ly_do": "Nói với người phục vụ thì 'She'd like' tự nhiên, lịch sự hơn"
+ },
+ {
+  "id": "k014n1",
+  "dap": [
+   "I don't eat meat.",
+   "Sorry, I don't eat meat.",
+   "I'm a vegetarian.",
+   "Sorry, I'm vegetarian.",
+   "I don't eat beef."
+  ],
+  "ly_do": "Thêm 'I'm a vegetarian', câu người Mỹ nói nhiều nhất trong tình huống này"
+ },
+ {
+  "id": "k016n1",
+  "dap": [
+   "There is an ATM on the corner.",
+   "There's an ATM on the corner.",
+   "There's one on the corner.",
+   "There's an ATM right on the corner."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k018n1",
+  "dap": [
+   "Where is the restroom?",
+   "Where's the restroom?",
+   "Excuse me, where is the restroom?",
+   "Where is the bathroom?",
+   "Excuse me, where's the restroom?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k020n1",
+  "dap": [
+   "How much is this?",
+   "How much is this scarf?",
+   "How much is it?",
+   "How much does this cost?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k022n1",
+  "dap": [
+   "Can you open the door?",
+   "Can you open the door, please?",
+   "Can you help me?",
+   "Could you open the door, please?",
+   "Can you get the door?"
+  ],
+  "ly_do": "Thêm 'Can you get the door?' rất hay dùng ở Mỹ"
+ },
+ {
+  "id": "k024n1",
+  "dap": [
+   "I'm cooking dinner.",
+   "I am cooking dinner.",
+   "Sorry, I'm cooking dinner right now.",
+   "I'm making dinner right now."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k026n1",
+  "dap": [
+   "Let's have lunch.",
+   "Let's eat.",
+   "Let's go eat.",
+   "Let's get lunch.",
+   "Let's go get lunch."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k028n1",
+  "dap": [
+   "I have a toothache.",
+   "My tooth hurts.",
+   "I have a toothache. I need to see a dentist.",
+   "I need to see a dentist.",
+   "I need to go to the dentist."
+  ],
+  "ly_do": "Đồng nghiệp hỏi sao không ăn: câu trả lời tự nhiên nhất là 'I have a toothache'"
+ },
+ {
+  "id": "k030n1",
+  "dap": [
+   "The meeting is at 9 o'clock on Monday.",
+   "It's at 9 a.m. on Monday.",
+   "The meeting starts at 9 on Monday.",
+   "It's on Monday at 9 a.m.",
+   "It's at 9 on Monday morning."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k032n1",
+  "dap": [
+   "It's very hot in Saigon today.",
+   "It is very hot today.",
+   "It's really hot here today.",
+   "It's really hot today."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k034n1",
+  "dap": [
+   "That's Lan's motorbike.",
+   "It's Lan's motorbike.",
+   "The red motorbike is Lan's.",
+   "It's Lan's."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k036n1",
+  "dap": [
+   "This soup is very good.",
+   "It's very good!",
+   "It's so good!",
+   "This soup is delicious.",
+   "It's delicious!"
+  ],
+  "ly_do": "Thêm 'delicious', cách khen món ăn phổ biến"
+ },
+ {
+  "id": "k038n1",
+  "dap": [
+   "Nice to meet you.",
+   "It's nice to meet you.",
+   "Hello, nice to meet you.",
+   "It's a pleasure to meet you."
+  ],
+  "ly_do": "Thêm cách nói phổ biến khi gặp đối tác"
+ },
+ {
+  "id": "k040n1",
+  "dap": [
+   "When are you free?",
+   "What day are you free?",
+   "When are you available?",
+   "What time are you free?",
+   "When do you want to come?"
+  ],
+  "ly_do": "'hôm nào' là ngày: thêm 'What day are you free?' và 'When are you available?'"
+ },
+ {
+  "id": "k042n1",
+  "dap": [
+   "I went to Dalat with my family.",
+   "We went to Dalat.",
+   "I went to Dalat with my family last weekend.",
+   "My family and I went to Dalat."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k044n1",
+  "dap": [
+   "Did you eat lunch?",
+   "Did you have lunch?",
+   "Did you have lunch yet?",
+   "Have you had lunch yet?",
+   "Have you eaten lunch yet?"
+  ],
+  "ly_do": "Thêm dạng 'Have you had lunch yet?' rất phổ biến"
+ },
+ {
+  "id": "k046n1",
+  "dap": [
+   "I will send it tonight.",
+   "I'll send you the price tonight.",
+   "I'll send it to you tonight.",
+   "I'll send you the price list tonight."
+  ],
+  "ly_do": "Thêm 'price list' (bảng giá)"
+ },
+ {
+  "id": "k048n1",
+  "dap": [
+   "I'd like an iced tea, please.",
+   "I'd like a glass of iced tea, please.",
+   "I would like an iced tea, please.",
+   "Can I get an iced tea, please?"
+  ],
+  "ly_do": "Thêm 'Can I get...' cách gọi món rất phổ biến ở Mỹ"
+ },
+ {
+  "id": "k058n1",
+  "dap": [
+   "I was late because there was a traffic jam.",
+   "Sorry, I'm late because the traffic was bad.",
+   "There was a lot of traffic, so I was late.",
+   "Sorry, I was stuck in traffic for an hour."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k062n1",
+  "dap": [
+   "Me too.",
+   "I'm hungry too.",
+   "I am too.",
+   "So am I."
+  ],
+  "ly_do": "Thêm 'So am I.'"
+ },
+ {
+  "id": "k064n1",
+  "dap": [
+   "Let me finish writing this first.",
+   "Let me finish writing the report first.",
+   "I need to finish writing the report first.",
+   "Let me finish this first.",
+   "Can you wait for me? Let me finish this first."
+  ],
+  "ly_do": "Thêm cách nói tự nhiên, gọn hơn"
+ },
+ {
+  "id": "k068n1",
+  "dap": [
+   "Wash your hands before eating.",
+   "Please wash your hands before eating.",
+   "Go wash your hands before eating.",
+   "Wash your hands before you eat."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k070n1",
+  "dap": [
+   "It's getting cold. Let's go inside.",
+   "It's getting cold.",
+   "It is getting cold.",
+   "It's getting colder. Let's go inside."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k072n1",
+  "dap": [
+   "Who is that man?",
+   "Who's that man?",
+   "Who is that?",
+   "Who's that guy?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k078n1",
+  "dap": [
+   "Can I have a little sugar, please?",
+   "Could I have a little more sugar?",
+   "Can I get a little sugar, please?",
+   "Can I have some more sugar, please?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k086n1",
+  "dap": [
+   "Let me turn on the light.",
+   "I'll turn on the light.",
+   "Let me turn the light on.",
+   "Let me turn on the lights."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k094n1",
+  "dap": [
+   "If I were you, I would take it.",
+   "If I were you, I'd take the job.",
+   "If I were you, I would accept the offer.",
+   "If I were you, I'd take it."
+  ],
+  "ly_do": "Thêm dạng viết tắt phổ biến"
+ },
+ {
+  "id": "k096n1",
+  "dap": [
+   "I wish I had a car.",
+   "I wish I had my own car.",
+   "I wish I had a car of my own."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k100n1",
+  "dap": [
+   "I'm used to getting up early.",
+   "I am used to it.",
+   "I'm used to waking up early.",
+   "I'm used to it."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k102n1",
+  "dap": [
+   "I've been waiting for an hour.",
+   "I have been waiting for an hour.",
+   "I've been waiting here since nine.",
+   "I've been waiting here for an hour."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "k108n1",
+  "dap": [
+   "A customer asked if the house was still for sale.",
+   "Someone called and asked if the house was still available.",
+   "A man asked whether the house was still for sale.",
+   "Someone called and asked if the house was still for sale."
+  ],
+  "vi": "Lúc vợ (hoặc chồng) bạn đi vắng, có một người khách gọi tới hỏi căn nhà đang rao còn bán không. Khi vợ (hoặc chồng) bạn về, bạn kể lại cuộc gọi đó.",
+  "ly_do": "Câu tình huống cũ 'Khi người đó về' dễ hiểu nhầm là người khách; sửa rõ là vợ/chồng về (trường vi ở đây là câu TÌNH). Thêm 1 đáp"
+ },
+ {
+  "id": "k114n1",
+  "dap": [
+   "How about going to Dalat this weekend?",
+   "Why don't we go to Dalat this weekend?",
+   "How about a trip to Dalat this weekend?",
+   "Let's go to Dalat this weekend."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "nban_hangn3",
+  "dap": [
+   "There are only two left.",
+   "There are two left.",
+   "There are only two shirts left.",
+   "We only have two left."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "nvan_phongn3",
+  "dap": [
+   "What time does the meeting start?",
+   "What time is the meeting?",
+   "When does the meeting start?"
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "nnha_hangn3",
+  "dap": [
+   "Please wait a moment.",
+   "Please wait a minute.",
+   "Please wait here for a moment.",
+   "Could you wait a moment, please?",
+   "Just a moment, please."
+  ],
+  "ly_do": "Thêm cách nói lịch sự phổ biến"
+ },
+ {
+  "id": "ny_ten3",
+  "dap": [
+   "I feel dizzy.",
+   "I feel a little dizzy.",
+   "I feel very dizzy.",
+   "I get dizzy when I stand up."
+  ],
+  "ly_do": "Thêm câu tả đúng triệu chứng 'đứng lên là chóng mặt'"
+ },
+ {
+  "id": "ntho_ky_thuatn3",
+  "dap": [
+   "I will fix it tomorrow.",
+   "I'll fix it tomorrow.",
+   "It'll be ready tomorrow."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "ngiao_vienn3",
+  "dap": [
+   "He should read every day.",
+   "She should read every day.",
+   "Your child should read every day.",
+   "Your child should read books every day."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ },
+ {
+  "id": "nhoc_sinhn3",
+  "dap": [
+   "I hope to pass the exam.",
+   "I hope to pass.",
+   "I hope I pass the exam.",
+   "I hope I'll pass the exam."
+  ],
+  "ly_do": "Người Mỹ hay nói 'I hope I pass'; thêm vào"
+ },
+ {
+  "id": "nnoi_tron3",
+  "dap": [
+   "We need to buy more rice.",
+   "We need more rice.",
+   "We need to get more rice.",
+   "We're almost out of rice."
+  ],
+  "ly_do": "Thêm cách nói phổ biến"
+ }
+]
