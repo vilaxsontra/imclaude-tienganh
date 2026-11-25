@@ -6,6 +6,7 @@ export default {
     const u = new URL(req.url); let p = u.pathname;
     if (req.method !== 'GET' && req.method !== 'HEAD') return new Response('', { status: 405 });
     if (p === '/' || p === '/index.html') p = 'trang/index.html';
+    else if (p === '/bai' || p === '/bai/' || p === '/bai.html') p = 'trang/bai.html';
     else if (/^\/([a-f0-9]{8}\/)?[A-Za-z0-9_.-]+\.(json|txt)$/.test(p)) p = 'nguon' + p;
     else return new Response('Không có', { status: 404 });
     const r = await fetch(RAW + p, { cf: { cacheTtl: 600, cacheEverything: true } });
