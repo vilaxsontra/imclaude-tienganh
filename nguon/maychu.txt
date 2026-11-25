@@ -1,8 +1,8 @@
 // ===== HỌC TIẾNG ANH THEO CÁCH AI HỌC — máy chủ (Cloudflare Worker + D1 + Workers AI) =====
 // Ràng buộc: DB (D1), AI (Workers AI). Giao diện, kho câu và giọng đọc tải một lần từ NGUON
 // rồi lưu hẳn vào D1 của bạn (bảng assets), từ đó web chạy độc lập.
-const NGUON = 'https://imclaude-tienganh.pages.dev/7f792c37/';
-const VER = '7f792c37';
+const NGUON = 'https://imclaude-tienganh.pages.dev/40c7ad48/';
+const VER = '40c7ad48';
 
 const SCHEMA = [
   `CREATE TABLE IF NOT EXISTS settings (k TEXT PRIMARY KEY, v TEXT)`,
@@ -73,10 +73,12 @@ async function chamNoi(env, S, text, cham, acc) {
   const t = chuanNoi(text); if (!t) return { ok: false, sua: dap[0] || '', vi: 'Máy chưa nghe được câu nào.' };
   if (dap.some(d => chuanNoi(d) === t)) return { ok: true, khop: true };
   try {
-    const out = await llm(env, S, 'You grade one spoken answer from a Vietnamese adult learning everyday American English. The text comes from speech recognition: ignore missing punctuation and capitalization, and accept contractions or full forms. ok=true only if the answer is grammatically correct, natural, and a sensible reply to the situation. Any grammar slip (missing -s, wrong be form, wrong tense, missing article, wrong word order) means ok=false. If ok=false, give the corrected sentence that stays closest to what the learner said, and a very short reason in Vietnamese for an adult with no grammar background. Reply with JSON only: {"ok":true|false,"sua":"...","vi":"..."}',
+    const codes = Object.entries(LOAI).map(([k, v]) => k + ': ' + v).join('\n');
+    const out = await llm(env, S, 'You grade one spoken answer from a Vietnamese adult learning everyday American English. The text comes from speech recognition: ignore missing punctuation and capitalization, and accept contractions or full forms. ok=true only if the answer is grammatically correct, natural, and a sensible reply to the situation. Any grammar slip (missing -s, wrong be form, wrong tense, missing article, wrong word order) means ok=false. If ok=false, give the corrected sentence that stays closest to what the learner said, and the one error code from this list that best names the main mistake (or "" if none fits):\n' + codes + '\nReply with JSON only: {"ok":true|false,"sua":"...","loai":"code"}',
       `Situation (Vietnamese): ${tinh}\nModel answers: ${dap.join(' | ')}\nLearner said: ${String(text).slice(0, 300)}`, 300, acc);
     const a = out.indexOf('{'), b = out.lastIndexOf('}'); const j = JSON.parse(out.slice(a, b + 1));
-    return { ok: !!j.ok, sua: j.ok ? '' : String(j.sua || dap[0] || ''), vi: j.ok ? '' : String(j.vi || '') };
+    const loai = j.ok ? '' : (LOAI[j.loai] ? j.loai : '');
+    return { ok: !!j.ok, sua: j.ok ? '' : String(j.sua || dap[0] || ''), loai };
   } catch (e) { return { ok: false, sua: dap[0] || '', vi: '', loi: 1 }; }
 }
 
@@ -204,11 +206,11 @@ export default {
         }
         if (p === '/rieng-tu') return new Response(RIENG_TU, { headers: { 'content-type': 'text/html; charset=utf-8' } });
         const B = await bundle(env);
-        if (p === '/sw.js') return new Response(B.sw.replace('7f792c37', VER), { headers: { 'content-type': 'text/javascript; charset=utf-8', 'cache-control': 'no-cache' } });
+        if (p === '/sw.js') return new Response(B.sw.replace('40c7ad48', VER), { headers: { 'content-type': 'text/javascript; charset=utf-8', 'cache-control': 'no-cache' } });
         if (p === '/manifest.webmanifest') return new Response(B.manifest, { headers: { 'content-type': 'application/manifest+json' } });
         if (p === '/icon.svg') return new Response(B.icon, { headers: { 'content-type': 'image/svg+xml', 'cache-control': 'max-age=86400' } });
         if (p === '/icon-192.png' || p === '/icon-512.png') return new Response(b64bytes(p.includes('192') ? B.png192 : B.png512), { headers: { 'content-type': 'image/png', 'cache-control': 'max-age=86400' } });
-        return new Response(B.html.replace('7f792c37', VER), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-cache' } });
+        return new Response(B.html.replace('40c7ad48', VER), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-cache' } });
       }
       const body = req.method === 'POST' ? await req.json().catch(() => ({})) : {};
       const S = await getSet(env);
