@@ -11,6 +11,13 @@ const SCHEMA = [
   `CREATE TABLE IF NOT EXISTS tt (id INTEGER PRIMARY KEY, doc TEXT, updated INTEGER)`,
   `CREATE TABLE IF NOT EXISTS ke (id INTEGER PRIMARY KEY AUTOINCREMENT, day TEXT, text TEXT, sua TEXT, created INTEGER)`,
   `CREATE TABLE IF NOT EXISTS am (k TEXT PRIMARY KEY, v TEXT)`,
+  // chế độ web chung (đăng nhập Google)
+  `CREATE TABLE IF NOT EXISTS users (uid TEXT PRIMARY KEY, email TEXT, name TEXT, created INTEGER, last INTEGER)`,
+  `CREATE TABLE IF NOT EXISTS phien (token TEXT PRIMARY KEY, uid TEXT, created INTEGER)`,
+  `CREATE TABLE IF NOT EXISTS ttu (uid TEXT PRIMARY KEY, doc TEXT, updated INTEGER)`,
+  `CREATE TABLE IF NOT EXISTS keu (id INTEGER PRIMARY KEY AUTOINCREMENT, uid TEXT, day TEXT, text TEXT, sua TEXT, created INTEGER)`,
+  `CREATE TABLE IF NOT EXISTS luot (ai TEXT, day TEXT, nghe_s REAL DEFAULT 0, sua INTEGER DEFAULT 0, PRIMARY KEY(ai, day))`,
+  `CREATE TABLE IF NOT EXISTS tran (day TEXT PRIMARY KEY, units REAL DEFAULT 0)`,
 ];
 let migrated = false; const MEM = {};
 async function migrate(env) { if (migrated) return; await env.DB.batch(SCHEMA.map(s => env.DB.prepare(s))); migrated = true; }
@@ -45,11 +52,12 @@ const b64bytes = b => Uint8Array.from(atob(b), c => c.charCodeAt(0));
 
 // ---------- AI ----------
 const MODEL = '@cf/openai/gpt-oss-120b';
-async function llm(env, S, sys, user, max = 1200) {
+async function llm(env, S, sys, user, max = 1200, acc) {
   const m = S.ai_model || MODEL;
   const r = m.includes('gpt-oss')
     ? await env.AI.run(m, { instructions: sys, input: user, reasoning: { effort: 'low' }, max_output_tokens: max + 600 })
     : await env.AI.run(m, { messages: [{ role: 'system', content: sys }, { role: 'user', content: user }], max_tokens: max, temperature: 0.1 });
+  if (acc) { const u = r && r.usage; acc.units += u ? ((u.input_tokens || u.prompt_tokens || 0) * 0.35 + (u.output_tokens || u.completion_tokens || 0) * 0.75) / 1e6 / 0.000011 : 110; }
   if (r && Array.isArray(r.output)) { const msg = r.output.find(o => o.type === 'message'); const t = msg && msg.content && msg.content.map(c => c.text || '').join(''); if (t) return t; }
   const t = r && (r.response ?? r.result?.response ?? r.choices?.[0]?.message?.content);
   return typeof t === 'string' ? t : JSON.stringify(t || '');
@@ -80,9 +88,9 @@ function diffs(a, b) {
     return { sai: sa.join(' ').replace(/ ([.,!?;:])/g, '$1'), dung: sb.join(' ').replace(/ ([.,!?;:])/g, '$1'), bj, len: sb.length };
   }).filter(d => d.sai && d.dung && d.sai.toLowerCase() !== d.dung.toLowerCase());
 }
-async function suaCau(env, S, text) {
+async function suaCau(env, S, text, acc) {
   const sys = 'You are a careful English teacher for Vietnamese adult learners. Split the learner text into sentences (they may mix in some Vietnamese words). Correct each sentence into natural, everyday American English with the SMALLEST possible changes; keep the meaning and the learner\'s words where they are fine; do not add new sentences. Output ONLY a JSON array, one element per sentence: {"goc": original sentence, "sua": corrected sentence, "vi": natural Vietnamese translation of the corrected sentence}.';
-  const arr = pickJSON(await llm(env, S, sys, text.slice(0, 1500), 1500));
+  const arr = pickJSON(await llm(env, S, sys, text.slice(0, 1500), 1500, acc));
   if (!Array.isArray(arr)) return { error: 'AI chưa trả lời đúng dạng, thử lại.' };
   const items = arr.filter(x => x && typeof x.sua === 'string' && typeof x.goc === 'string').slice(0, 10).map(x => ({ goc: x.goc.trim(), sua: x.sua.trim(), vi: String(x.vi || '').trim(), doi: diffs(x.goc, x.sua).slice(0, 3) }));
   // lần hai: kiểm câu sửa có thật đúng và tự nhiên không, đồng thời gọi đúng tên từng lỗi
@@ -90,7 +98,7 @@ async function suaCau(env, S, text) {
   const prompt = `Sentences:\n${items.map((x, i) => `${i + 1}. ${x.sua}`).join('\n')}\n\nChanges made by the teacher:\n${ch.map((c, k) => `C${k + 1} (sentence ${c.i + 1}): "${c.d.sai}" -> "${c.d.dung}"`).join('\n') || '(none)'}\n\nError codes:\n${Object.entries(LOAI).map(([k, v]) => k + ': ' + v).join('\n')}`;
   let va = [];
   for (let t = 0; t < 2; t++) { // hỏi lại một lần nếu trả lời sai dạng
-    const v = await llm(env, S, 'You check an English teacher\'s corrections. Output ONLY a JSON array: first one element per sentence, "OK" if the sentence is fully grammatical, natural American English, else "BAD"; then one element per change, the single best error code for the learner\'s mistake. Example for 2 sentences and 1 change: ["OK","OK","thieu_s"].', prompt, 600);
+    const v = await llm(env, S, 'You check an English teacher\'s corrections. Output ONLY a JSON array: first one element per sentence, "OK" if the sentence is fully grammatical, natural American English, else "BAD"; then one element per change, the single best error code for the learner\'s mistake. Example for 2 sentences and 1 change: ["OK","OK","thieu_s"].', prompt, 600, acc);
     va = pickJSON(v) || []; if (va.length === items.length + ch.length) break;
   }
   items.forEach((x, i) => { x.kiem = String(va[i] || '').toUpperCase().includes('OK'); });
@@ -112,6 +120,40 @@ async function suaCau(env, S, text) {
   return { cau: items.map(x => ({ goc: x.goc, sua: x.sua, vi: x.vi, doi: x.doi.map(d => ({ sai: d.sai, dung: d.dung, loai: d.loai })), kiem: x.kiem })), bai };
 }
 
+// ---------- đăng nhập Google (web chung) ----------
+let JWKS = null, JWKS_T = 0;
+const b64u = s => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(s.length / 4) * 4, '=')), c => c.charCodeAt(0));
+async function googleUser(env, cred) {
+  if (env.TEST_LOGIN === '1' && cred.startsWith('test:')) { const e = cred.slice(5); return { sub: 'test-' + e, email: e, name: e.split('@')[0] }; } // chỉ dùng khi kiểm thử cục bộ
+  const [h, p, sg] = String(cred).split('.'); if (!sg) throw new Error('Mã đăng nhập không hợp lệ');
+  const head = JSON.parse(new TextDecoder().decode(b64u(h))), pay = JSON.parse(new TextDecoder().decode(b64u(p)));
+  if (!JWKS || Date.now() - JWKS_T > 3600e3) { JWKS = (await (await fetch('https://www.googleapis.com/oauth2/v3/certs')).json()).keys; JWKS_T = Date.now(); }
+  const jwk = JWKS.find(k => k.kid === head.kid); if (!jwk) throw new Error('Không tìm thấy khoá Google');
+  const key = await crypto.subtle.importKey('jwk', jwk, { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, false, ['verify']);
+  const ok = await crypto.subtle.verify('RSASSA-PKCS1-v1_5', key, b64u(sg), new TextEncoder().encode(h + '.' + p));
+  if (!ok) throw new Error('Chữ ký không đúng');
+  if (pay.aud !== env.GOOGLE_CLIENT_ID) throw new Error('Sai ứng dụng');
+  if (!['accounts.google.com', 'https://accounts.google.com'].includes(pay.iss)) throw new Error('Sai nơi cấp');
+  if (pay.exp * 1000 < Date.now()) throw new Error('Mã đăng nhập đã hết hạn');
+  return { sub: pay.sub, email: pay.email || '', name: pay.name || '' };
+}
+const NUM = (env, k, d) => Number(env[k] ?? d);
+const today7 = () => new Date(Date.now() + 7 * 3600e3).toISOString().slice(0, 10);
+async function quota(env, who, day) { return (await env.DB.prepare('SELECT nghe_s, sua FROM luot WHERE ai=? AND day=?').bind(who, day).first()) || { nghe_s: 0, sua: 0 }; }
+async function tranUsed(env, day) { const r = await env.DB.prepare('SELECT units FROM tran WHERE day=?').bind(day).first(); return r ? r.units : 0; }
+async function addUse(env, who, day, nghe_s, sua, units) {
+  await env.DB.batch([
+    env.DB.prepare('INSERT INTO luot(ai,day,nghe_s,sua) VALUES(?,?,?,?) ON CONFLICT(ai,day) DO UPDATE SET nghe_s=nghe_s+excluded.nghe_s, sua=sua+excluded.sua').bind(who, day, nghe_s, sua),
+    env.DB.prepare('INSERT INTO tran(day,units) VALUES(?,?) ON CONFLICT(day) DO UPDATE SET units=units+excluded.units').bind(day, units)]);
+}
+const RIENG_TU = `<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dữ liệu của bạn</title><style>body{font:17px/1.6 system-ui,sans-serif;max-width:680px;margin:0 auto;padding:20px;background:#f4f1ea;color:#1c1917}h1{color:#0f766e}</style></head><body>
+<h1>Dữ liệu của bạn</h1>
+<p><b>Khi chưa đăng nhập:</b> tiến độ học chỉ lưu trong trình duyệt trên máy bạn. Máy chủ không lưu gì về bạn, ngoài số giây đã luyện nói trong ngày để giới hạn lượt dùng.</p>
+<p><b>Khi đăng nhập bằng Google:</b> máy chủ lưu email, tên hiển thị, tiến độ học (câu đã học, câu sai, lịch ôn, số giây) và những câu bạn tự kể để AI sửa. Mục đích duy nhất là để bạn học tiếp được trên mọi máy.</p>
+<p><b>Giọng nói:</b> đoạn ghi âm khi luyện nói được gửi đi để máy nghe ra chữ rồi bỏ ngay, không lưu lại.</p>
+<p>Không bán, không chia sẻ dữ liệu cho ai. Muốn xoá hết: vào <b>Cài đặt → Xoá tài khoản</b>, mọi dữ liệu của bạn bị xoá ngay.</p>
+<p><a href="/">← Quay lại học</a></p></body></html>`;
+
 // ---------- định tuyến ----------
 export default {
   async fetch(req, env, ctx) {
@@ -131,6 +173,7 @@ export default {
             return new Response(by.slice(a, b + 1), { status: 206, headers: { ...H, 'content-range': `bytes ${a}-${b}/${by.length}`, 'content-length': String(b - a + 1) } }); }
           return new Response(by, { headers: H });
         }
+        if (p === '/rieng-tu') return new Response(RIENG_TU, { headers: { 'content-type': 'text/html; charset=utf-8' } });
         const B = await bundle(env);
         if (p === '/sw.js') return new Response(B.sw.replace('__VER__', VER), { headers: { 'content-type': 'text/javascript; charset=utf-8', 'cache-control': 'no-cache' } });
         if (p === '/manifest.webmanifest') return new Response(B.manifest, { headers: { 'content-type': 'application/manifest+json' } });
@@ -140,7 +183,71 @@ export default {
       }
       const body = req.method === 'POST' ? await req.json().catch(() => ({})) : {};
       const S = await getSet(env);
-      if (p === '/api/state') return J({ hasPin: !!S.pin, ver: VER, ai: !!env.AI });
+      const CHUNG = !!env.GOOGLE_CLIENT_ID; // web chung: đăng nhập Google, nhiều người; không có thì là bản tự cài một người (mã PIN)
+      if (p === '/api/state') return J({ mode: CHUNG ? 'google' : 'pin', client: env.GOOGLE_CLIENT_ID || '', hasPin: !!S.pin, ver: VER, ai: !!env.AI });
+      if (p === '/api/tai') { const n = Number(url.searchParams.get('n')); if (!(n >= 0)) return ERR('Thiếu số gói'); try { return J({ ok: true, n: await importPack(env, n) }); } catch (e) { return ERR(e.message, 502); } }
+      // ai đang dùng: phiên đăng nhập, hoặc khách (mã máy)
+      const tk = req.headers.get('x-tk') || '';
+      let uid = null;
+      if (tk) { const r = CHUNG ? await env.DB.prepare('SELECT uid FROM phien WHERE token=?').bind(tk).first() : await env.DB.prepare('SELECT 1 AS ok FROM sessions WHERE token=?').bind(tk).first(); if (r) uid = CHUNG ? r.uid : 'chu'; }
+      if (CHUNG) {
+        if (p === '/api/vao' && req.method === 'POST') {
+          let g; try { g = await googleUser(env, String(body.credential || '')); } catch (e) { return ERR('Chưa đăng nhập được: ' + e.message, 401); }
+          await env.DB.prepare('INSERT INTO users(uid,email,name,created,last) VALUES(?,?,?,?,?) ON CONFLICT(uid) DO UPDATE SET email=excluded.email, name=excluded.name, last=excluded.last').bind(g.sub, g.email, g.name, Date.now(), Date.now()).run();
+          const t = rnd(32); await env.DB.prepare('INSERT INTO phien VALUES(?,?,?)').bind(t, g.sub, Date.now()).run();
+          return J({ token: t, email: g.email, name: g.name });
+        }
+        if (p === '/api/nghe' && req.method === 'POST') {
+          if (!env.AI) return ERR('Chưa bật Workers AI');
+          const a = String(body.audio || ''); if (!a || a.length > 1.5e6) return ERR('Không có tiếng hoặc quá dài');
+          const sec = Math.max(0.5, (a.length * 0.75 - 44) / 32000); const day = today7();
+          const who = uid || ('k:' + String(req.headers.get('x-may') || req.headers.get('cf-connecting-ip') || 'x').slice(0, 40));
+          const lim = (uid ? NUM(env, 'NGHE_PHUT', 15) : NUM(env, 'NGHE_PHUT_KHACH', 3)) * 60;
+          const q = await quota(env, who, day);
+          if (q.nghe_s + sec > lim) return J({ error: uid ? 'Hôm nay bạn đã nói hết ' + (lim / 60) + ' phút. Mai quay lại nhé.' : 'Hết ' + (lim / 60) + ' phút nói thử hôm nay. Đăng nhập Gmail để được ' + NUM(env, 'NGHE_PHUT', 15) + ' phút mỗi ngày.', code: uid ? 'het' : 'khach' }, 429);
+          const units = sec / 60 * 46.63;
+          if (await tranUsed(env, day) + units > NUM(env, 'TRAN_NGAY', 300000)) return J({ error: 'Hôm nay web đã dùng hết lượt AI. Mai quay lại nhé, phần học vẫn dùng bình thường.', code: 'tran' }, 429);
+          try { const r = await env.AI.run('@cf/openai/whisper-large-v3-turbo', { audio: a, language: 'en', vad_filter: true }); await addUse(env, who, day, sec, 0, units); return J({ text: String(r?.text || '').trim() }); }
+          catch (e) { return J({ error: 'Chưa nghe được: ' + e.message }, 502); }
+        }
+        if (p === '/api/nghe-nghiep' && req.method === 'POST') {
+          const list = body.list || {}; const mota = String(body.mota || '').slice(0, 200); const day = today7();
+          if (!env.AI || !mota || await tranUsed(env, day) > NUM(env, 'TRAN_NGAY', 300000)) return J({ job: '' });
+          try { const acc = { units: 0 }; const t = await llm(env, S, 'Pick the single closest job category for a person. Answer with only the code.', `Person's job (Vietnamese): ${mota}\nCategories:\n${Object.entries(list).map(([k, v]) => k + ': ' + v).join('\n')}`, 20, acc); await addUse(env, 'k:nghe', day, 0, 0, acc.units); const k = Object.keys(list).find(k => t.includes(k)) || ''; return J({ job: k }); }
+          catch { return J({ job: '' }); }
+        }
+        if (!uid) return ERR('Cần đăng nhập', 401);
+        if (p === '/api/tt') {
+          if (req.method === 'POST') {
+            const doc = JSON.stringify(body.doc || {}); if (doc.length > 3e6) return ERR('Dữ liệu quá lớn');
+            const cur = await env.DB.prepare('SELECT updated FROM ttu WHERE uid=?').bind(uid).first(); const up = Number(body.updated) || Date.now();
+            if (cur && cur.updated > up && !body.force) return J({ conflict: true, updated: cur.updated });
+            await env.DB.prepare('INSERT INTO ttu(uid,doc,updated) VALUES(?,?,?) ON CONFLICT(uid) DO UPDATE SET doc=excluded.doc, updated=excluded.updated').bind(uid, doc, up).run();
+            return J({ ok: true, updated: up });
+          }
+          const r = await env.DB.prepare('SELECT doc,updated FROM ttu WHERE uid=?').bind(uid).first();
+          const u = await env.DB.prepare('SELECT email,name FROM users WHERE uid=?').bind(uid).first();
+          return J(r ? { doc: JSON.parse(r.doc), updated: r.updated, me: u } : { doc: null, updated: 0, me: u });
+        }
+        if (p === '/api/sua' && req.method === 'POST') {
+          if (!env.AI) return ERR('Chưa bật Workers AI');
+          const text = String(body.text || '').trim(); if (text.length < 3) return ERR('Viết vài câu trước đã');
+          const day = today7(); const q = await quota(env, uid, day); const lim = NUM(env, 'SUA_LUOT', 6);
+          if (q.sua >= lim) return J({ error: 'Hôm nay bạn đã dùng hết ' + lim + ' lượt sửa câu. Mai quay lại nhé.', code: 'het' }, 429);
+          if (await tranUsed(env, day) + 250 > NUM(env, 'TRAN_NGAY', 300000)) return J({ error: 'Hôm nay web đã dùng hết lượt AI. Mai quay lại nhé.', code: 'tran' }, 429);
+          try { const acc = { units: 0 }; const r = await suaCau(env, S, text, acc); await addUse(env, uid, day, 0, 1, acc.units); if (r.error) return J(r, 502);
+            await env.DB.prepare('INSERT INTO keu(uid,day,text,sua,created) VALUES(?,?,?,?,?)').bind(uid, String(body.day || ''), text, JSON.stringify(r), Date.now()).run(); return J({ ...r, con: lim - q.sua - 1 }); }
+          catch (e) { return J({ error: 'AI đang bận, thử lại sau ít phút (' + e.message + ').' }, 502); }
+        }
+        if (p === '/api/luot') { const day = today7(); const q = await quota(env, uid, day); return J({ nghe_con: Math.max(0, NUM(env, 'NGHE_PHUT', 15) * 60 - q.nghe_s), sua_con: Math.max(0, NUM(env, 'SUA_LUOT', 6) - q.sua) }); }
+        if (p === '/api/logout' && req.method === 'POST') { await env.DB.prepare('DELETE FROM phien WHERE token=?').bind(tk).run(); return J({ ok: true }); }
+        if (p === '/api/xoa' && req.method === 'POST') {
+          await env.DB.batch(['DELETE FROM ttu WHERE uid=?', 'DELETE FROM keu WHERE uid=?', 'DELETE FROM luot WHERE ai=?', 'DELETE FROM phien WHERE uid=?', 'DELETE FROM users WHERE uid=?'].map(q => env.DB.prepare(q).bind(uid)));
+          return J({ ok: true });
+        }
+        return ERR('Không có', 404);
+      }
+      // ----- bản tự cài một người (mã PIN) -----
       if (p === '/api/setup' && req.method === 'POST') {
         if (S.pin) return ERR('Đã đặt mã PIN rồi');
         const pin = String(body.pin || ''); if (!/^\d{4,8}$/.test(pin)) return ERR('Mã PIN gồm 4–8 chữ số');
@@ -154,7 +261,7 @@ export default {
         if (await sha(S.salt + String(body.pin || '')) !== S.pin) { const f = Number(S.fails || 0) + 1; await setSet(env, 'fails', f >= 5 ? 0 : f); if (f >= 5) await setSet(env, 'lock', Date.now() + 5 * 60e3); return ERR('Sai mã PIN', 401); }
         await setSet(env, 'fails', 0); const t = rnd(32); await env.DB.prepare('INSERT INTO sessions VALUES(?,?)').bind(t, Date.now()).run(); return J({ token: t });
       }
-      if (!(await authed(req, env))) return ERR('Cần đăng nhập', 401);
+      if (!uid) return ERR('Cần đăng nhập', 401);
       if (p === '/api/tt') {
         if (req.method === 'POST') {
           const doc = JSON.stringify(body.doc || {}); if (doc.length > 3e6) return ERR('Dữ liệu quá lớn');
@@ -185,10 +292,9 @@ export default {
         try { const t = await llm(env, S, 'Pick the single closest job category for a person. Answer with only the code.', `Person's job (Vietnamese): ${mota}\nCategories:\n${Object.entries(list).map(([k, v]) => k + ': ' + v).join('\n')}`, 20); const k = Object.keys(list).find(k => t.includes(k)) || ''; return J({ job: k }); }
         catch { return J({ job: '' }); }
       }
-      if (p === '/api/tai') { const n = Number(url.searchParams.get('n')); if (!(n >= 0)) return ERR('Thiếu số gói'); try { return J({ ok: true, n: await importPack(env, n) }); } catch (e) { return ERR(e.message, 502); } }
       if (p === '/api/ke') return J((await env.DB.prepare('SELECT day,text,sua,created FROM ke ORDER BY id DESC LIMIT 30').all()).results.map(x => ({ ...x, sua: JSON.parse(x.sua || '{}') })));
       if (p === '/api/pin' && req.method === 'POST') { if (!/^\d{4,8}$/.test(String(body.pin || ''))) return ERR('Mã PIN gồm 4–8 chữ số'); const salt = rnd(12); await setSet(env, 'salt', salt); await setSet(env, 'pin', await sha(salt + body.pin)); return J({ ok: true }); }
-      if (p === '/api/logout' && req.method === 'POST') { await env.DB.prepare('DELETE FROM sessions WHERE token=?').bind(req.headers.get('x-tk')).run(); return J({ ok: true }); }
+      if (p === '/api/logout' && req.method === 'POST') { await env.DB.prepare('DELETE FROM sessions WHERE token=?').bind(tk).run(); return J({ ok: true }); }
       return ERR('Không có', 404);
     } catch (e) { return ERR('Lỗi máy chủ: ' + e.message, 500); }
   },

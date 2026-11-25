@@ -60,7 +60,7 @@ if ONLY: sys.exit(0)
 # ---- đóng gói ----
 packs = []; cur = {}; size = 0; LIMIT = 300_000
 for sid in ids:
-    c = kho['c'][sid]; b = open(c.pop('_mp3'), 'rb').read(); c.pop('_sim', None)
+    c = kho['c'][sid]; m = c.pop('_mp3'); m = m[:-4] + '.n.mp3' if os.path.exists(m[:-4] + '.n.mp3') else m; b = open(m, 'rb').read(); c.pop('_sim', None)
     if size + len(b) > LIMIT and cur: packs.append(cur); cur = {}; size = 0
     cur[sid] = base64.b64encode(b).decode(); size += len(b); c['am'] = len(packs)
 if cur: packs.append(cur)

@@ -3,13 +3,17 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const app = () => $('#app');
 const TK = () => localStorage.getItem('tk') || '';
-let KHO = null, E = null, SYNC_T = null, ONLINE = navigator.onLine;
+let KHO = null, E = null, SYNC_T = null, ONLINE = navigator.onLine, MODE = 'pin', CLIENT = '';
+const MAY = localStorage.getItem('may') || (() => { const m = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('may', m); return m; })();
+const CHUNG = () => MODE === 'google';
+const INAPP = /FBAN|FBAV|FB_IAB|FBIOS|Instagram|Zalo|Line\/|musical_ly|BytedanceWebview|TikTok|Messenger/i.test(navigator.userAgent);
+const ANDROID = /Android/i.test(navigator.userAgent);
 const NGHE = { ban_hang: 'Bán hàng, kinh doanh', van_phong: 'Văn phòng', nong_nghiep: 'Làm vườn, trồng trọt, chăn nuôi', bat_dong_san: 'Môi giới nhà đất', nha_hang: 'Nhà hàng, quán cà phê, nấu ăn', lai_xe: 'Lái xe, giao hàng', y_te: 'Y tế, nhà thuốc', tho_ky_thuat: 'Thợ, kỹ thuật, xây dựng', giao_vien: 'Giáo viên', hoc_sinh: 'Học sinh, sinh viên', du_lich: 'Du lịch, khách sạn, đi nước ngoài', noi_tro: 'Nội trợ, gia đình' };
 
 async function api(p, body, opt = {}) {
-  const r = await fetch(p, { method: body ? 'POST' : 'GET', headers: { 'content-type': 'application/json', 'x-tk': TK() }, body: body ? JSON.stringify(body) : undefined, keepalive: !!opt.keep });
+  const r = await fetch(p, { method: body ? 'POST' : 'GET', headers: { 'content-type': 'application/json', 'x-tk': TK(), 'x-may': MAY }, body: body ? JSON.stringify(body) : undefined, keepalive: !!opt.keep });
   let j = {}; try { j = await r.json(); } catch { }
-  if (r.status === 401 && !opt.noLogout && TK()) { localStorage.removeItem('tk'); location.reload(); }
+  if (r.status === 401 && !opt.noLogout && TK()) { localStorage.removeItem('tk'); if (!CHUNG()) location.reload(); }
   if (!r.ok && !j.error) j.error = 'Lỗi ' + r.status;
   return j;
 }
@@ -27,18 +31,47 @@ async function loadAll() {
   app().innerHTML = '<div class="mid"><div class="spin"></div><p>Đang mở bài học…</p></div>';
   const kr = await fetch('/kho.json'); KHO = await kr.json();
   let local = null; try { local = JSON.parse(localStorage.getItem('tt') || 'null'); } catch { }
-  let remote = null; try { const r = await api('/api/tt'); if (r.doc) remote = r.doc; } catch { }
-  let st = local; if (remote && (!local || (remote.updated || 0) > (local.updated || 0))) st = remote;
+  let remote = null; if (TK()) try { const r = await api('/api/tt'); if (r.doc) remote = r.doc; if (r.me) localStorage.setItem('me', r.me.email || ''); } catch { }
+  const st = DC.merge(local, remote); // gộp: học lúc chưa đăng nhập hay trên máy khác đều không mất
   E = DC.Engine(KHO, st || DC.newState(), {});
-  if (local && remote && (local.updated || 0) > (remote.updated || 0)) pushState();
+  if (remote && local && (E.S.updated || 0) > (remote.updated || 0)) pushState();
   saveLocal();
   if (!E.S.placed) onboard(); else home();
-  setTimeout(taiGiong, 3000);
+  if (!CHUNG()) setTimeout(taiGiong, 3000);
 }
 // chép dần giọng đọc từ nguồn về máy chủ riêng của bạn (mỗi lần một gói nhỏ), để web chạy độc lập
 async function taiGiong() {
   const n = KHO.goi || 0; let done = Number(localStorage.getItem('am_done') || 0);
   for (let i = done; i < n; i++) { if (!ONLINE) return; const r = await api('/api/tai?n=' + i, null, { noLogout: true }).catch(() => ({ error: 1 })); if (r.error) return setTimeout(taiGiong, 60e3); localStorage.setItem('am_done', String(i + 1)); }
+}
+
+// ---------- đăng nhập Gmail (web chung) ----------
+function loadGsi() { return new Promise((ok, no) => { if (window.google && google.accounts) return ok(); const sc = document.createElement('script'); sc.src = 'https://accounts.google.com/gsi/client'; sc.async = true; sc.onload = () => ok(); sc.onerror = () => no(new Error('Không tải được nút Google')); document.head.appendChild(sc); }); }
+async function onCred(resp) {
+  const r = await api('/api/vao', { credential: resp.credential }, { noLogout: true });
+  if (r.error) return toast(r.error, 4000);
+  localStorage.setItem('tk', r.token); localStorage.setItem('me', r.email || '');
+  const rr = await api('/api/tt'); const m = DC.merge(E ? E.S : null, rr.doc);
+  E = DC.Engine(KHO, m || DC.newState(), {}); saveLocal(); await pushState();
+  toast('Đã đăng nhập ' + (r.email || ''), 3000); if (E.S.placed) home(); else onboard();
+}
+function loginBox(el, why) {
+  if (!el) return;
+  if (INAPP) {
+    const u = location.origin + '/';
+    el.innerHTML = `<div class="why"><p>${why ? esc(why) + ' ' : ''}Bạn đang mở trong ứng dụng (Facebook, TikTok, Zalo…), Google không cho đăng nhập ở đây.</p><p><b>Bấm nút ⋯ ở góc trên, chọn "Mở bằng trình duyệt"</b>, rồi đăng nhập. Tiến độ bạn vừa học vẫn còn nếu mở lại đúng trình duyệt đó.</p>
+      <div class="row"><button id="mo">${ANDROID ? 'Mở bằng Chrome' : 'Mở bằng Safari'}</button><button id="cp">Chép link</button></div></div>`;
+    el.querySelector('#mo').onclick = () => { location.href = ANDROID ? `intent://${location.host}/#Intent;scheme=https;package=com.android.chrome;end` : `x-safari-https://${location.host}/`; };
+    el.querySelector('#cp').onclick = () => { const t = document.createElement('textarea'); t.value = u; document.body.appendChild(t); t.select(); let ok = false; try { ok = document.execCommand('copy'); } catch { } t.remove(); if (!ok && navigator.clipboard) navigator.clipboard.writeText(u).then(() => toast('Đã chép link')); else toast(ok ? 'Đã chép link, dán vào Chrome hoặc Safari' : u); };
+    return;
+  }
+  el.innerHTML = `${why ? `<p>${esc(why)}</p>` : ''}<div class="gbtn"></div><p class="sub">Chỉ dùng để giữ tiến độ học của bạn trên mọi máy. <a href="/rieng-tu">Lưu những gì?</a></p>`;
+  loadGsi().then(() => { google.accounts.id.initialize({ client_id: CLIENT, callback: onCred, ux_mode: 'popup', auto_select: false, use_fedcm_for_button: true }); google.accounts.id.renderButton(el.querySelector('.gbtn'), { theme: 'filled_blue', size: 'large', text: 'signin_with', shape: 'pill', locale: 'vi', width: 280 }); })
+    .catch(e => { el.querySelector('.gbtn').innerHTML = `<p class="err">${esc(e.message)}. Kiểm tra mạng rồi thử lại.</p>`; });
+}
+function dangNhap() {
+  app().innerHTML = `<div class="top"><button class="x" id="out">✕</button><span class="cnt">Đăng nhập</span></div><div class="card mid"><h2>Giữ tiến độ học</h2><p>Đăng nhập Gmail để học tiếp trên mọi máy, mọi trình duyệt. Những gì bạn đã học sẽ được giữ nguyên.</p><div id="lg"></div></div>`;
+  $('#out').onclick = home; loginBox($('#lg'));
 }
 
 // ---------- âm thanh ----------
@@ -125,7 +158,9 @@ function home() {
   <button class="big" id="hoc">${(s.today.n || 0) >= s.goal ? 'Học thêm' : 'Học hôm nay'}</button>
   <div class="row"><button id="noi" ${canNoi ? '' : 'disabled'}>🎙️ Nói thẳng</button><button id="ke">✍️ Kể chuyện</button></div>
   <div class="row"><button id="tb">📈 Tiến bộ</button><button id="cd">⚙️ Cài đặt</button></div>
-  <p class="sub">${s.known}/${s.total} khuôn câu đã thuộc · ${s.due} câu tới hẹn ôn${canNoi ? '' : ' · Nói thẳng mở khi bạn thuộc khuôn đầu tiên'}</p>${ONLINE ? '' : '<p class="sub">Đang không có mạng, vẫn học được bình thường.</p>'}</div>`;
+  <p class="sub">${s.known}/${s.total} khuôn câu đã thuộc · ${s.due} câu tới hẹn ôn${canNoi ? '' : ' · Nói thẳng mở khi bạn thuộc khuôn đầu tiên'}</p>${ONLINE ? '' : '<p class="sub">Đang không có mạng, vẫn học được bình thường.</p>'}</div>
+  ${CHUNG() && !TK() ? `<div class="card hint"><p><b>Đăng nhập Gmail</b> để giữ tiến độ khi đổi máy hoặc đổi trình duyệt.</p><button id="dn">Đăng nhập</button></div>` : ''}`;
+  if ($('#dn')) $('#dn').onclick = dangNhap;
   $('#hoc').onclick = () => learn(); $('#noi').onclick = () => noi(); $('#ke').onclick = () => ke(); $('#tb').onclick = () => tienbo(); $('#cd').onclick = () => caidat();
 }
 
@@ -186,7 +221,8 @@ function done(finished) {
   const p = Math.round(100 * SESS.ok / SESS.n);
   app().innerHTML = `<div class="card mid"><h2>${finished ? 'Hết bài cho hôm nay' : 'Nghỉ chút nhé'}</h2><p class="huge">${SESS.ok}/${SESS.n}</p><p>câu đúng (${p}%)</p>
   <p class="sub">${p >= 90 ? 'Dễ quá rồi, lần sau web sẽ đưa câu khó hơn.' : p < 70 ? 'Hơi khó, web sẽ cho bạn đọc thêm trước khi đoán.' : 'Vừa sức, đúng mức học nhanh nhất.'}</p>
-  <button class="big" id="h">Về trang chính</button></div>`; $('#h').onclick = home; SESS = null;
+  <button class="big" id="h">Về trang chính</button></div>${CHUNG() && !TK() ? '<div class="card mid"><p><b>Đăng nhập Gmail để giữ kết quả này</b>, mai học tiếp trên máy nào cũng được.</p><div id="lg"></div></div>' : ''}`; $('#h').onclick = home; SESS = null;
+  if ($('#lg')) loginBox($('#lg'));
 }
 
 // ---------- nói thẳng ----------
@@ -196,6 +232,11 @@ async function micStart() {
   if (!REC.ctx) { REC.ctx = new (window.AudioContext || window.webkitAudioContext)(); const src = REC.ctx.createMediaStreamSource(REC.stream); REC.node = REC.ctx.createScriptProcessor(4096, 1, 1); src.connect(REC.node); REC.node.connect(REC.ctx.destination); REC.node.onaudioprocess = e => { if (!REC.on) return; const d = e.inputBuffer.getChannelData(0); REC.buf.push(new Float32Array(d)); REC.tick && REC.tick(d); }; }
   if (REC.ctx.state === 'suspended') await REC.ctx.resume();
 }
+function micStop() { // tắt micro: iPhone và nhiều máy Android chỉ trả tiếng về loa ngoài khi micro đã tắt
+  try { REC.stream && REC.stream.getTracks().forEach(t => t.stop()); } catch { } try { REC.ctx && REC.ctx.close(); } catch { }
+  REC.stream = null; REC.ctx = null; REC.node = null; REC.on = false;
+}
+function wavUrl(b64) { const bin = atob(b64), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return URL.createObjectURL(new Blob([u], { type: 'audio/wav' })); }
 function wav16(chunks, rate) {
   let n = 0; for (const c of chunks) n += c.length; const all = new Float32Array(n); let o = 0; for (const c of chunks) { all.set(c, o); o += c.length; }
   const ratio = rate / 16000, m = Math.floor(n / ratio), pcm = new Int16Array(m);
@@ -213,7 +254,7 @@ function recordOnce(t0, onLevel) {
       onLevel && onLevel(Math.min(1, rms * 8));
       if (rms > Math.max(0.025, floor * 2.5)) { if (!speechAt) speechAt = Date.now(); lastLoud = now; }
       if ((speechAt && now - lastLoud > 1300) || now - st > 12000) finish(); };
-    const finish = () => { if (!REC.on) return; REC.on = false; REC.tick = null; resolve({ wav: REC.buf.length ? wav16(REC.buf, REC.ctx.sampleRate) : '', ms: speechAt ? speechAt - t0 : null }); };
+    const finish = () => { if (!REC.on) return; REC.on = false; REC.tick = null; const wav = REC.buf.length && REC.ctx ? wav16(REC.buf, REC.ctx.sampleRate) : ''; micStop(); resolve({ wav, ms: speechAt ? speechAt - t0 : null }); };
     REC.stop = finish;
   });
 }
@@ -226,33 +267,42 @@ async function noi() {
     <div class="card"><p class="tag">Nói thẳng bằng tiếng Anh, không dịch</p><p class="tinh">${esc(it.tinh)}</p>
     <div class="mic" id="mic"><div class="lv" id="lv"></div><span id="ms">Bấm để bắt đầu</span></div><div id="fb"></div>
     <button class="link" id="skip">Bỏ qua câu này</button></div>`;
-    $('#out').onclick = () => { if (REC.stop) REC.stop(); home(); };
-    $('#skip').onclick = () => { if (REC.stop) REC.stop(); i++; show(); };
+    $('#out').onclick = () => { if (REC.stop) REC.stop(); micStop(); home(); };
+    $('#skip').onclick = () => { if (REC.stop) REC.stop(); micStop(); i++; show(); };
+    const t0 = Date.now(); // đo từ lúc thấy tình huống tới lúc mở miệng
     const go = async () => {
       $('#mic').onclick = null;
-      try { await micStart(); } catch (e) { $('#fb').innerHTML = `<p class="err">Chưa mở được micro. Trên iPhone hãy cho phép micro trong cài đặt trình duyệt. (${esc(e.message)})</p>`; return; }
-      const t0 = Date.now(); $('#mic').classList.add('on'); $('#ms').textContent = 'Nói đi…';
+      try { await micStart(); } catch (e) { micStop(); $('#fb').innerHTML = `<p class="err">Chưa mở được micro. Trên iPhone hãy cho phép micro trong cài đặt trình duyệt. (${esc(e.message)})</p>`; $('#mic').onclick = go; return; }
+      $('#mic').classList.add('on'); $('#ms').textContent = 'Nói đi…';
       const r = await recordOnce(t0, v => { const l = $('#lv'); if (l) l.style.transform = `scale(${1 + v})`; });
       $('#mic').classList.remove('on'); if (!$('#ms')) return;
       if (!r.wav || r.ms == null) { $('#ms').textContent = 'Chưa nghe thấy gì. Bấm để thử lại'; $('#mic').onclick = go; return; }
       $('#ms').textContent = 'Đang nghe lại…';
       const a = await api('/api/nghe', { audio: r.wav }).catch(e => ({ error: e.message }));
-      if (a.error) { $('#ms').textContent = 'Bấm để thử lại'; $('#fb').innerHTML = `<p class="err">${esc(a.error)}${ONLINE ? '' : ' Phần nói cần có mạng.'}</p>`; $('#mic').onclick = go; return; }
+      if (a.error) { $('#ms').textContent = 'Bấm để thử lại'; $('#fb').innerHTML = `<p class="err">${esc(a.error)}${ONLINE ? '' : ' Phần nói cần có mạng.'}</p>${a.code === 'khach' ? '<div id="lg"></div>' : ''}`; if ($('#lg')) loginBox($('#lg')); $('#mic').onclick = go; return; }
+      const myUrl = wavUrl(r.wav);
       const ck = E.noiCheck(it, a.text); E.noiResult(it, ck.ok, r.ms); saveLocal(); res.push({ ok: ck.ok, ms: r.ms });
       $('#ms').textContent = (r.ms / 1000).toFixed(1) + ' giây';
       $('#fb').innerHTML = `<div class="fb ${ck.ok ? 'ok' : 'no'}"><p class="sub">Máy nghe được:</p><p class="en">${esc(a.text || '(không rõ)')}</p>
         <p class="msg">${ck.ok ? 'Đúng rồi!' : 'Chưa khớp. Một cách nói đúng:'}</p>${ck.ok ? '' : `<p class="en">${esc(it.dap[0])}</p>`}
-        <div class="row"><button id="nn">🔊 Nghe câu mẫu</button><button id="again">Nói lại</button></div><button class="big" id="nx">Tiếp →</button></div>`;
-      $('#nn').onclick = () => it.sid ? say(it.sid) : sayText(it.dap[0]); $('#again').onclick = () => show(); $('#nx').onclick = () => { i++; show(); };
+        <div class="row"><button id="me">🔁 Giọng mình</button><button id="nn">🔊 Câu mẫu</button></div><div class="row"><button id="ss">So sánh: mình rồi mẫu</button><button id="again">Nói lại</button></div><button class="big" id="nx">Tiếp →</button></div>`;
+      const mau = () => it.sid ? say(it.sid) : sayText(it.dap[0]);
+      const mine = after => { clearTimeout(AU_T); AU.pause(); AU_N++; AU.onended = after || null; AU.src = myUrl; AU.currentTime = 0; AU.playbackRate = 1; const pr = AU.play(); if (pr) pr.catch(() => { }); };
+      $('#me').onclick = () => mine(); $('#nn').onclick = () => { AU.onended = null; mau(); };
+      $('#ss').onclick = () => mine(() => { AU.onended = null; setTimeout(mau, 350); });
+      $('#again').onclick = () => show(); $('#nx').onclick = () => { AU.onended = null; i++; show(); };
     };
     $('#mic').onclick = go;
-    if (REC.stream) go();
   };
   show();
 }
 
 // ---------- kể chuyện cuối ngày ----------
 async function ke() {
+  if (CHUNG() && !TK()) {
+    app().innerHTML = `<div class="top"><button class="x" id="out">✕</button><span class="cnt">Kể chuyện cuối ngày</span></div><div class="card mid"><h2>AI sửa câu bạn tự kể</h2><p>Phần này dùng AI nên cần đăng nhập Gmail, mỗi ngày được vài lượt miễn phí.</p><div id="lg"></div></div>`;
+    $('#out').onclick = home; loginBox($('#lg')); return;
+  }
   app().innerHTML = `<div class="top"><button class="x" id="out">✕</button><span class="cnt">Kể chuyện cuối ngày</span></div><div class="card">
   <p>Kể 3–5 câu bằng tiếng Anh về ngày hôm nay của bạn. Sai thoải mái, AI sẽ sửa, và câu nào bị sửa sẽ thành bài đoán của ngày mai.</p>
   <textarea id="tx" rows="6" placeholder="Today I went to the market. I buy some vegetables…"></textarea>
@@ -261,6 +311,7 @@ async function ke() {
   $('#mic2').onclick = async () => { try { await micStart(); } catch (e) { return toast('Chưa mở được micro'); } $('#mic2').textContent = '● Đang nghe… bấm để dừng'; let stopped = false; $('#mic2').onclick = () => { stopped = true; REC.stop && REC.stop(); };
     const r = await new Promise(res => { REC.buf = []; REC.on = true; REC.tick = null; REC.stop = () => { REC.on = false; res({ wav: wav16(REC.buf, REC.ctx.sampleRate) }); }; setTimeout(() => REC.stop && REC.on && REC.stop(), 45000); });
     $('#mic2').textContent = 'Đang chuyển thành chữ…'; const a = await api('/api/nghe', { audio: r.wav }).catch(() => ({}));
+    micStop(); if (a.error) toast(a.error, 4000);
     if (a.text) $('#tx').value = ($('#tx').value + ' ' + a.text).trim(); $('#mic2').textContent = '🎙️ Nói thêm'; $('#mic2').onclick = () => ke(); };
   $('#go').onclick = async () => {
     const t = $('#tx').value.trim(); if (t.length < 3) return toast('Viết vài câu trước đã'); if (!ONLINE) return toast('Phần này cần có mạng');
@@ -293,15 +344,23 @@ function caidat() {
   <h3>Nghề của bạn</h3><select id="job">${Object.entries(NGHE).map(([k, v]) => `<option value="${k}" ${E.S.job === k ? 'selected' : ''}>${esc(v)}</option>`).join('')}</select>
   <h3>Mục tiêu mỗi ngày</h3><select id="goal">${[20, 40, 60, 80, 120].map(g => `<option ${E.S.goal === g ? 'selected' : ''} value="${g}">${g} câu</option>`).join('')}</select>
   <h3>Tốc độ giọng đọc</h3><select id="toc">${[[0.8, 'Chậm'], [1, 'Bình thường'], [1.15, 'Nhanh']].map(([v, t]) => `<option value="${v}" ${Number(localStorage.getItem('toc') || 1) === v ? 'selected' : ''}>${t}</option>`).join('')}</select>
-  <h3>Đổi mã PIN</h3><input id="np" type="password" inputmode="numeric" maxlength="8" placeholder="Mã PIN mới"><button id="sp">Đổi</button>
-  <button class="big" id="sv">Lưu</button><button class="link" id="lo">Đăng xuất trên máy này</button>
+  ${CHUNG() ? (TK() ? `<h3>Tài khoản</h3><p>${esc(localStorage.getItem('me') || 'Đã đăng nhập')}</p><div class="row"><button id="lo2">Đăng xuất</button><button id="xoa">Xoá tài khoản</button></div><p class="sub"><a href="/rieng-tu">Web lưu những gì về bạn?</a></p>` : `<h3>Tài khoản</h3><div id="lg"></div>`)
+    : `<h3>Đổi mã PIN</h3><input id="np" type="password" inputmode="numeric" maxlength="8" placeholder="Mã PIN mới"><button id="sp">Đổi</button>`}
+  <button class="big" id="sv">Lưu</button>${CHUNG() ? '' : '<button class="link" id="lo">Đăng xuất trên máy này</button>'}
   <p class="sub">Phiên bản __VER__ · Danh sách từ thông dụng theo New General Service List (Browne, Culligan & Phillips, CC BY-SA 4.0).</p></div>`;
   $('#out').onclick = home;
   $('#sv').onclick = () => { E.S.job = $('#job').value; E.S.goal = Number($('#goal').value); localStorage.setItem('toc', $('#toc').value); E.S.updated = Date.now(); saveLocal(); pushState(); toast('Đã lưu'); home(); };
-  $('#sp').onclick = async () => { const r = await api('/api/pin', { pin: $('#np').value.trim() }); toast(r.error || 'Đã đổi mã PIN'); };
-  $('#lo').onclick = async () => { await pushState(); await api('/api/logout', {}); localStorage.removeItem('tk'); location.reload(); };
+  if ($('#sp')) $('#sp').onclick = async () => { const r = await api('/api/pin', { pin: $('#np').value.trim() }); toast(r.error || 'Đã đổi mã PIN'); };
+  if ($('#lo')) $('#lo').onclick = async () => { await pushState(); await api('/api/logout', {}); localStorage.removeItem('tk'); location.reload(); };
+  if ($('#lg')) loginBox($('#lg'));
+  const xoaMay = () => { ['tk', 'me', 'tt', 'tt_sync'].forEach(k => localStorage.removeItem(k)); location.reload(); };
+  if ($('#lo2')) $('#lo2').onclick = async () => { await pushState(); await api('/api/logout', {}, { noLogout: true }); xoaMay(); };
+  if ($('#xoa')) $('#xoa').onclick = async () => {
+    const b = $('#xoa'); if (!b.dataset.c) { b.dataset.c = 1; b.textContent = 'Bấm lần nữa để xoá hẳn'; b.classList.add('danger'); return; }
+    const r = await api('/api/xoa', {}, { noLogout: true }); if (r.error) return toast(r.error); toast('Đã xoá toàn bộ dữ liệu'); setTimeout(xoaMay, 800);
+  };
 }
 
 // ---------- khởi động ----------
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => { });
-(TK() ? loadAll() : lock()).catch(e => { app().innerHTML = `<div class="card mid"><p class="err">Chưa mở được: ${esc(e.message)}</p><button class="big" onclick="location.reload()">Thử lại</button></div>`; });
+(async () => { const s = await api('/api/state', null, { noLogout: true }); MODE = s.mode || 'pin'; CLIENT = s.client || ''; return (CHUNG() || TK()) ? loadAll() : lock(); })().catch(e => { app().innerHTML = `<div class="card mid"><p class="err">Chưa mở được: ${esc(e.message)}</p><button class="big" onclick="location.reload()">Thử lại</button></div>`; });

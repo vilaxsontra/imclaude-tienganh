@@ -227,6 +227,19 @@
     return { S, next, answer, placementItems, applyPlacement, noiItems, noiCheck, noiResult, addUser, stats, dueList, cOf, acc, sess, norm };
   }
 
-  const api = { Engine, newState, fsrs, norm, dayKey };
+  // Gộp tiến độ của hai nơi (học khi chưa đăng nhập + tiến độ đã lưu trên máy chủ): không mất câu nào
+  function merge(a, b) {
+    if (!a) return b; if (!b) return a;
+    const [x, y] = (a.updated || 0) >= (b.updated || 0) ? [a, b] : [b, a];
+    const o = JSON.parse(JSON.stringify(x));
+    for (const [s, c] of Object.entries(y.cards || {})) { const m = o.cards[s]; if (!m || (c.last || 0) > (m.last || 0)) o.cards[s] = c; }
+    for (const [k, f] of Object.entries(y.fr || {})) { const m = o.fr[k]; if (!m) { o.fr[k] = f; continue; } if ((f.st || 0) > (m.st || 0)) { o.fr[k] = Object.assign({}, f, { got: Object.assign({}, m.got, f.got) }); } else m.got = Object.assign({}, f.got, m.got); }
+    for (const [d, v] of Object.entries(y.days || {})) { const m = o.days[d] ||= {}; for (const k in v) m[k] = Math.max(m[k] || 0, v[k] || 0); }
+    for (const [k, v] of Object.entries(y.noi || {})) { const m = o.noi[k]; if (!m || (v.n || 0) > (m.n || 0)) o.noi[k] = v; }
+    o.userc = Object.assign({}, y.userc || {}, o.userc || {});
+    o.placed = !!(x.placed || y.placed); o.lv = Math.max(x.lv || 1, y.lv || 1); o.job = x.job || y.job; o.created = Math.min(x.created || Date.now(), y.created || Date.now());
+    o.updated = Math.max(x.updated || 0, y.updated || 0) + 1; return o;
+  }
+  const api = { Engine, newState, fsrs, norm, dayKey, merge };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.DC = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
